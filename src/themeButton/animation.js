@@ -73,7 +73,6 @@ export const { handleAnimation, stopAnimation } = (() => {
   };
 
   const animate = () => {
-    console.log(onAnimate);
     if (!onAnimate) return;
     particles.map(setParticle);
     requestAnimationFrame(animate);
