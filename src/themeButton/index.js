@@ -1,10 +1,12 @@
 import { handleAnimation, stopAnimation } from "./animation.js";
-import { handleSign, displayCanvas, foldCanvas } from "./style.js";
+import handleSoundSign from "./sound.js";
+import { displayCanvas, foldCanvas, handleThemeSign } from "./style.js";
 
 const themeButtonSetup = () => {
   const handleClick = () => {
     handleAnimation();
-    handleSign();
+    handleThemeSign();
+    handleSoundSign();
   };
 
   const clearCanvas = () => {
