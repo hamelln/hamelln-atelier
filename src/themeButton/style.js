@@ -10,8 +10,8 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
       body.setAttribute("data-theme", "dark");
     };
 
-    const sunImage = "./public/img/sun.png";
-    const moonImage = "./public/img/moon.png";
+    const sunImage = "./public/img/sun.webp";
+    const moonImage = "./public/img/moon.webp";
     const phaseMap = new Map();
     phaseMap.set(1, [sunImage, light]);
     phaseMap.set(-1, [moonImage, dark]);
