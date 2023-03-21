@@ -27,7 +27,7 @@
   --body-bg-color: #444352;
   --text-color: #efefef;
   --button-shadow: 2px 2px 4px rgba(233, 230, 59, 0.6);
-  --button-background-color: var(--pale-gray);
+  --button-background-color: var(--pale-black);
   --button-change-background-color: rgba(27, 27, 27, 0.4);
 }
 
@@ -132,7 +132,7 @@ button {
   right: 4%;
   display: flex;
   flex-direction: column-reverse;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .mode__button {
@@ -218,45 +218,43 @@ button {
     padding: 0;
   }
 
-  10% {
+  22% {
     width: 80%;
-    border: 1px solid var(--text-color);
     height: 0px;
-    padding: 0;
   }
 
-  20% {
+  40% {
     width: 114%;
     border: 2px solid var(--text-color);
     height: 20px;
-    padding: 1px;
+    padding: 0;
   }
 
-  30% {
+  50% {
     width: 108%;
     height: 30%;
     padding: 2px;
   }
 
-  40% {
+  60% {
     width: 104%;
     height: 50%;
     padding: 2px;
   }
 
-  44% {
+  64% {
     width: 102%;
     height: 52%;
     padding: 3px;
   }
 
-  50% {
+  70% {
     width: 94%;
     height: 54%;
     padding: 4px;
   }
 
-  60% {
+  80% {
     width: 148px;
     height: 92px;
   }
@@ -301,14 +299,18 @@ button {
     padding: 1px;
   }
 
-  50% {
+  58% {
     width: 80%;
     height: 0px;
     border: 1px solid var(--text-color);
     padding: 0;
   }
 
-  60% {
+  70% {
+    width: 2px;
+  }
+
+  80% {
     width: 0;
     border: none;
     height: 0;
