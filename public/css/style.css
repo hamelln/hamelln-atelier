@@ -127,18 +127,15 @@ button {
 
 .header-nav-list li {
   margin: 0 20px;
-}
-
-.header-nav-list li a {
   color: #fff;
-  text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
   font-size: 16px;
   transition: color 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.header-nav-list li a:hover {
+.header-nav-list li:hover {
   color: #ffca28;
 }
 
@@ -590,10 +587,9 @@ button {
 /*? 푸터  */
 
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--body-bg-color);
+  color: var(--text-color);
   padding: 20px;
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -615,7 +611,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px solid #2d2d2d;
+  border: 4px solid var(--text-color);
   border-radius: 40px;
   width: 100px;
   padding: 0 60px;
