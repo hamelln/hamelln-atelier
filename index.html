@@ -8,18 +8,34 @@
     <script type="module" src="./src/index.js" defer></script>
     <title>Hamelln's Atelier</title>
   </head>
+
   <body>
-    <img src="./public/img/morning.png" id="morning" />
-    <img src="./public/img/night.png" id="night" />
+    <img src="./public/img/morning.webp" id="morning" />
+    <img src="./public/img/night.webp" id="night" />
+    <audio src="./public/sound/morning.mp3" id="morning-sound"></audio>
+    <audio src="./public/sound/night.mp3" id="night-sound"></audio>
 
     <section class="opening">
       <h1 class="opening__title">Hamelln's Atelier</h1>
       <hr class="opening__seperator" />
     </section>
 
+    <header class="header">
+      <div class="header__logo">
+        <h2 class="header__title">HAMELLN</h2>
+      </div>
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li>About</li>
+          <li>Projects</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+    </header>
+
     <div class="mode">
       <button class="mode__button">
-        <img class="mode__button__image" src="./public/img/sun.png" />
+        <img class="mode__button__image" src="./public/img/sun.webp" />
       </button>
       <div class="mode__container hide">
         <figure class="mode__frame">
@@ -27,5 +43,44 @@
         </figure>
       </div>
     </div>
+
+    <section class="about">자기소개입니다.</section>
+
+    <section class="project">
+      <div class="project-header">
+        <div class="project-header__box">
+          <h2 class="project-header__title">PROJECT</h2>
+          <p class="project-header__subtitle">COLLECTION</p>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-content__selection">
+          <h2 class="project-content__selection__title">PROJECT SELECT</h2>
+          <ul class="project-content__selection__list">
+            <li class="project-content__selection__item" onmouseover="">
+              QANDA Clone
+            </li>
+            <li class="project-content__selection__item">Koalla</li>
+            <li class="project-content__selection__item">Banryeoin</li>
+            <li class="project-content__selection__item">Modak</li>
+          </ul>
+        </div>
+        <div class="project-content__overview">
+          <img
+            src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            alt="project image"
+            class="project-content__overview__image"
+          />
+        </div>
+      </div>
+      <div class="project__skills">Next.js React TypeScript</div>
+    </section>
+
+    <footer>
+      <p class="copyright">
+        <ruby class="copyright__text"><rb>Hamelln</rb><rt>2023</rt></ruby
+        ><sup>ⓒ</sup>
+      </p>
+    </footer>
   </body>
 </html>
