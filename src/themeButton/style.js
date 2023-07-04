@@ -1,25 +1,25 @@
-export const { displayCanvas, foldCanvas, handleSign } = (() => {
+export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
   const setup = () => {
-    const sunImage = "./public/img/sun.png";
-    const moonImage = "./public/img/moon.png";
+    const light = () => {
+      const body = document.querySelector("body");
+      body.removeAttribute("data-theme");
+    };
+
+    const dark = () => {
+      const body = document.querySelector("body");
+      body.setAttribute("data-theme", "dark");
+    };
+
+    const sunImage = "./public/img/sun.webp";
+    const moonImage = "./public/img/moon.webp";
     const phaseMap = new Map();
     phaseMap.set(1, [sunImage, light]);
     phaseMap.set(-1, [moonImage, dark]);
     return phaseMap;
   };
 
-  const light = () => {
-    const body = document.querySelector("body");
-    body.removeAttribute("data-theme");
-  };
-
-  const dark = () => {
-    const body = document.querySelector("body");
-    body.setAttribute("data-theme", "dark");
-  };
-
-  const changeTheme = (sign) => {
-    phaseMap.get(sign)[1]();
+  const setTheme = (themeSign, phaseMap) => {
+    phaseMap.get(themeSign)[1]();
   };
 
   const displayCanvas = () => {
@@ -32,35 +32,35 @@ export const { displayCanvas, foldCanvas, handleSign } = (() => {
     const container = document.querySelector(".mode__container");
     timeoutId = setTimeout(() => {
       container.classList.add("hide");
-    }, 400);
+    }, 800);
   };
 
-  const changeButtonImage = (sign) => {
+  const setButtonImage = (themeSign, phaseMap) => {
     const img = document.querySelector(".mode__button__image");
     const button = document.querySelector(".mode__button");
-    const src = phaseMap.get(sign)[0];
     button.classList.add("clicked");
     setTimeout(() => {
+      const src = phaseMap.get(themeSign)[0];
       img.src = src;
       button.classList.remove("clicked");
     }, 400);
   };
 
-  const setSign = (newSign) => {
-    if (sign !== newSign) {
-      sign = newSign;
-      changeTheme(sign);
-      changeButtonImage(sign);
+  const setThemeSign = (newThemeSign, phaseMap) => {
+    if (themeSign !== newThemeSign) {
+      themeSign = newThemeSign;
+      setTheme(themeSign, phaseMap);
+      setButtonImage(themeSign, phaseMap);
     }
   };
 
-  const handleSign = () => {
-    setSign(-sign);
+  const handleThemeSign = () => {
+    setThemeSign(-themeSign, phaseMap);
   };
 
   let timeoutId;
-  let sign = 1;
+  let themeSign = 1;
   let phaseMap = setup();
 
-  return { displayCanvas, foldCanvas, handleSign };
+  return { displayCanvas, foldCanvas, handleThemeSign };
 })();
