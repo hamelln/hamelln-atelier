@@ -18,7 +18,7 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
     return phaseMap;
   };
 
-  const setTheme = (themeSign) => {
+  const setTheme = (themeSign, phaseMap) => {
     phaseMap.get(themeSign)[1]();
   };
 
@@ -32,10 +32,10 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
     const container = document.querySelector(".mode__container");
     timeoutId = setTimeout(() => {
       container.classList.add("hide");
-    }, 400);
+    }, 800);
   };
 
-  const setButtonImage = (themeSign) => {
+  const setButtonImage = (themeSign, phaseMap) => {
     const img = document.querySelector(".mode__button__image");
     const button = document.querySelector(".mode__button");
     button.classList.add("clicked");
@@ -46,16 +46,16 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
     }, 400);
   };
 
-  const setThemeSign = (newThemeSign) => {
+  const setThemeSign = (newThemeSign, phaseMap) => {
     if (themeSign !== newThemeSign) {
       themeSign = newThemeSign;
-      setTheme(themeSign);
-      setButtonImage(themeSign);
+      setTheme(themeSign, phaseMap);
+      setButtonImage(themeSign, phaseMap);
     }
   };
 
   const handleThemeSign = () => {
-    setThemeSign(-themeSign);
+    setThemeSign(-themeSign, phaseMap);
   };
 
   let timeoutId;
