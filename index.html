@@ -10,29 +10,33 @@
   </head>
 
   <body>
+    <!-- 자원 -->
     <img src="./public/img/morning.webp" id="morning" />
     <img src="./public/img/night.webp" id="night" />
     <audio src="./public/sound/morning.mp3" id="morning-sound"></audio>
     <audio src="./public/sound/night.mp3" id="night-sound"></audio>
 
+    <!-- 오프닝 -->
     <section class="opening">
       <h1 class="opening__title">Hamelln's Atelier</h1>
       <hr class="opening__seperator" />
     </section>
 
+    <!-- 헤더 -->
     <header class="header">
-      <div class="header__logo">
-        <h2 class="header__title">HAMELLN</h2>
+      <div class="header__logo" tabindex="0">
+        <h2 class="header__title">Hamelln</h2>
       </div>
       <nav class="header-nav">
         <ul class="header-nav-list">
-          <li>About</li>
-          <li>Projects</li>
-          <li>Contact</li>
+          <li tabindex="0">about</li>
+          <li tabindex="0">project</li>
+          <li tabindex="0">contact</li>
         </ul>
       </nav>
     </header>
 
+    <!-- 테마 버튼 -->
     <div class="mode">
       <button class="mode__button">
         <img class="mode__button__image" src="./public/img/sun.webp" />
@@ -44,9 +48,11 @@
       </div>
     </div>
 
-    <section class="about">자기소개입니다.</section>
+    <!-- 소개 섹션 -->
+    <section id="about">자기소개입니다.</section>
 
-    <section class="project">
+    <!-- 프로젝트 섹션 -->
+    <section id="project">
       <div class="project-header">
         <div class="project-header__box">
           <h2 class="project-header__title">PROJECT</h2>
@@ -57,11 +63,8 @@
         <div class="project-content__selection">
           <h2 class="project-content__selection__title">PROJECT SELECT</h2>
           <ul class="project-content__selection__list">
-            <li class="project-content__selection__item" onmouseover="">
-              QANDA Clone
-            </li>
-            <li class="project-content__selection__item">Koalla</li>
-            <li class="project-content__selection__item">Banryeoin</li>
+            <li class="project-content__selection__item">COFFEEN</li>
+            <li class="project-content__selection__item">반려in</li>
             <li class="project-content__selection__item">Modak</li>
           </ul>
         </div>
@@ -76,6 +79,9 @@
       <div class="project__skills">Next.js React TypeScript</div>
     </section>
 
+    <section id="contact">컨택트 섹션입니다.</section>
+
+    <!-- 푸터 -->
     <footer>
       <p class="copyright">
         <ruby class="copyright__text"><rb>Hamelln</rb><rt>2023</rt></ruby
