@@ -1,9 +1,11 @@
 import themeButtonSetup from "./themeButton/index.js";
-import headerSetup from "./header.js";
+import setupHeaderScrollBehavior from "./setupHeaderScrollBehavior.js";
+import addKeyboardNavigationWithScroll from "./addKeyboardNavigationWithScroll.js";
 
 window.addEventListener("load", () => {
   themeButtonSetup();
-  headerSetup();
+  setupHeaderScrollBehavior();
+  addKeyboardNavigationWithScroll();
   const op = document.querySelector(".opening");
   setTimeout(() => op.remove(), 6000);
 });
