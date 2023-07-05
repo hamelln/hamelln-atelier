@@ -3,7 +3,9 @@ import handleSoundSign from "./sound.js";
 import { displayCanvas, foldCanvas, handleThemeSign } from "./style.js";
 
 const themeButtonSetup = () => {
-  const handleClick = () => {
+  const button = document.querySelector(".mode__button");
+
+  const changeTheme = () => {
     handleAnimation();
     handleThemeSign();
     handleSoundSign();
@@ -14,10 +16,16 @@ const themeButtonSetup = () => {
     foldCanvas();
   };
 
-  const button = document.querySelector(".mode__button");
-  button.addEventListener("click", handleClick);
+  button.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      changeTheme();
+    }
+  });
+  button.addEventListener("click", changeTheme);
   button.addEventListener("mouseenter", displayCanvas);
-  button.addEventListener("mouseleave", clearCanvas);
+  button.addEventListener("focus", displayCanvas);
+  button.addEventListener("blur", clearCanvas);
 };
 
 export default themeButtonSetup;
