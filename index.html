@@ -24,29 +24,17 @@
 
     <!-- 헤더 -->
     <header class="header">
-      <div class="header__logo" tabindex="0">
+      <div class="header__logo focusable" tabindex="0">
         <h2 class="header__title">Hamelln</h2>
       </div>
       <nav class="header-nav">
         <ul class="header-nav-list">
-          <li tabindex="0">about</li>
-          <li tabindex="0">project</li>
-          <li tabindex="0">contact</li>
+          <li class="focusable" tabindex="0">about</li>
+          <li class="focusable" tabindex="0">project</li>
+          <li class="focusable" tabindex="0">contact</li>
         </ul>
       </nav>
     </header>
-
-    <!-- 테마 버튼 -->
-    <div class="mode">
-      <button class="mode__button">
-        <img class="mode__button__image" src="./public/img/sun.webp" />
-      </button>
-      <div class="mode__container hide">
-        <figure class="mode__frame">
-          <canvas class="mode__canvas"></canvas>
-        </figure>
-      </div>
-    </div>
 
     <!-- 소개 섹션 -->
     <section id="about">자기소개입니다.</section>
@@ -63,9 +51,15 @@
         <div class="project-content__selection">
           <h2 class="project-content__selection__title">PROJECT SELECT</h2>
           <ul class="project-content__selection__list">
-            <li class="project-content__selection__item">COFFEEN</li>
-            <li class="project-content__selection__item">반려in</li>
-            <li class="project-content__selection__item">Modak</li>
+            <li class="project-content__selection__item focusable" tabindex="0">
+              COFFEEN
+            </li>
+            <li class="project-content__selection__item focusable" tabindex="0">
+              반려in
+            </li>
+            <li class="project-content__selection__item focusable" tabindex="0">
+              Modak
+            </li>
           </ul>
         </div>
         <div class="project-content__overview">
@@ -76,17 +70,71 @@
           />
         </div>
       </div>
-      <div class="project__skills">Next.js React TypeScript</div>
+      <ul class="project__skills">
+        <li>Next.js</li>
+        <li>React</li>
+        <li>TypeScript</li>
+      </ul>
     </section>
 
-    <section id="contact">컨택트 섹션입니다.</section>
+    <section id="contact">
+      <h2>문의</h2>
+      <ul>
+        <li>
+          <a
+            class="focusable"
+            href="https://github.com/hamelln"
+            target="_blank"
+          >
+            <img src="./public/img/icons/github.png" alt="GitHub" />
+          </a>
+        </li>
+        <li>
+          <a
+            class="focusable"
+            href="https://www.linkedin.com/in/%ED%83%9C%ED%98%84-%EC%9D%B4-531077273/"
+            target="_blank"
+          >
+            <img src="./public/img/icons/linkedin.svg" alt="Linkedin" />
+          </a>
+        </li>
+        <li>
+          <a class="focusable" href="mailto:vusdus91@gmail.com">
+            <img src="./public/img/icons/github.png" alt="Email" />
+          </a>
+        </li>
+        <li>
+          <a
+            class="focusable"
+            href="https://blog.cinntiq.synology.me/"
+            target="_blank"
+          >
+            <img src="./public/img/icons/ghost.png" alt="blog" />
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 테마 버튼 -->
+    <div class="mode">
+      <button class="mode__button focusable">
+        <img class="mode__button__image" src="./public/img/sun.webp" />
+      </button>
+      <div class="mode__container hide">
+        <figure class="mode__frame">
+          <canvas class="mode__canvas"></canvas>
+        </figure>
+      </div>
+    </div>
 
     <!-- 푸터 -->
     <footer>
-      <p class="copyright">
-        <ruby class="copyright__text"><rb>Hamelln</rb><rt>2023</rt></ruby
-        ><sup>ⓒ</sup>
-      </p>
+      <div>
+        <div class="copyright">
+          <ruby class="copyright__text"><rb>Hamelln</rb><rt>2023</rt></ruby
+          ><sup>ⓒ</sup>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
