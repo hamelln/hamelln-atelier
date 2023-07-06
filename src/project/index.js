@@ -19,6 +19,7 @@ const setupOfProjectSkillTextChange = () => {
     period: "1개월",
   });
 
+  const selectSound = document.getElementById("select-sound");
   const skills = document.querySelector(".project__skills");
   const projectItems = document.querySelectorAll(
     ".project-content__selection__item"
@@ -26,11 +27,10 @@ const setupOfProjectSkillTextChange = () => {
 
   projectItems.forEach((project) => {
     project.addEventListener("focus", () => {
-      if (project.classList.contains("focus")) {
-        const projectTitle = project.textContent.trim();
-        const skillText = projects.get(projectTitle)["skills"];
-        skills.textContent = skillText;
-      }
+      selectSound.muted || selectSound.play();
+      const projectTitle = project.textContent.trim();
+      const skillText = projects.get(projectTitle)["skills"];
+      skills.textContent = skillText;
     });
   });
 };
