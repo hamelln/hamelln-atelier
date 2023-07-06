@@ -11,7 +11,7 @@ const handleSoundSign = (() => {
   const sound = () => soundMap.get(soundSign);
 
   const play = (sound) => {
-    sound.muted || sound.play();
+    sound.play();
   };
 
   const stop = (sound) => {
