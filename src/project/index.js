@@ -27,10 +27,13 @@ const setupOfProjectSkillTextChange = () => {
 
   projectItems.forEach((project) => {
     project.addEventListener("focus", () => {
-      selectSound.muted || selectSound.play();
+      selectSound.play();
       const projectTitle = project.textContent.trim();
       const skillText = projects.get(projectTitle)["skills"];
       skills.textContent = skillText;
+    });
+    project.addEventListener("blur", () => {
+      skills.textContent = "";
     });
   });
 };
