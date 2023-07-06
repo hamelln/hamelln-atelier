@@ -1,14 +1,16 @@
 # Hamelln
 
+https://hamelln.vercel.app/
+
 - 저를 소개하는 홈페이지입니다.  
   This is my homepage.
 
 - 기술: HTML, CSS, JavaScript
 
 - 사용한 툴  
-  figma: 와이어프레임, 아이콘 생성  
+  Figma: 와이어프레임, 아이콘 생성  
   VSCode: 프로그래밍  
-  charGPT: 디버깅, 코드 생성, 변수 작명, 디자인  
+  chatGPT: 디버깅, 코드 생성, 변수 작명, 디자인  
   Stable Diffusion web UI: 테마 버튼 그림 생성  
   Bxfr: 효과음 작곡
 
