@@ -9,6 +9,7 @@ const addKeyboardNavigationWithScroll = () => {
 
   const removeFocus = (node) => {
     node.classList.remove("focus");
+    node.blur();
   };
 
   const navigateNodes = (event) => {
