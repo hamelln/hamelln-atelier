@@ -541,8 +541,9 @@ button {
 }
 
 .project-content__selection {
-  padding-left: 40px;
+  padding-left: 20px;
   width: 40%;
+  margin-right: 10px;
 }
 
 .project-content__selection__title,
@@ -585,15 +586,11 @@ button {
 
 .project__skills {
   padding: 4px 0;
-  display: flex;
-  justify-content: center;
   background-color: #295eae;
   color: #f4f4f4;
   column-gap: 10px;
-}
-
-.project__skills li {
-  padding: 0 12px;
+  text-align: center;
+  word-spacing: 0.5em;
 }
 
 /*? 소개 */
