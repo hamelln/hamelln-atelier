@@ -68,6 +68,7 @@ export const { handleAnimation, stopAnimation } = (() => {
   };
 
   const stopAnimation = () => {
+    if (!onAnimate) return;
     onAnimate = false;
     particles = [];
     const img = phaseMap.get(-phaseSign)[0];
