@@ -6,24 +6,23 @@ const setupMuteButton = () => {
   sounds.forEach((sound) => {
     sound.muted = true;
   });
+
   muteButton.addEventListener("click", () => {
+    const src = new Map();
+    const alt = new Map();
+    src.set(true, "public/img/icons/mute.svg");
+    src.set(false, "public/img/icons/speaker.svg");
+    alt.set(true, "mute button - crossed-out speaker icon");
+    alt.set(false, "unmute button - speaker icon");
     isMuted = !isMuted;
     sounds.forEach((sound) => {
       sound.pause();
       sound.muted = isMuted;
     });
 
-    let src = isMuted
-      ? "public/img/icons/mute.svg"
-      : "public/img/icons/speaker.svg";
-
-    const alt = isMuted
-      ? "mute button - crossed-out speaker icon"
-      : "unmute button - speaker icon";
-
     const img = document.createElement("img");
-    img.src = src;
-    img.alt = alt;
+    img.src = src.get(isMuted);
+    img.alt = alt.get(isMuted);
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   });

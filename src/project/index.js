@@ -43,6 +43,7 @@ const setupOfProjectSkillTextChange = () => {
     project.addEventListener(soundEvent, () => {
       playSound(selectSound);
       changeProjectSkill(project);
+      if (isMobileDevice) project.focus();
     });
     project.addEventListener("blur", () => {
       skills.textContent = "";

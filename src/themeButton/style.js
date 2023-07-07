@@ -12,14 +12,16 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
 
     const sunImage = "./public/img/sun.webp";
     const moonImage = "./public/img/moon.webp";
+    const sunAlt = "sun icon";
+    const moonAlt = "moon icon";
     const phaseMap = new Map();
-    phaseMap.set(1, [sunImage, light]);
-    phaseMap.set(-1, [moonImage, dark]);
+    phaseMap.set(1, [sunImage, sunAlt, light]);
+    phaseMap.set(-1, [moonImage, moonAlt, dark]);
     return phaseMap;
   };
 
   const setTheme = (themeSign, phaseMap) => {
-    phaseMap.get(themeSign)[1]();
+    phaseMap.get(themeSign)[2]();
   };
 
   const displayCanvas = () => {
@@ -41,7 +43,9 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
     button.classList.add("clicked");
     setTimeout(() => {
       const src = phaseMap.get(themeSign)[0];
+      const alt = phaseMap.get(themeSign)[1];
       img.src = src;
+      img.alt = alt;
       button.classList.remove("clicked");
     }, 400);
   };
