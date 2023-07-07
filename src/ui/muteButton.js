@@ -18,7 +18,6 @@ const setupMuteButton = () => {
 
   const changeMute = () => {
     isMuted = !isMuted;
-
     sounds.forEach((sound) => {
       sound.pause();
       sound.muted = isMuted;
@@ -33,7 +32,12 @@ const setupMuteButton = () => {
     muteButton.appendChild(img);
   };
 
+  const handleEnter = (e) => {
+    e.key === "Enter" && handleMute();
+  };
+
   muteButton.addEventListener("click", handleMute);
+  muteButton.addEventListener("keydown", handleEnter);
 };
 
 export default setupMuteButton;
