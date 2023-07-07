@@ -25,12 +25,24 @@ const setupOfProjectSkillTextChange = () => {
     ".project-content__selection__item"
   );
 
+  const playSound = (sound) => {
+    sound.currentTime = 0;
+    sound.play();
+  };
+
+  const changeProjectSkill = (project) => {
+    const projectTitle = project.textContent.trim();
+    const skillText = projects.get(projectTitle)["skills"];
+    skills.textContent = skillText;
+  };
+
+  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+  const soundEvent = isMobileDevice ? "touchstart" : "focus";
+
   projectItems.forEach((project) => {
-    project.addEventListener("focus", () => {
-      selectSound.play();
-      const projectTitle = project.textContent.trim();
-      const skillText = projects.get(projectTitle)["skills"];
-      skills.textContent = skillText;
+    project.addEventListener(soundEvent, () => {
+      playSound(selectSound);
+      changeProjectSkill(project);
     });
     project.addEventListener("blur", () => {
       skills.textContent = "";
