@@ -1,3 +1,5 @@
+"use strict";
+
 const addKeyboardNavigationWithScroll = () => {
   const focusableNodes = document.querySelectorAll(".focusable");
   const focusableArray = Array.from(focusableNodes);

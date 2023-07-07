@@ -111,6 +111,7 @@ button {
   color: var(--text-color);
   transition: color 0.45s ease-in;
   letter-spacing: 2px;
+  transform: translateX(2px);
 }
 
 .header-nav {
@@ -133,7 +134,7 @@ button {
   color: var(--text-color);
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 16px;
+  font-size: var(--font-size-s);
   transition: color 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -517,6 +518,10 @@ button {
 
 /*? 프로젝트  */
 
+#project {
+  margin-top: 40px;
+}
+
 .project-header {
   background-color: #7d95b8;
   display: flex;
@@ -536,11 +541,11 @@ button {
 .project-header__title,
 .project-header__subtitle {
   line-height: 1.2;
-  font-size: 32px;
+  font-size: var(--title-size-xl);
 }
 
 .project-header__title {
-  color: black;
+  color: var(--pale-black);
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
@@ -602,18 +607,20 @@ button {
 }
 
 .project__skills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 4px 0;
   background-color: #295eae;
   color: #f4f4f4;
   column-gap: 10px;
-  text-align: center;
   word-spacing: 0.5em;
   height: 60px;
 }
 
 /*? 소개 */
 
-.about {
+#about {
   padding-top: 80px;
 }
 
@@ -733,15 +740,56 @@ footer {
 /*? 반응형 - 폰 */
 
 @media screen and (min-width: 120px) and (max-width: 767px) {
+  /*? 일반 */
   body {
     padding: 0;
   }
 
+  /*? 오프닝 */
   .opening {
     width: 100%;
   }
+
+  /*? 헤더  */
+  .header__logo {
+    padding: 4px 8px;
+  }
+
+  /*? 프로젝트  */
+  .project-header {
+    padding: 12px 0;
+  }
+
+  .project__skills {
+    height: 30px;
+  }
+
+  /*? 폰트  */
   .opening__title {
-    font-size: var(--title-size-s);
+    font-size: var(--font-size-m);
+  }
+
+  .project-header__title,
+  .project-header__subtitle {
+    font-size: var(--font-size-m);
+  }
+
+  .project-content__selection__title,
+  .contact__title {
+    font-size: var(--font-size-s);
+  }
+
+  .project-content__selection__item,
+  .project__skills,
+  .header-nav-list li {
+    font-size: var(--font-size-xs);
+  }
+
+  /*? 푸터 */
+
+  .copyright {
+    padding: 0;
+    font-size: var(--font-size-xs);
   }
 }
 

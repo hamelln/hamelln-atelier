@@ -1,3 +1,5 @@
+"use strict";
+
 const handleSoundSign = (() => {
   const setup = () => {
     const morningSound = document.getElementById("morning-sound");
