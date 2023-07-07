@@ -1,4 +1,6 @@
-const setupOfProjectSkillTextChange = () => {
+"use strict";
+
+const setupChangeProjectSkill = () => {
   const projects = new Map();
   projects.set("COFFEEN", {
     uuid: "95000cc1-beb9-4c77-8812-13a8be2d5a16",
@@ -25,9 +27,19 @@ const setupOfProjectSkillTextChange = () => {
     ".project-content__selection__item"
   );
 
-  const playSound = (sound) => {
+  const play = (sound) => {
     sound.currentTime = 0;
     sound.play();
+  };
+
+  const addFocus = (node) => {
+    node.classList.add("focus");
+    node.focus();
+  };
+
+  const removeFocus = (node) => {
+    node.classList.remove("focus");
+    node.blur();
   };
 
   const changeProjectSkill = (project) => {
@@ -37,18 +49,19 @@ const setupOfProjectSkillTextChange = () => {
   };
 
   const isMobileDevice = /Mobi/i.test(navigator.userAgent);
-  const soundEvent = isMobileDevice ? "touchstart" : "focus";
+  const soundEvent = isMobileDevice ? "click" : "focus";
 
   projectItems.forEach((project) => {
     project.addEventListener(soundEvent, () => {
-      playSound(selectSound);
+      play(selectSound);
       changeProjectSkill(project);
-      if (isMobileDevice) project.focus();
+      if (isMobileDevice) addFocus(project);
     });
     project.addEventListener("blur", () => {
       skills.textContent = "";
+      removeFocus(project);
     });
   });
 };
 
-export default setupOfProjectSkillTextChange;
+export default setupChangeProjectSkill;

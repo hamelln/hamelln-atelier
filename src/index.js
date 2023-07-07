@@ -1,16 +1,18 @@
-import themeButtonSetup from "./themeButton/index.js";
-import setupHeaderScrollBehavior from "./setupHeaderScrollBehavior.js";
-import addKeyboardNavigationWithScroll from "./addKeyboardNavigationWithScroll.js";
-import setupOfProjectSkillTextChange from "./project/index.js";
-import setupMuteButton from "./mute.js";
+"use strict";
+
+import setupHeaderScrollBehavior from "./header/setupHeaderScrollBehavior.js";
+import setupChangeProjectSkill from "./project/index.js";
+import addKeyboardNavigationWithScroll from "./ui/addKeyboardNavigationWithScroll.js";
+import setupMuteButton from "./ui/muteButton.js";
+import setupThemeButton from "./ui/themeButton/index.js";
 
 window.addEventListener("load", () => {
   const isMobileDevice = /Mobi/i.test(navigator.userAgent);
   setupMuteButton();
-  themeButtonSetup();
+  setupThemeButton();
   setupHeaderScrollBehavior();
   isMobileDevice || addKeyboardNavigationWithScroll();
-  setupOfProjectSkillTextChange();
+  setupChangeProjectSkill();
 
   const op = document.querySelector(".opening");
   setTimeout(() => op.remove(), 6000);
