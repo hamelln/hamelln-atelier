@@ -1,3 +1,5 @@
+"use strict";
+
 import Particle from "./Particle.js";
 
 export const { handleAnimation, stopAnimation } = (() => {
@@ -62,7 +64,7 @@ export const { handleAnimation, stopAnimation } = (() => {
     phaseSign = newPhaseSign;
     phase = phaseMap.get(phaseSign)[1];
     particles = init(ctx, WIDTH, HEIGHT);
-    play();
+    startAnimate();
   };
 
   const stopAnimation = () => {
@@ -72,7 +74,7 @@ export const { handleAnimation, stopAnimation } = (() => {
     drawImg(img);
   };
 
-  const play = () => {
+  const startAnimate = () => {
     setTimeout(() => {
       onAnimate = true;
       animate();

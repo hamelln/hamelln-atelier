@@ -1,3 +1,5 @@
+"use strict";
+
 const setupHeaderScrollBehavior = () => {
   const homeLink = document.querySelector(".header__logo");
   const tabs = document.querySelector(".header-nav-list").children;

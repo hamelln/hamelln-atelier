@@ -1,3 +1,5 @@
+"use strict";
+
 export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
   const setup = () => {
     const light = () => {
