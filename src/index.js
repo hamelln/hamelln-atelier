@@ -13,8 +13,8 @@ window.addEventListener("load", () => {
   setupSound();
   setupThemeButton();
   setupHeaderScrollBehavior();
-  isMobileDevice || addKeyboardNavigationWithScroll();
   setupChangeProjectSkill();
+  isMobileDevice || addKeyboardNavigationWithScroll();
 
   const op = document.querySelector(".opening");
   setTimeout(() => op.remove(), 6000);
