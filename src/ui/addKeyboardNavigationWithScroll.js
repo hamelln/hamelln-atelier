@@ -1,18 +1,10 @@
 "use strict";
 
+import { addFocus, removeFocus } from "../utils/focus.js";
+
 const addKeyboardNavigationWithScroll = () => {
   const focusableNodes = document.querySelectorAll(".focusable");
   const focusableArray = Array.from(focusableNodes);
-
-  const addFocus = (node) => {
-    node.classList.add("focus");
-    node.focus();
-  };
-
-  const removeFocus = (node) => {
-    node.classList.remove("focus");
-    node.blur();
-  };
 
   const navigateNodes = (event) => {
     const currentIndex = focusableArray.findIndex(
