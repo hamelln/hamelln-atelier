@@ -5,10 +5,11 @@ import setupOfProjectSkillTextChange from "./project/index.js";
 import setupMuteButton from "./mute.js";
 
 window.addEventListener("load", () => {
+  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
   setupMuteButton();
   themeButtonSetup();
   setupHeaderScrollBehavior();
-  addKeyboardNavigationWithScroll();
+  isMobileDevice || addKeyboardNavigationWithScroll();
   setupOfProjectSkillTextChange();
 
   const op = document.querySelector(".opening");
