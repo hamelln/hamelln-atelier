@@ -1,5 +1,7 @@
 "use strict";
 
+import { play, stop } from "../../utils/sound.js";
+
 const handleSoundSign = (() => {
   const setup = () => {
     const morningSound = document.getElementById("morning-sound");
@@ -11,15 +13,6 @@ const handleSoundSign = (() => {
   };
 
   const sound = () => soundMap.get(soundSign);
-
-  const play = (sound) => {
-    sound.play();
-  };
-
-  const stop = (sound) => {
-    sound.pause();
-    sound.currentTime = 0;
-  };
 
   const setSoundSign = (newSoundSign) => {
     if (soundSign !== newSoundSign) {

@@ -1,5 +1,7 @@
 "use strict";
 
+import { addFocus, removeFocus } from "../utils/focus.js";
+
 const setupChangeProjectSkill = () => {
   const projects = new Map();
   projects.set("COFFEEN", {
@@ -21,26 +23,12 @@ const setupChangeProjectSkill = () => {
     period: "1개월",
   });
 
-  const selectSound = document.getElementById("select-sound");
+  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+  const event = isMobileDevice ? "click" : "focus";
   const skills = document.querySelector(".project__skills");
   const projectItems = document.querySelectorAll(
     ".project-content__selection__item"
   );
-
-  const play = (sound) => {
-    sound.currentTime = 0;
-    sound.play();
-  };
-
-  const addFocus = (node) => {
-    node.classList.add("focus");
-    node.focus();
-  };
-
-  const removeFocus = (node) => {
-    node.classList.remove("focus");
-    node.blur();
-  };
 
   const changeProjectSkill = (project) => {
     const projectTitle = project.textContent.trim();
@@ -48,14 +36,10 @@ const setupChangeProjectSkill = () => {
     skills.textContent = skillText;
   };
 
-  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
-  const soundEvent = isMobileDevice ? "click" : "focus";
-
   projectItems.forEach((project) => {
-    project.addEventListener(soundEvent, () => {
-      play(selectSound);
+    project.addEventListener(event, () => {
       changeProjectSkill(project);
-      if (isMobileDevice) addFocus(project);
+      isMobileDevice && addFocus(project);
     });
     project.addEventListener("blur", () => {
       skills.textContent = "";
