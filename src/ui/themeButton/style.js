@@ -1,29 +1,15 @@
 "use strict";
 
-export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
+export const { displayCanvas, foldCanvas, handleSign } = (() => {
   const setup = () => {
-    const light = () => {
-      const body = document.querySelector("body");
-      body.removeAttribute("data-theme");
-    };
-
-    const dark = () => {
-      const body = document.querySelector("body");
-      body.setAttribute("data-theme", "dark");
-    };
-
     const sunImage = "./public/img/sun.webp";
     const moonImage = "./public/img/moon.webp";
     const sunAlt = "sun icon";
     const moonAlt = "moon icon";
     const phaseMap = new Map();
-    phaseMap.set(1, [sunImage, sunAlt, light]);
-    phaseMap.set(-1, [moonImage, moonAlt, dark]);
+    phaseMap.set(1, [sunImage, sunAlt]);
+    phaseMap.set(-1, [moonImage, moonAlt]);
     return phaseMap;
-  };
-
-  const setTheme = (themeSign, phaseMap) => {
-    phaseMap.get(themeSign)[2]();
   };
 
   const displayCanvas = () => {
@@ -52,21 +38,20 @@ export const { displayCanvas, foldCanvas, handleThemeSign } = (() => {
     }, 400);
   };
 
-  const setThemeSign = (newThemeSign, phaseMap) => {
+  const setSign = (newThemeSign, phaseMap) => {
     if (themeSign !== newThemeSign) {
       themeSign = newThemeSign;
-      setTheme(themeSign, phaseMap);
       setButtonImage(themeSign, phaseMap);
     }
   };
 
-  const handleThemeSign = () => {
-    setThemeSign(-themeSign, phaseMap);
+  const handleSign = () => {
+    setSign(-themeSign, phaseMap);
   };
 
   let timeoutId;
   let themeSign = 1;
   let phaseMap = setup();
 
-  return { displayCanvas, foldCanvas, handleThemeSign };
+  return { displayCanvas, foldCanvas, handleSign };
 })();
