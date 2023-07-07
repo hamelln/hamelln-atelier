@@ -1,5 +1,5 @@
 :root,
-[data-theme="default"] {
+[data-theme="light"] {
   --pale-black: #2d2d2d;
   --pale-gray: #ccc;
   --pale-white: #f8f8f8;
@@ -97,11 +97,18 @@ button {
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  border: 6px solid var(--primary-color);
+  /* border: 6px solid var(--primary-color);
   border-radius: 80px;
-  padding: 6px 36px;
+  padding: 6px 36px; */
   transition: border 0.45s ease-in;
+}
+
+.header__logo img {
+  width: 40px;
+  height: 40px;
 }
 
 .header__title {
@@ -230,12 +237,6 @@ button {
 
 .mute-button {
   position: absolute;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
   right: 60px;
   background-color: #7d95b8;
 }
@@ -245,21 +246,24 @@ button {
   height: 30px;
 }
 
-.mode__button {
+.mode__button,
+.mute-button {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 40px;
   height: 40px;
   padding: 4px;
+  border-radius: var(--border-radius-full);
+  border-right: 1px solid var(--text-color);
+  box-shadow: var(--button-shadow);
+}
+
+.mode__button {
   margin-right: 10px;
   margin-top: 10px;
   background-color: var(--button-background-color);
-  border-radius: var(--border-radius-full);
   overflow: hidden;
-  border-right: 1px solid var(--text-color);
-  box-shadow: var(--button-shadow);
-  transition: background-color 0.4s;
   transition: background-color 0.45s ease-in, color 0.45s ease-in;
 }
 
