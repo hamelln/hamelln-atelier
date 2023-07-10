@@ -244,7 +244,7 @@ button {
   }
 }
 
-/*? 다크, 라이트 모드 */
+/*? 테마 버튼 */
 
 .mode {
   position: fixed;
@@ -544,9 +544,8 @@ button {
 /*? 프로젝트  */
 
 #project {
-  margin-top: 40px;
   width: 100%;
-  height: calc(100vh);
+  height: calc(100vh - 50px);
 }
 
 .project-header {
@@ -554,15 +553,15 @@ button {
   display: flex;
   justify-content: center;
   padding: 20px 0;
+  height: 18%;
 }
 
 .project-header__box {
   border: 3px solid black;
   border-radius: 12px;
-  width: 34%;
-  height: 40%;
+  width: 50%;
+  height: 100%;
   text-align: center;
-  padding: 6px 0;
 }
 
 .project-header__title,
@@ -587,7 +586,7 @@ button {
   background-color: var(--darker-bg-color);
   transition: background-color 0.45s ease-in;
   width: 100%;
-  height: 60%;
+  height: 70%;
 }
 
 .project-content__selection {
@@ -647,18 +646,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 0;
   background-color: #295eae;
   color: #f4f4f4;
   column-gap: 10px;
   word-spacing: 0.5em;
-  height: 10%;
-}
-
-/*? 소개 */
-
-#about {
-  padding-top: 80px;
+  height: 12%;
 }
 
 /*? contact */
@@ -766,10 +758,7 @@ footer {
 }
 
 /*? 초기 이미지 */
-#morning {
-  display: none;
-}
-
+#morning,
 #night {
   display: none;
 }
@@ -795,10 +784,6 @@ footer {
   /*? 프로젝트  */
   .project-header {
     padding: 12px 0;
-  }
-
-  .project__skills {
-    height: 30px;
   }
 
   /*? 폰트  */
