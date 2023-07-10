@@ -12,17 +12,24 @@ export const setupSound = () => {
   const defaultSound = document.getElementById("default-sound");
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
+  const projectStart = document.getElementById("game-start");
   const soundEvent = isMobileDevice ? "click" : "focus";
   const focusableNodes = document.querySelectorAll(".focusable");
 
   focusableNodes.forEach((node) => {
-    node.addEventListener(soundEvent, () => {
+    node.addEventListener("focus", () => {
       if (node.closest("#project")) {
         play(projectSound);
       } else if (node.closest("#contact")) {
         play(contactSound);
       } else {
         play(defaultSound);
+      }
+    });
+
+    node.addEventListener("click", () => {
+      if (node.closest("#project")) {
+        play(projectStart);
       }
     });
   });
