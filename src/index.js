@@ -1,6 +1,6 @@
 "use strict";
 
-import setupHeaderScrollBehavior from "./header/setupHeaderScrollBehavior.js";
+import setupNavigateScroll from "./header/setupNavigateScroll.js";
 import setupChangeProjectSkill from "./project/index.js";
 import addKeyboardNavigationWithScroll from "./ui/addKeyboardNavigationWithScroll.js";
 import setupMuteButton from "./ui/muteButton.js";
@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
   setupMuteButton();
   setupSound();
   setupThemeButton();
-  setupHeaderScrollBehavior();
+  setupNavigateScroll();
   setupChangeProjectSkill();
   isMobileDevice || addKeyboardNavigationWithScroll();
 

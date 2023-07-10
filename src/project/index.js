@@ -24,7 +24,7 @@ const setupChangeProjectSkill = () => {
   });
 
   const isMobileDevice = /Mobi/i.test(navigator.userAgent);
-  const event = isMobileDevice ? "click" : "focus";
+  const focusEvent = isMobileDevice ? "click" : "focus";
   const skills = document.querySelector(".project__skills");
   const projectItems = document.querySelectorAll(
     ".project-content__selection__item"
@@ -37,7 +37,7 @@ const setupChangeProjectSkill = () => {
   };
 
   projectItems.forEach((project) => {
-    project.addEventListener(event, () => {
+    project.addEventListener(focusEvent, () => {
       changeProjectSkill(project);
       isMobileDevice && addFocus(project);
     });
