@@ -37,7 +37,7 @@ const setupChangeProjectSkill = () => {
   };
 
   projectItems.forEach((project) => {
-    project.addEventListener(focusEvent, () => {
+    project.addEventListener("focus", () => {
       changeProjectSkill(project);
       isMobileDevice && addFocus(project);
     });
@@ -45,6 +45,7 @@ const setupChangeProjectSkill = () => {
       skills.textContent = "";
       removeFocus(project);
     });
+    project.addEventListener("click", () => {});
   });
 };
 
