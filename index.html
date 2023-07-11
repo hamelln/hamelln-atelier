@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff" as="font" type="font/woff" crossorigin>
     <link rel="icon" type="image/x-icon" href="public/img/dark-logo.svg" />
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
@@ -32,6 +34,11 @@
       id="contact-sound"
       muted
     ></audio>
+    <audio
+    src="./public/sound/game-start.mp3"
+    id="game-start"
+    muted
+  ></audio>
 
     <!-- 오프닝 -->
     <section class="opening">
@@ -47,15 +54,19 @@
       </div>
       <nav class="header-nav">
         <ul class="header-nav-list">
-          <li class="focusable" tabindex="0">about</li>
-          <li class="focusable" tabindex="0">project</li>
-          <li class="focusable" tabindex="0">contact</li>
+          <li class="focusable" tabindex="0">About</li>
+          <li class="focusable" tabindex="0">Project</li>
+          <li class="focusable" tabindex="0">Contact</li>
         </ul>
       </nav>
     </header>
 
     <!-- 소개 섹션 -->
-    <section id="about">자기소개입니다.</section>
+    <section id="about">
+      <h2 class="about__title">이태현</h2>
+      <h2 class="about__subtitle">Frontend Developer</h2>
+      <button class="about__nav focusable">click</button>
+    </section>
 
     <!-- 프로젝트 섹션 -->
     <section id="project">
@@ -67,7 +78,7 @@
       </div>
       <div class="project-content">
         <div class="project-content__selection">
-          <h2 class="project-content__selection__title">PROJECT SELECT</h2>
+          <h2 class="project-content__selection__title">Project Select</h2>
           <ul class="project-content__selection__list">
             <li class="project-content__selection__item focusable" tabindex="0">
               COFFEEN
@@ -114,7 +125,7 @@
         </li>
         <li>
           <a class="profile focusable" href="mailto:vusdus91@gmail.com">
-            <img src="./public/img/icons/github.png" alt="Email" />
+            <img src="./public/img/icons/email.png" alt="Email" />
           </a>
         </li>
         <li>
