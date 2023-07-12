@@ -65,7 +65,10 @@
   box-sizing: border-box;
   font-family: PFStardust, NeoDunggeunmoPro-Regular, sans-serif;
   scroll-behavior: smooth;
-  /* outline: none; */
+}
+
+a {
+  text-decoration: none;
 }
 
 ul {
@@ -557,17 +560,18 @@ button {
 }
 
 .project-header__box {
-  border: 3px solid black;
-  border-radius: 12px;
-  width: 50%;
-  height: 100%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--title-size-xl);
+  gap: 6px;
 }
 
 .project-header__title,
 .project-header__subtitle {
   line-height: 1.2;
-  font-size: var(--title-size-xl);
+  font-size: var(--title-size-s);
 }
 
 .project-header__title {
@@ -582,6 +586,7 @@ button {
 }
 
 .project-content {
+  position: relative;
   display: flex;
   background-color: var(--darker-bg-color);
   transition: background-color 0.45s ease-in;
@@ -641,6 +646,43 @@ button {
   width: 100%;
   height: 100%;
 }
+.project-box {
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  gap: 20%;
+}
+
+.project-box__title {
+  font-size: var(--title-size-m);
+  color: var(--text-color);
+}
+
+.project-box__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-box__info__item {
+  color: var(--text-color);
+  font-size: var(--font-size-l);
+  cursor: pointer;
+}
+
+.project__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
 
 .project__skills {
   display: flex;
@@ -651,6 +693,49 @@ button {
   column-gap: 10px;
   word-spacing: 0.5em;
   height: 12%;
+}
+
+.project-content__spec {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  gap: 12px;
+}
+
+.project-content__spec__character {
+  display: flex;
+  width: 120px;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.project-content__spec__character__image {
+  border: 2px solid black;
+  border-radius: var(--border-radius-m);
+  padding: 4px;
+  width: 100px;
+  height: 100px;
+}
+
+.project-content__spec__box {
+  position: relative;
+  background-color: rgba(85, 31, 88, 0.6);
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.project-content__spec__box__describe {
+  color: var(--text-color);
+}
+
+.project-content__spec__box__Enter {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  color: var(--text-color);
 }
 
 /*? contact */
@@ -784,6 +869,15 @@ footer {
   /*? 프로젝트  */
   .project-header {
     padding: 12px 0;
+  }
+
+  .project-header__box {
+    flex-direction: row;
+    gap: 12px;
+    font-size: var(--title-size-xl);
+    border: 3px solid black;
+    padding: 12px;
+    border-radius: var(--border-radius-l);
   }
 
   /*? 폰트  */
