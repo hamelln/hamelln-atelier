@@ -63,7 +63,7 @@ export default function Project({
       infoElem.appendChild(anchor);
     }
     const specElem = makeListItem("spec", () => {
-      Spec(spec);
+      Spec(spec, render);
     });
     const featureElem = makeListItem("feature", () => {});
     const exitElem = makeListItem("exit", () => {

@@ -1,4 +1,7 @@
-export default function Spec({ period, member, skill, role, characterImage }) {
+export default function Spec(
+  { period, member, skill, role, characterImage },
+  renderProject
+) {
   const makeBox = () => {
     const boxElem = document.createElement("div");
     boxElem.classList.add("project-content__spec");
@@ -25,6 +28,7 @@ export default function Spec({ period, member, skill, role, characterImage }) {
     EnterElem.classList.add("project-content__spec__box__Enter");
     pElem.textContent = "안녕하세요.";
     EnterElem.textContent = "Enter";
+    EnterElem.addEventListener("click", renderProject);
     describeElem.appendChild(pElem);
     describeElem.appendChild(EnterElem);
     return describeElem;
