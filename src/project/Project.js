@@ -66,9 +66,7 @@ export default function Project({
       Spec(spec, render);
     });
     const featureElem = makeListItem("feature", () => {});
-    const exitElem = makeListItem("exit", () => {
-      Selection();
-    });
+    const exitElem = makeListItem("exit", Selection);
     infoElem.appendChild(specElem);
     infoElem.appendChild(featureElem);
     infoElem.appendChild(exitElem);
