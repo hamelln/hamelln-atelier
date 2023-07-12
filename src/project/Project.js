@@ -1,9 +1,10 @@
+import Spec from "./Spec.js";
+
 export default function Project({
   title,
   siteUrl,
   codeUrl,
   backgroundImage,
-  characterImage,
   bgmUrl,
   spec,
   feature,
@@ -29,18 +30,45 @@ export default function Project({
     return titleElem;
   };
 
+  const makeLink = (url, content) => {
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.target = "_blank";
+    const li = document.createElement("li");
+    li.classList.add("project-box__info__item");
+    li.textContent = content;
+    anchor.appendChild(li);
+    return anchor;
+  };
+
+  const makeListItem = (content, callback) => {
+    const elem = document.createElement("li");
+    elem.classList.add("project-box__info__item");
+    elem.textContent = content;
+    elem.addEventListener("click", callback);
+    return elem;
+  };
+
   const makeInfo = () => {
     let infoElem = document.createElement("ul");
     infoElem.classList.add("project-box__info");
     let html = "";
     if (siteUrl) {
-      html += `<a href=${siteUrl} target="_blank"}><li class="project-box__info__item">homepage</li></a>`;
+      const anchor = makeLink(siteUrl, "homepage");
+      infoElem.appendChild(anchor);
     }
     if (codeUrl) {
-      html += `<a href=${codeUrl} target="_blank"}><li class="project-box__info__item">code</li></a>`;
+      const anchor = makeLink(codeUrl, "code");
+      infoElem.appendChild(anchor);
     }
-    html += `<li class="project-box__info__item">spec</li><li class="project-box__info__item">feature</li><li class="project-box__info__item">exit</li>`;
-    infoElem.innerHTML = html;
+    const specElem = makeListItem("spec", () => {
+      Spec(spec);
+    });
+    const featureElem = makeListItem("feature", () => {});
+    const exitElem = makeListItem("exit", () => {});
+    infoElem.appendChild(specElem);
+    infoElem.appendChild(featureElem);
+    infoElem.appendChild(exitElem);
     return infoElem;
   };
 
