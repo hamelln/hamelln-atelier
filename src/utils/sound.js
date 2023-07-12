@@ -8,12 +8,10 @@ export const stop = (sound) => {
 };
 
 export const setupSound = () => {
-  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
   const defaultSound = document.getElementById("default-sound");
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
   const projectStart = document.getElementById("game-start");
-  const soundEvent = isMobileDevice ? "click" : "focus";
   const focusableNodes = document.querySelectorAll(".focusable");
 
   focusableNodes.forEach((node) => {
