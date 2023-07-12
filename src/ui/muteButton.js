@@ -4,12 +4,14 @@ const setupMuteButton = () => {
   let isMuted = true;
   const sounds = document.querySelectorAll("audio");
   const muteButton = document.querySelector(".mute-button");
-  const src = new Map();
-  const alt = new Map();
-  src.set(true, "public/img/icons/mute.svg");
-  src.set(false, "public/img/icons/speaker.svg");
-  alt.set(true, "mute button - crossed-out speaker icon");
-  alt.set(false, "unmute button - speaker icon");
+  const src = new Map([
+    [true, "public/img/icons/mute.svg"],
+    [false, "public/img/icons/speaker.svg"],
+  ]);
+  const alt = new Map([
+    [true, "mute button - crossed-out speaker icon"],
+    [false, "unmute button - speaker icon"],
+  ]);
 
   const handleMute = () => {
     changeMute();
@@ -24,10 +26,13 @@ const setupMuteButton = () => {
     });
   };
 
+  const getSrc = () => src.get(isMuted);
+  const getAlt = () => alt.get(isMuted);
+
   const changeMuteImg = () => {
     const img = document.createElement("img");
-    img.src = src.get(isMuted);
-    img.alt = alt.get(isMuted);
+    img.src = getSrc();
+    img.alt = getAlt();
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   };
