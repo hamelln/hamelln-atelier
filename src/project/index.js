@@ -6,6 +6,7 @@ import Project from "./Project.js";
 
 const setupChangeProjectSkill = () => {
   const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+  const focusEvent = isMobileDevice ? "click" : "focus";
   const skills = document.querySelector(".project__skills");
   const projectItems = document.querySelectorAll(
     ".project-content__selection__item"
@@ -31,6 +32,7 @@ const setupChangeProjectSkill = () => {
       const projectData = data[projectTitle];
       Project(projectData);
     });
+    project.addEventListener("click", () => {});
   });
 };
 
