@@ -1,3 +1,4 @@
+import { play } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 
@@ -53,7 +54,6 @@ export default function Project({
   const makeInfo = () => {
     let infoElem = document.createElement("ul");
     infoElem.classList.add("project-box__info");
-    let html = "";
     if (siteUrl) {
       const anchor = makeLink(siteUrl, "homepage");
       infoElem.appendChild(anchor);
@@ -91,6 +91,8 @@ export default function Project({
     const [box, img] = makeHTML();
     elem.appendChild(box);
     elem.appendChild(img);
+    const bgm = document.getElementById("bgm");
+    play(bgm);
   };
 
   render();
