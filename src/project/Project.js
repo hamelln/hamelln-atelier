@@ -1,3 +1,4 @@
+import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 
 export default function Project({
@@ -65,7 +66,9 @@ export default function Project({
       Spec(spec);
     });
     const featureElem = makeListItem("feature", () => {});
-    const exitElem = makeListItem("exit", () => {});
+    const exitElem = makeListItem("exit", () => {
+      Selection();
+    });
     infoElem.appendChild(specElem);
     infoElem.appendChild(featureElem);
     infoElem.appendChild(exitElem);
