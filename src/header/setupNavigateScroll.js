@@ -1,6 +1,6 @@
 "use strict";
 
-import addEventForClickAndEnter from "../utils/addEventForClickAndEnter.js";
+import addEventForClickAndEnter from "../utils/addClickAndEnterHandler.js";
 
 const setupNavigateScroll = () => {
   const calcPosition = (section) => {

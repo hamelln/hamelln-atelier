@@ -1,7 +1,7 @@
 import data from "../data/project.json" assert { type: "json" };
 import addKeyboardNavigationWithScroll from "../ui/addKeyboardNavigationWithScroll.js";
-import addEventForClickAndEnter from "../utils/addEventForClickAndEnter.js";
-import { addFocus, removeFocus } from "../utils/focus.js";
+import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import { addBlurHandler, addFocusHandler } from "../utils/focus.js";
 import { play } from "../utils/sound.js";
 import Project from "./Project.js";
 
@@ -73,18 +73,16 @@ export default function Selection() {
     const handleFocus = () => {
       const skillText = projectData.spec.skill;
       skills.textContent = skillText;
-      addFocus(project);
       play(selectSound);
     };
 
     const handleBlur = () => {
       skills.textContent = "";
-      removeFocus(project);
     };
 
-    project.addEventListener("focus", handleFocus);
-    project.addEventListener("blur", handleBlur);
-    addEventForClickAndEnter(project)(startProject);
+    addFocusHandler(project)(handleFocus);
+    addBlurHandler(project)(handleBlur);
+    addClickAndEnterHandler(project)(startProject);
   };
 
   const render = () => {

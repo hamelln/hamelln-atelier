@@ -1,7 +1,7 @@
 "use strict";
 
 import setLogo from "../../header/changeLogoWithTheme.js";
-import addEventForClickAndEnter from "../../utils/addEventForClickAndEnter.js";
+import addClickAndEnterHandler from "../../utils/addClickAndEnterHandler.js";
 import { handleAnimation, stopAnimation } from "./animation.js";
 import handleSoundSign from "./sound.js";
 import { displayCanvas, foldCanvas, handleSign } from "./style.js";
@@ -32,7 +32,7 @@ const setupThemeButton = () => {
     foldCanvas();
   };
 
-  addEventForClickAndEnter(button)(handleTheme);
+  addClickAndEnterHandler(button)(handleTheme);
   button.addEventListener("mouseenter", displayCanvas);
   button.addEventListener("focus", displayCanvas);
   button.addEventListener("blur", clearCanvas);

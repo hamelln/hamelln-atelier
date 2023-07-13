@@ -1,6 +1,6 @@
 "use strict";
 
-import addEventForClickAndEnter from "../utils/addEventForClickAndEnter.js";
+import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 
 const setupMuteButton = () => {
   let isMuted = true;
@@ -39,7 +39,7 @@ const setupMuteButton = () => {
     muteButton.appendChild(img);
   };
 
-  addEventForClickAndEnter(muteButton)(handleMute);
+  addClickAndEnterHandler(muteButton)(handleMute);
 };
 
 export default setupMuteButton;
