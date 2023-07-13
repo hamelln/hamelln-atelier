@@ -43,6 +43,16 @@ export default function Spec(
     return boxElem;
   };
 
+  const focus = () => {
+    const list = document.querySelectorAll(".project-box__info__item");
+    for (const item of list) {
+      if (item.textContent === "spec") {
+        addFocus(item);
+        break;
+      }
+    }
+  };
+
   const render = () => {
     let elem = document.querySelector(".project-content");
     elem.innerHTML = "";

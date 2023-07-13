@@ -154,16 +154,21 @@ button {
 
 /*? 어바웃 */
 #about {
+  position: relative;
   margin-top: 40px;
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: var(--pale-white);
   height: calc(100vh - 40px);
+  display: flex;
+  justify-content: center;
+}
+.about__intro {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 99;
 }
-
 .about__title {
   font-size: var(--title-size-xl);
 }
@@ -172,6 +177,13 @@ button {
   font-size: var(--title-size-l);
   margin-top: 6vh;
   margin-bottom: 20vh;
+}
+
+.about__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
 }
 
 /*? 오프닝 */
@@ -625,7 +637,8 @@ button {
   transform: translateX(10px);
 }
 
-.project-content__selection__item::before {
+.project-content__selection__item::before,
+.project-box__info__item::before {
   content: "\2192";
   display: inline-block;
   margin-right: 5px;
@@ -634,7 +647,8 @@ button {
   font-weight: bold;
 }
 
-.project-content__selection__item.focus::before {
+.project-content__selection__item.focus::before,
+.project-box__info__item.focus::before {
   opacity: 1;
 }
 
@@ -670,9 +684,15 @@ button {
 }
 
 .project-box__info__item {
+  display: flex;
   color: var(--text-color);
   font-size: var(--font-size-l);
   cursor: pointer;
+}
+
+.project-box__info__item > a:visited,
+.project-box__info__item > a:active {
+  color: var(--text-color);
 }
 
 .project__image {

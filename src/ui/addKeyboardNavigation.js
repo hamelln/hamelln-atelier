@@ -48,7 +48,7 @@ const navigateelements = (event, focusableArray) => {
   parentSection?.scrollIntoView({ block: "nearest" });
 };
 
-const addKeyboardNavigationWithScroll = () => {
+const addKeyboardNavigation = () => {
   const focusableElements = document.querySelectorAll(".focusable");
 
   focusableElements.forEach((element) => {
@@ -72,4 +72,4 @@ const addKeyboardNavigationWithScroll = () => {
   });
 };
 
-export default addKeyboardNavigationWithScroll;
+export default addKeyboardNavigation;

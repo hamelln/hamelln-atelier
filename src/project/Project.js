@@ -1,5 +1,7 @@
+import addKeyboardNavigation from "../ui/addKeyboardNavigation.js";
+import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import addEventForClickAndEnter from "../utils/addClickAndEnterHandler.js";
-import { addFocusAttribute } from "../utils/focus.js";
+import { addFocus, addFocusHandlers } from "../utils/focus.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 
@@ -36,21 +38,27 @@ export default function Project({
   const makeLinkItem = (content) => {
     const li = document.createElement("li");
     li.classList.add("project-box__info__item");
-    li.textContent = content;
+    li.setAttribute("data-focus-name", content);
     return (url) => {
       const anchor = document.createElement("a");
       anchor.href = url;
       anchor.target = "_blank";
-      anchor.appendChild(li);
-      return anchor;
+      anchor.textContent = content;
+      addClickAndEnterHandler(li)(() => {
+        saveFocusedElement(content);
+        window.open(url, "_blank");
+      });
+      li.appendChild(anchor);
+      return li;
     };
   };
 
   const makeItem = (content) => {
-    const elem = document.createElement("li");
-    elem.classList.add("project-box__info__item");
-    elem.textContent = content;
-    return elem;
+    const li = document.createElement("li");
+    li.classList.add("project-box__info__item");
+    li.setAttribute("data-focus-name", content);
+    li.textContent = content;
+    return li;
   };
 
   const moveTo = (element) => {
@@ -64,23 +72,23 @@ export default function Project({
     infoElem.classList.add("project-box__info");
     if (siteUrl) {
       const homepageLink = makeLinkItem("homepage")(siteUrl);
-      addFocusAttribute(homepageLink);
+      addFocusHandlers(homepageLink);
       infoElem.appendChild(homepageLink);
     }
     if (codeUrl) {
       const codeLink = makeLinkItem("code")(codeUrl);
-      addFocusAttribute(codeLink);
+      addFocusHandlers(codeLink);
       infoElem.appendChild(codeLink);
     }
     const specElem = makeItem("spec");
     const featureElem = makeItem("feature");
     const exitElem = makeItem("exit");
-    addFocusAttribute(specElem);
-    addFocusAttribute(featureElem);
-    addFocusAttribute(exitElem);
+    addFocusHandlers(specElem);
+    addFocusHandlers(featureElem);
+    addFocusHandlers(exitElem);
     moveTo(specElem)(Spec, spec, render);
     moveTo(featureElem)(() => {});
-    moveTo(exitElem)(Selection);
+    moveTo(exitElem)(Selection, title);
     infoElem.appendChild(specElem);
     infoElem.appendChild(featureElem);
     infoElem.appendChild(exitElem);
@@ -97,13 +105,39 @@ export default function Project({
     return [boxElem, imgElem];
   };
 
+  const saveFocusedElement = (name) => {
+    localStorage.setItem("lastFocusedElement", name);
+  };
+
+  const restoreFocus = () => {
+    const lastFocusedName = localStorage.getItem("lastFocusedElement");
+    if (lastFocusedName) {
+      const elem = document.querySelector(
+        `[data-focus-name="${lastFocusedName}"]`
+      );
+      if (elem) {
+        addFocus(elem);
+        localStorage.removeItem("lastFocusedElement");
+      }
+    }
+  };
+
   const render = () => {
     const elem = document.querySelector(".project-content");
     elem.innerHTML = "";
     const [box, img] = makeContent();
     elem.appendChild(box);
     elem.appendChild(img);
+    addKeyboardNavigation();
+    focus();
   };
+
+  const focus = () => {
+    const firstItem = document.querySelector(".project-box__info").firstChild;
+    addFocus(firstItem);
+  };
+
+  window.addEventListener("focus", restoreFocus);
 
   render();
 }
