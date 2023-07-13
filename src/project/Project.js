@@ -1,8 +1,10 @@
-import addKeyboardNavigation from "../ui/addKeyboardNavigation.js";
+import addKeyboardController from "../utils/addKeyboardController.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import { addFocus, addFocusHandlers } from "../utils/focus.js";
+import { play, stop } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
+import Loading from "./Loading.js";
 
 export default function Project({
   title,
@@ -13,6 +15,8 @@ export default function Project({
   spec,
   feature,
 }) {
+  const bgm = document.getElementById("bgm");
+
   const makeBox = () => {
     const boxElem = document.createElement("div");
     boxElem.classList.add("project-box");
@@ -35,18 +39,19 @@ export default function Project({
   };
 
   const makeLinkItem = (content) => {
+    const openLinkAndSaveFocus = (url) => {
+      saveFocusedElement(content);
+      window.open(url, "_blank");
+    };
+
     const li = document.createElement("li");
     li.classList.add("project-box__info__item");
     li.setAttribute("data-focus-name", content);
+
     return (url) => {
       const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.target = "_blank";
       anchor.textContent = content;
-      addClickAndEnterHandler(li)(() => {
-        saveFocusedElement(content);
-        window.open(url, "_blank");
-      });
+      addClickAndEnterHandler(li)(openLinkAndSaveFocus, url);
       li.appendChild(anchor);
       return li;
     };
@@ -64,6 +69,14 @@ export default function Project({
     return (callback, ...args) => {
       addClickAndEnterHandler(element)(callback, ...args);
     };
+  };
+
+  const quitProject = () => {
+    Loading("Thank you!");
+    setTimeout(() => {
+      Selection(title);
+      stop(bgm);
+    }, 1000);
   };
 
   const makeInfo = () => {
@@ -87,7 +100,7 @@ export default function Project({
     addFocusHandlers(exitElem);
     moveTo(specElem)(Spec, spec, render);
     moveTo(featureElem)(() => {});
-    moveTo(exitElem)(Selection, title);
+    moveTo(exitElem)(quitProject);
     infoElem.appendChild(specElem);
     infoElem.appendChild(featureElem);
     infoElem.appendChild(exitElem);
@@ -127,8 +140,9 @@ export default function Project({
     const [box, img] = makeContent();
     elem.appendChild(box);
     elem.appendChild(img);
-    addKeyboardNavigation();
+    addKeyboardController();
     focus();
+    play(bgm);
   };
 
   const focus = () => {

@@ -1,3 +1,10 @@
+let isMuted = true;
+
+const mute = (sound) => {
+  stop(sound);
+  sound.muted = isMuted;
+};
+
 export const play = (sound) => {
   sound.currentTime = 0;
   sound.play();
@@ -5,6 +12,12 @@ export const play = (sound) => {
 
 export const stop = (sound) => {
   sound.pause();
+};
+
+export const changeMute = () => {
+  const sounds = document.querySelectorAll("audio");
+  isMuted = !isMuted;
+  sounds.forEach(mute);
 };
 
 export const setupSound = () => {

@@ -6,7 +6,8 @@ export default function addClickAndEnterHandler(element) {
         callback(...args);
       }
     });
-    element.addEventListener("click", () => {
+    element.addEventListener("click", (e) => {
+      e.preventDefault();
       callback(...args);
     });
   };

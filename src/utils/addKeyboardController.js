@@ -1,6 +1,7 @@
 "use strict";
 
-import { addFocus, removeFocus } from "../utils/focus.js";
+import { addFocus, removeFocus } from "./focus.js";
+import isMobile from "./isMobile.js";
 
 const handleKeyDown = (event) => {
   const focusableElements = document.querySelectorAll(".focusable");
@@ -41,16 +42,18 @@ const navigateToElements = (event, focusableArray) => {
   } else if (nextIndex >= focusableArray.length) {
     nextIndex = 0;
   }
-  removeFocus(focusableArray[currentIndex]);
+
   const nextElement = focusableArray[nextIndex];
+  removeFocus(focusableArray[currentIndex]);
   addFocus(nextElement);
   const parentSection = nextElement.closest("section");
   parentSection?.scrollIntoView({ block: "nearest" });
 };
 
-const addKeyboardNavigation = () => {
-  const focusableElements = document.querySelectorAll(".focusable");
+const addKeyboardController = () => {
+  if (isMobile()) return;
 
+  const focusableElements = document.querySelectorAll(".focusable");
   focusableElements.forEach((element) => {
     const handleFocus = () => {
       addFocus(element);
@@ -72,4 +75,4 @@ const addKeyboardNavigation = () => {
   });
 };
 
-export default addKeyboardNavigation;
+export default addKeyboardController;

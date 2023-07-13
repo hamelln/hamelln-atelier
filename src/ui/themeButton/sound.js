@@ -6,9 +6,10 @@ const handleSoundSign = (() => {
   const setup = () => {
     const morningSound = document.getElementById("morning-sound");
     const nightSound = document.getElementById("night-sound");
-    const soundMap = new Map();
-    soundMap.set(1, morningSound);
-    soundMap.set(-1, nightSound);
+    const soundMap = new Map([
+      [1, morningSound],
+      [-1, nightSound],
+    ]);
     return soundMap;
   };
 

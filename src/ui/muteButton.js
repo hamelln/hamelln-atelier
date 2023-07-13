@@ -1,11 +1,12 @@
 "use strict";
 
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import { changeMute } from "../utils/sound.js";
 
 const setupMuteButton = () => {
-  let isMuted = true;
-  const sounds = document.querySelectorAll("audio");
   const muteButton = document.querySelector(".mute-button");
+  let isMuted = true;
+
   const src = new Map([
     [true, "public/img/icons/mute.svg"],
     [false, "public/img/icons/speaker.svg"],
@@ -16,25 +17,15 @@ const setupMuteButton = () => {
   ]);
 
   const handleMute = () => {
-    changeMute();
-    changeMuteImg();
-  };
-
-  const changeMute = () => {
     isMuted = !isMuted;
-    sounds.forEach((sound) => {
-      sound.pause();
-      sound.muted = isMuted;
-    });
+    changeMuteImg();
+    changeMute();
   };
-
-  const getSrc = () => src.get(isMuted);
-  const getAlt = () => alt.get(isMuted);
 
   const changeMuteImg = () => {
     const img = document.createElement("img");
-    img.src = getSrc();
-    img.alt = getAlt();
+    img.src = src.get(isMuted);
+    img.alt = alt.get(isMuted);
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   };

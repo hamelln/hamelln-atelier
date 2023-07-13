@@ -1,9 +1,10 @@
 import data from "../data/project.json" assert { type: "json" };
-import addKeyboardNavigation from "../ui/addKeyboardNavigation.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import addKeyboardController from "../utils/addKeyboardController.js";
 import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
 import { play } from "../utils/sound.js";
 import Project from "./Project.js";
+import Loading from "./Loading.js";
 
 export default function Selection(projectTitle = undefined) {
   const makeBox = () => {
@@ -65,9 +66,13 @@ export default function Selection(projectTitle = undefined) {
     const selectSound = document.getElementById("project-sound");
     const startSound = document.getElementById("game-start");
     const skills = document.querySelector(".project__skills");
+
     const startProject = () => {
       play(startSound);
-      Project(projectData);
+      Loading("Hamelln");
+      setTimeout(() => {
+        Project(projectData);
+      }, 1000);
     };
 
     const handleFocus = () => {
@@ -92,16 +97,17 @@ export default function Selection(projectTitle = undefined) {
     const figure = makeFigure();
     elem.appendChild(box);
     elem.appendChild(figure);
-    addKeyboardNavigation();
-    focus(projectTitle);
+    addKeyboardController();
+    prevFocus(projectTitle);
   };
 
-  const focus = (projectTitle) => {
-    if (!projectTitle) return;
+  const prevFocus = (focusedProjectTitle) => {
+    if (!focusedProjectTitle) return;
+
     const list = document.querySelectorAll(".project-content__selection__item");
     for (const project of list) {
       const title = project.textContent.trim();
-      if (title === projectTitle) {
+      if (title === focusedProjectTitle) {
         addFocus(project);
         break;
       }
