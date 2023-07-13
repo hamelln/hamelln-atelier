@@ -5,10 +5,10 @@ import { addFocus, removeFocus } from "../utils/focus.js";
 const handleKeyDown = (event) => {
   const focusableElements = document.querySelectorAll(".focusable");
   const focusableArray = Array.from(focusableElements);
-  navigateelements(event, focusableArray);
+  navigateToElements(event, focusableArray);
 };
 
-const navigateelements = (event, focusableArray) => {
+const navigateToElements = (event, focusableArray) => {
   const currentIndex = focusableArray.findIndex(
     (element) => element === document.activeElement
   );
