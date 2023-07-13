@@ -1,5 +1,7 @@
 "use strict";
 
+import addEventForClickAndEnter from "../utils/addEventForClickAndEnter.js";
+
 const setupMuteButton = () => {
   let isMuted = true;
   const sounds = document.querySelectorAll("audio");
@@ -37,12 +39,7 @@ const setupMuteButton = () => {
     muteButton.appendChild(img);
   };
 
-  const handleEnter = (e) => {
-    e.key === "Enter" && handleMute();
-  };
-
-  muteButton.addEventListener("click", handleMute);
-  muteButton.addEventListener("keydown", handleEnter);
+  addEventForClickAndEnter(muteButton)(handleMute);
 };
 
 export default setupMuteButton;
