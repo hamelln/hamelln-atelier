@@ -1,9 +1,15 @@
-export const addFocus = (node) => {
-  node.classList.add("focus");
-  node.focus();
+export const addFocus = (element) => {
+  element.classList.add("focus");
+  element.focus();
 };
 
-export const removeFocus = (node) => {
-  node.classList.remove("focus");
-  node.blur();
+export const removeFocus = (element) => {
+  element.classList.remove("focus");
+  element.blur();
+};
+
+export const addFocusAttribute = (element) => {
+  element.classList.add("focusable");
+  element.tabIndex = 0;
+  return element;
 };

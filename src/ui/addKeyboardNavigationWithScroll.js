@@ -3,14 +3,14 @@
 import { addFocus, removeFocus } from "../utils/focus.js";
 
 const handleKeyDown = (event) => {
-  const focusableNodes = document.querySelectorAll(".focusable");
-  const focusableArray = Array.from(focusableNodes);
-  navigateNodes(event, focusableArray);
+  const focusableElements = document.querySelectorAll(".focusable");
+  const focusableArray = Array.from(focusableElements);
+  navigateelements(event, focusableArray);
 };
 
-const navigateNodes = (event, focusableArray) => {
+const navigateelements = (event, focusableArray) => {
   const currentIndex = focusableArray.findIndex(
-    (node) => node === document.activeElement
+    (element) => element === document.activeElement
   );
   let nextIndex = -1;
 
@@ -42,33 +42,33 @@ const navigateNodes = (event, focusableArray) => {
     nextIndex = 0;
   }
   removeFocus(focusableArray[currentIndex]);
-  const nextNode = focusableArray[nextIndex];
-  addFocus(nextNode);
-  const parentSection = nextNode.closest("section");
+  const nextElement = focusableArray[nextIndex];
+  addFocus(nextElement);
+  const parentSection = nextElement.closest("section");
   parentSection?.scrollIntoView({ block: "nearest" });
 };
 
 const addKeyboardNavigationWithScroll = () => {
-  const focusableNodes = document.querySelectorAll(".focusable");
+  const focusableElements = document.querySelectorAll(".focusable");
 
-  focusableNodes.forEach((node) => {
+  focusableElements.forEach((element) => {
     const handleFocus = () => {
-      addFocus(node);
+      addFocus(element);
     };
     const handleBlur = () => {
-      removeFocus(node);
+      removeFocus(element);
     };
-    node.removeEventListener("mousemove", handleFocus);
-    node.removeEventListener("mouseleave", handleBlur);
-    node.removeEventListener("focus", handleFocus);
-    node.removeEventListener("blur", handleBlur);
-    node.removeEventListener("keydown", handleKeyDown);
+    element.removeEventListener("mousemove", handleFocus);
+    element.removeEventListener("mouseleave", handleBlur);
+    element.removeEventListener("focus", handleFocus);
+    element.removeEventListener("blur", handleBlur);
+    element.removeEventListener("keydown", handleKeyDown);
 
-    node.addEventListener("mousemove", handleFocus);
-    node.addEventListener("mouseleave", handleBlur);
-    node.addEventListener("focus", handleFocus);
-    node.addEventListener("blur", handleBlur);
-    node.addEventListener("keydown", handleKeyDown);
+    element.addEventListener("mousemove", handleFocus);
+    element.addEventListener("mouseleave", handleBlur);
+    element.addEventListener("focus", handleFocus);
+    element.addEventListener("blur", handleBlur);
+    element.addEventListener("keydown", handleKeyDown);
   });
 };
 
