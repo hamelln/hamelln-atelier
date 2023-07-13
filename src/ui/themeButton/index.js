@@ -2,17 +2,17 @@
 
 import setLogo from "../../header/changeLogoWithTheme.js";
 import addClickAndEnterHandler from "../../utils/addClickAndEnterHandler.js";
+import isMobile from "../../utils/isMobile.js";
 import { handleAnimation, stopAnimation } from "./animation.js";
 import handleSoundSign from "./sound.js";
 import { displayCanvas, foldCanvas, handleSign } from "./style.js";
 
 const setupThemeButton = () => {
-  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
   const button = document.querySelector(".mode__button");
 
   const handleTheme = () => {
     setTheme();
-    if (isMobileDevice) displayCanvas();
+    if (isMobile()) displayCanvas();
     handleAnimation();
     handleSign();
     handleSoundSign();
