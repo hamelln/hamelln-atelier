@@ -1,4 +1,4 @@
-export default function addEventForClickAndEnter(element) {
+export default function addClickAndEnterHandler(element) {
   return (callback, ...args) => {
     element.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
