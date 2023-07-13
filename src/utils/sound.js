@@ -8,27 +8,25 @@ export const stop = (sound) => {
 };
 
 export const setupSound = () => {
-  const isMobileDevice = /Mobi/i.test(navigator.userAgent);
   const defaultSound = document.getElementById("default-sound");
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
   const projectStart = document.getElementById("game-start");
-  const soundEvent = isMobileDevice ? "click" : "focus";
-  const focusableNodes = document.querySelectorAll(".focusable");
+  const focusableElements = document.querySelectorAll(".focusable");
 
-  focusableNodes.forEach((node) => {
-    node.addEventListener("focus", () => {
-      if (node.closest("#project")) {
+  focusableElements.forEach((element) => {
+    element.addEventListener("focus", () => {
+      if (element.closest("#project")) {
         play(projectSound);
-      } else if (node.closest("#contact")) {
+      } else if (element.closest("#contact")) {
         play(contactSound);
       } else {
         play(defaultSound);
       }
     });
 
-    node.addEventListener("click", () => {
-      if (node.closest("#project")) {
+    element.addEventListener("click", () => {
+      if (element.closest("#project")) {
         play(projectStart);
       }
     });

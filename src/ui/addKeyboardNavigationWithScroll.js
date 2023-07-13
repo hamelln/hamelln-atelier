@@ -2,64 +2,73 @@
 
 import { addFocus, removeFocus } from "../utils/focus.js";
 
+const handleKeyDown = (event) => {
+  const focusableElements = document.querySelectorAll(".focusable");
+  const focusableArray = Array.from(focusableElements);
+  navigateelements(event, focusableArray);
+};
+
+const navigateelements = (event, focusableArray) => {
+  const currentIndex = focusableArray.findIndex(
+    (element) => element === document.activeElement
+  );
+  let nextIndex = -1;
+
+  event.preventDefault();
+
+  switch (event.key) {
+    case "ArrowUp":
+      nextIndex = currentIndex - 1;
+      break;
+    case "ArrowDown":
+      nextIndex = currentIndex + 1;
+      break;
+    case "ArrowLeft":
+      nextIndex = currentIndex - 1;
+      break;
+    case "ArrowRight":
+      nextIndex = currentIndex + 1;
+      break;
+    case "Tab":
+      nextIndex = currentIndex + 1;
+      break;
+    default:
+      return;
+  }
+
+  if (nextIndex < 0) {
+    nextIndex = focusableArray.length - 1;
+  } else if (nextIndex >= focusableArray.length) {
+    nextIndex = 0;
+  }
+  removeFocus(focusableArray[currentIndex]);
+  const nextElement = focusableArray[nextIndex];
+  addFocus(nextElement);
+  const parentSection = nextElement.closest("section");
+  parentSection?.scrollIntoView({ block: "nearest" });
+};
+
 const addKeyboardNavigationWithScroll = () => {
-  const focusableNodes = document.querySelectorAll(".focusable");
-  const focusableArray = Array.from(focusableNodes);
+  const focusableElements = document.querySelectorAll(".focusable");
 
-  const navigateNodes = (event) => {
-    const currentIndex = focusableArray.findIndex(
-      (node) => node === document.activeElement
-    );
-    let nextIndex = -1;
+  focusableElements.forEach((element) => {
+    const handleFocus = () => {
+      addFocus(element);
+    };
+    const handleBlur = () => {
+      removeFocus(element);
+    };
+    element.removeEventListener("mousemove", handleFocus);
+    element.removeEventListener("mouseleave", handleBlur);
+    element.removeEventListener("focus", handleFocus);
+    element.removeEventListener("blur", handleBlur);
+    element.removeEventListener("keydown", handleKeyDown);
 
-    event.preventDefault();
-
-    switch (event.key) {
-      case "ArrowUp":
-        nextIndex = currentIndex - 1;
-        break;
-      case "ArrowDown":
-        nextIndex = currentIndex + 1;
-        break;
-      case "ArrowLeft":
-        nextIndex = currentIndex - 1;
-        break;
-      case "ArrowRight":
-        nextIndex = currentIndex + 1;
-        break;
-      case "Tab":
-        nextIndex = currentIndex + 1;
-        break;
-      default:
-        return;
-    }
-
-    if (nextIndex < 0) {
-      nextIndex = focusableArray.length - 1;
-    } else if (nextIndex >= focusableArray.length) {
-      nextIndex = 0;
-    }
-    removeFocus(focusableArray[currentIndex]);
-    const nextNode = focusableArray[nextIndex];
-    addFocus(nextNode);
-    const parentSection = nextNode.closest("section");
-    parentSection?.scrollIntoView({ block: "nearest" });
-  };
-
-  focusableNodes.forEach((node) => {
-    node.addEventListener("mousemove", () => {
-      addFocus(node);
-    });
-    node.addEventListener("mouseleave", () => {
-      removeFocus(node);
-    });
-    node.addEventListener("focus", () => {
-      addFocus(node);
-    });
-    node.addEventListener("blur", () => {
-      removeFocus(node);
-    });
-    node.addEventListener("keydown", navigateNodes);
+    element.addEventListener("mousemove", handleFocus);
+    element.addEventListener("mouseleave", handleBlur);
+    element.addEventListener("focus", handleFocus);
+    element.addEventListener("blur", handleBlur);
+    element.addEventListener("keydown", handleKeyDown);
   });
 };
 

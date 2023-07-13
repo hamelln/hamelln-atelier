@@ -1,4 +1,9 @@
 import data from "../data/project.json" assert { type: "json" };
+import addKeyboardNavigationWithScroll from "../ui/addKeyboardNavigationWithScroll.js";
+import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import { addBlurHandler, addFocusHandler } from "../utils/focus.js";
+import { play } from "../utils/sound.js";
+import Project from "./Project.js";
 
 export default function Selection() {
   const makeBox = () => {
@@ -19,13 +24,20 @@ export default function Selection() {
     ulElem.classList.add("project-content__selection__list");
     const keys = Object.keys(data);
     keys.map((key) => {
-      const liElem = document.createElement("li");
-      liElem.classList.add("project-content__selection__item");
-      liElem.tabIndex = 0;
-      liElem.textContent = key;
-      ulElem.appendChild(liElem);
+      const projectItem = makeProjectItem(key);
+      addEventProjectItem(projectItem, key);
+      ulElem.appendChild(projectItem);
     });
     return ulElem;
+  };
+
+  const makeProjectItem = (projectTitle) => {
+    const liElem = document.createElement("li");
+    liElem.classList.add("project-content__selection__item");
+    liElem.classList.add("focusable");
+    liElem.tabIndex = 0;
+    liElem.textContent = projectTitle;
+    return liElem;
   };
 
   const makeFigure = () => {
@@ -39,9 +51,8 @@ export default function Selection() {
     return figureElem;
   };
 
-  const makeHTML = () => {
+  const makeSelectionBox = () => {
     const boxElem = makeBox();
-    const figureElem = makeFigure();
     const listElem = makeProjectList();
     const titleElem = makeTitle();
     boxElem.appendChild(titleElem);
@@ -49,14 +60,39 @@ export default function Selection() {
     return boxElem;
   };
 
+  const addEventProjectItem = (project, projectTitle) => {
+    const projectData = data[projectTitle];
+    const selectSound = document.getElementById("project-sound");
+    const startSound = document.getElementById("game-start");
+    const skills = document.querySelector(".project__skills");
+    const startProject = () => {
+      play(startSound);
+      Project(projectData);
+    };
+
+    const handleFocus = () => {
+      const skillText = projectData.spec.skill;
+      skills.textContent = skillText;
+      play(selectSound);
+    };
+
+    const handleBlur = () => {
+      skills.textContent = "";
+    };
+
+    addFocusHandler(project)(handleFocus);
+    addBlurHandler(project)(handleBlur);
+    addClickAndEnterHandler(project)(startProject);
+  };
+
   const render = () => {
     const elem = document.querySelector(".project-content");
     elem.innerHTML = "";
-    const box = makeHTML();
+    const box = makeSelectionBox();
     const figure = makeFigure();
     elem.appendChild(box);
     elem.appendChild(figure);
+    addKeyboardNavigationWithScroll();
   };
-
   render();
 }

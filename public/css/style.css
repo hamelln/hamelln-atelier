@@ -736,6 +736,7 @@ button {
   bottom: 8px;
   right: 10px;
   color: var(--text-color);
+  cursor: pointer;
 }
 
 /*? contact */

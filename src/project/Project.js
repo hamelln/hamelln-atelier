@@ -1,3 +1,5 @@
+import addEventForClickAndEnter from "../utils/addClickAndEnterHandler.js";
+import { addFocusAttribute } from "../utils/focus.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 
@@ -31,51 +33,61 @@ export default function Project({
     return titleElem;
   };
 
-  const makeLink = (url, content) => {
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.target = "_blank";
+  const makeLinkItem = (content) => {
     const li = document.createElement("li");
     li.classList.add("project-box__info__item");
     li.textContent = content;
-    anchor.appendChild(li);
-    return anchor;
+    return (url) => {
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.target = "_blank";
+      anchor.appendChild(li);
+      return anchor;
+    };
   };
 
-  const makeListItem = (content, callback) => {
+  const makeItem = (content) => {
     const elem = document.createElement("li");
     elem.classList.add("project-box__info__item");
     elem.textContent = content;
-    elem.addEventListener("click", callback);
     return elem;
   };
 
+  const moveTo = (element) => {
+    return (callback, ...args) => {
+      addEventForClickAndEnter(element)(callback, ...args);
+    };
+  };
+
   const makeInfo = () => {
-    let infoElem = document.createElement("ul");
+    const infoElem = document.createElement("ul");
     infoElem.classList.add("project-box__info");
-    let html = "";
     if (siteUrl) {
-      const anchor = makeLink(siteUrl, "homepage");
-      infoElem.appendChild(anchor);
+      const homepageLink = makeLinkItem("homepage")(siteUrl);
+      addFocusAttribute(homepageLink);
+      infoElem.appendChild(homepageLink);
     }
     if (codeUrl) {
-      const anchor = makeLink(codeUrl, "code");
-      infoElem.appendChild(anchor);
+      const codeLink = makeLinkItem("code")(codeUrl);
+      addFocusAttribute(codeLink);
+      infoElem.appendChild(codeLink);
     }
-    const specElem = makeListItem("spec", () => {
-      Spec(spec, render);
-    });
-    const featureElem = makeListItem("feature", () => {});
-    const exitElem = makeListItem("exit", () => {
-      Selection();
-    });
+    const specElem = makeItem("spec");
+    const featureElem = makeItem("feature");
+    const exitElem = makeItem("exit");
+    addFocusAttribute(specElem);
+    addFocusAttribute(featureElem);
+    addFocusAttribute(exitElem);
+    moveTo(specElem)(Spec, spec, render);
+    moveTo(featureElem)(() => {});
+    moveTo(exitElem)(Selection);
     infoElem.appendChild(specElem);
     infoElem.appendChild(featureElem);
     infoElem.appendChild(exitElem);
     return infoElem;
   };
 
-  const makeHTML = () => {
+  const makeContent = () => {
     const boxElem = makeBox();
     const titleElem = makeTitle();
     const infoElem = makeInfo();
@@ -86,9 +98,9 @@ export default function Project({
   };
 
   const render = () => {
-    let elem = document.querySelector(".project-content");
+    const elem = document.querySelector(".project-content");
     elem.innerHTML = "";
-    const [box, img] = makeHTML();
+    const [box, img] = makeContent();
     elem.appendChild(box);
     elem.appendChild(img);
   };
