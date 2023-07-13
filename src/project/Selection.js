@@ -1,11 +1,11 @@
 import data from "../data/project.json" assert { type: "json" };
-import addKeyboardNavigationWithScroll from "../ui/addKeyboardNavigationWithScroll.js";
+import addKeyboardNavigation from "../ui/addKeyboardNavigation.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import { addBlurHandler, addFocusHandler } from "../utils/focus.js";
+import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
 import { play } from "../utils/sound.js";
 import Project from "./Project.js";
 
-export default function Selection() {
+export default function Selection(projectTitle = undefined) {
   const makeBox = () => {
     const boxElem = document.createElement("div");
     boxElem.classList.add("project-content__selection");
@@ -92,7 +92,21 @@ export default function Selection() {
     const figure = makeFigure();
     elem.appendChild(box);
     elem.appendChild(figure);
-    addKeyboardNavigationWithScroll();
+    addKeyboardNavigation();
+    focus(projectTitle);
   };
+
+  const focus = (projectTitle) => {
+    if (!projectTitle) return;
+    const list = document.querySelectorAll(".project-content__selection__item");
+    for (const project of list) {
+      const title = project.textContent.trim();
+      if (title === projectTitle) {
+        addFocus(project);
+        break;
+      }
+    }
+  };
+
   render();
 }
