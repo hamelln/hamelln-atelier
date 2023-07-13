@@ -62,7 +62,7 @@ export default function Project({
 
   const moveTo = (element) => {
     return (callback, ...args) => {
-      addEventForClickAndEnter(element)(callback, ...args);
+      addClickAndEnterHandler(element)(callback, ...args);
     };
   };
 
