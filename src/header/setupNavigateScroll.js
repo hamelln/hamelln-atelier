@@ -1,52 +1,36 @@
 "use strict";
 
+import addEventForClickAndEnter from "../utils/addEventForClickAndEnter.js";
+
 const setupNavigateScroll = () => {
-  const getPosition = (section) => {
-    const sectionTop = section?.offsetTop;
-    const sectionHeight = section?.offsetHeight;
-    const y = section
-      ? sectionTop - (windowHeight - sectionHeight) / 2 - headerHeight + 25
-      : 0;
-
-    return y;
+  const calcPosition = (section) => {
+    const windowHeight = window.innerHeight;
+    const headerHeight = document.querySelector("header").offsetHeight;
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    return sectionTop - (windowHeight - sectionHeight) / 2 - headerHeight + 25;
   };
 
-  const scrollToPosition = (link, position) => {
-    link.addEventListener("keydown", ({ key }) => {
-      if (key === "Enter") scrollTo(0, position);
-    });
-    link.addEventListener("click", () => {
-      scrollTo(0, position);
-    });
+  const scrollToPosition = (position) => {
+    scrollTo(0, position);
   };
 
-  const home = document.querySelector(".header__logo");
-  const tabs = document.querySelector(".header-nav-list").children;
+  const homeLogo = document.querySelector(".header__logo");
+  const tabs = document.querySelectorAll(".header-nav-list__item");
   const [aboutLink, projectsLink, contactLink] = tabs;
   const about = document.getElementById("about");
   const project = document.getElementById("project");
   const contact = document.getElementById("contact");
   const navToProject = document.querySelector(".about__nav");
-  const projectItems = document.querySelectorAll(
-    ".project-content__selection__item"
-  );
-  const windowHeight = window.innerHeight;
-  const headerHeight = document.querySelector("header").offsetHeight;
-  const aboutPosition = getPosition(about);
-  const projectPosition = getPosition(project);
-  const contactPosition = getPosition(contact);
+  const aboutPosition = calcPosition(about);
+  const projectPosition = calcPosition(project);
+  const contactPosition = calcPosition(contact);
 
-  projectItems.forEach((item) => {
-    item.addEventListener("focus", () => {
-      scrollToPosition(item, projectPosition);
-    });
-  });
-
-  scrollToPosition(home, 0);
-  scrollToPosition(aboutLink, aboutPosition);
-  scrollToPosition(projectsLink, projectPosition);
-  scrollToPosition(contactLink, contactPosition);
-  scrollToPosition(navToProject, projectPosition);
+  addEventForClickAndEnter(homeLogo)(scrollToPosition, 0);
+  addEventForClickAndEnter(aboutLink)(scrollToPosition, aboutPosition);
+  addEventForClickAndEnter(projectsLink)(scrollToPosition, projectPosition);
+  addEventForClickAndEnter(contactLink)(scrollToPosition, contactPosition);
+  addEventForClickAndEnter(navToProject)(scrollToPosition, projectPosition);
 };
 
 export default setupNavigateScroll;
