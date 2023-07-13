@@ -1,16 +1,16 @@
 "use strict";
 
-import setupNavigateScroll from "./header/setupNavigateScroll.js";
 import Selection from "./project/Selection.js";
 import setupMuteButton from "./ui/muteButton.js";
 import setupThemeButton from "./ui/themeButton/index.js";
+import navigateWithScroll from "./utils/navigateWithScroll.js";
 import { setupSound } from "./utils/sound.js";
 
 window.addEventListener("load", () => {
   setupMuteButton();
   setupSound();
   setupThemeButton();
-  setupNavigateScroll();
+  navigateWithScroll();
   Selection();
 
   const op = document.querySelector(".opening");

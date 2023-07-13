@@ -1,6 +1,5 @@
 import addKeyboardNavigation from "../ui/addKeyboardNavigation.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import addEventForClickAndEnter from "../utils/addClickAndEnterHandler.js";
 import { addFocus, addFocusHandlers } from "../utils/focus.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
