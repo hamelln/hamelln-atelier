@@ -1,7 +1,7 @@
 export const makeElementWithClasses = (tag) => {
   const element = document.createElement(tag);
-  return (className1, className2 = null) => {
-    element.classList.add(className1);
+  return (className1 = null, className2 = null) => {
+    className1 && element.classList.add(className1);
     className2 && element.classList.add(className2);
     return element;
   };
