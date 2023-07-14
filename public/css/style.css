@@ -142,7 +142,7 @@ button {
   margin: 0 20px;
   color: var(--text-color);
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 0.2em;
   font-size: var(--font-size-s);
   transition: color 0.2s ease-in-out;
   cursor: pointer;
@@ -653,12 +653,30 @@ button {
 }
 
 .project-content__overview {
+  position: relative;
   width: 70%;
 }
 
 .project-content__overview__image {
   width: 100%;
   height: 100%;
+}
+
+.project-content__overview__skill {
+  position: absolute;
+  display: flex;
+  top: 10px;
+  left: 10px;
+  gap: 1em;
+}
+
+.project-content__overview__skill__item {
+  font-size: var(--font-size-s);
+  border: 2px solid rgba(108, 201, 170, 0.8);
+  border-radius: var(--border-radius-l);
+  padding: 4px 1em;
+  background-color: rgba(108, 201, 170, 0.4);
+  color: white;
 }
 
 .project-box {
@@ -720,11 +738,12 @@ button {
   opacity: 0.7;
 }
 
-.project__skills {
+.project__describe {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #295eae;
+  font-size: var(--font-size-l);
   color: #f4f4f4;
   column-gap: 10px;
   word-spacing: 0.5em;
@@ -732,6 +751,7 @@ button {
 }
 
 .project-content__spec {
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -757,14 +777,53 @@ button {
 
 .project-content__spec__box {
   position: relative;
-  background-color: rgba(85, 31, 88, 0.6);
   width: 100%;
   height: 100%;
-  padding: 10px;
+}
+
+.project-content__spec__describe__box {
+  position: absolute;
+  width: 98%;
+  height: 100%;
+  left: 10px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  display: flex;
+  animation: balloon 0.2s ease-in;
+}
+
+@keyframes balloon {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  100% {
+    width: 80%;
+    height: 90%;
+  }
+}
+
+.project-content__spec__describe__box::before {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 20px 20px 20px 0;
+  border-color: transparent var(--bg-color) transparent transparent;
+  top: 20px;
+  left: -10px;
 }
 
 .project-content__spec__box__describe {
+  font-size: var(--font-size-m);
   color: var(--text-color);
+  line-height: 2em;
+  letter-spacing: 0.3em;
+}
+
+.project-content__spec__box__skill {
+  color: var(--primary-color);
 }
 
 .project-content__spec__box__Enter {
@@ -773,6 +832,21 @@ button {
   right: 10px;
   color: var(--text-color);
   cursor: pointer;
+  animation: slow-out 0.6s ease;
+}
+
+@keyframes slow-out {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .project-content__loading {
@@ -804,7 +878,7 @@ button {
 .project-content__loading__text {
   font-size: var(--title-size-xl);
   color: var(--text-color);
-  letter-spacing: 6px;
+  letter-spacing: 0.2em;
 }
 
 /*? contact */
@@ -965,7 +1039,7 @@ footer {
   }
 
   .project-content__selection__item,
-  .project__skills,
+  .project__describe,
   .header-nav-list li {
     font-size: var(--font-size-xs);
   }

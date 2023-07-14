@@ -1,63 +1,111 @@
+import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import {
+  addAttribute,
+  makeElementWithClasses,
+  makeImg,
+} from "../utils/controllDOM.js";
+
 export default function Spec(
-  { period, member, skill, role, characterImage },
+  { startDay, endDay, member, skill, role, characterImage },
   renderProject
 ) {
-  const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-content__spec");
-    return boxElem;
-  };
+  const animateText = (specDescription) => {
+    const descriptionTemplate = [
+      `<span class="project-content__spec__box__skill">`,
+      member,
+      `</span>`,
+      `인이 작업했습니다.`,
+      `<br />`,
+      `<span class="project-content__spec__box__skill">`,
+      startDay,
+      `</span>`,
+      `부터 `,
+      `<span class="project-content__spec__box__skill">`,
+      endDay,
+      `</span>`,
+      `까지 진행했어요.`,
+      `<br />`,
+      `이 프로젝트에 사용된 기술은 `,
+      `<span class="project-content__spec__box__skill">`,
+      skill,
+      `</span>`,
+      `입니다.`,
+      `<br />`,
+      `저는 `,
+      `<span class="project-content__spec__box__skill">`,
+      role,
+      `</span>`,
+      `를 담당했습니다.`,
+    ];
 
-  const makeFigure = () => {
-    const figureElem = document.createElement("figure");
-    const imgElem = document.createElement("img");
-    figureElem.classList.add("project-content__spec__character");
-    imgElem.classList.add("project-content__spec__character__image");
-    imgElem.src = characterImage;
-    imgElem.alt = ".project character image";
-    figureElem.appendChild(imgElem);
-    return figureElem;
-  };
+    let currentText = ``;
+    let index = 0;
+    let charIndex = 0;
+    const MAX_LENGTH = descriptionTemplate.length;
 
-  const makeDescribe = () => {
-    const describeElem = document.createElement("div");
-    const pElem = document.createElement("p");
-    const EnterElem = document.createElement("p");
-    describeElem.classList.add("project-content__spec__box");
-    pElem.classList.add("project-content__spec__box__describe");
-    EnterElem.classList.add("project-content__spec__box__Enter");
-    pElem.textContent = "안녕하세요.";
-    EnterElem.textContent = "Enter";
-    EnterElem.addEventListener("click", renderProject);
-    describeElem.appendChild(pElem);
-    describeElem.appendChild(EnterElem);
-    return describeElem;
-  };
+    const isHTML = (text) => text[0] === "<";
 
-  const makeHTML = () => {
-    const boxElem = makeBox();
-    const figureElem = makeFigure();
-    const describeElem = makeDescribe();
-    boxElem.appendChild(figureElem);
-    boxElem.appendChild(describeElem);
-    return boxElem;
-  };
+    const printAtOnce = (text) => {
+      currentText += text;
+      specDescription.innerHTML = currentText;
+      index++;
+    };
 
-  const focus = () => {
-    const list = document.querySelectorAll(".project-box__info__item");
-    for (const item of list) {
-      if (item.textContent === "spec") {
-        addFocus(item);
-        break;
+    const printPerChar = (text) => {
+      if (charIndex < text.length) {
+        currentText += text[charIndex];
+        specDescription.innerHTML = currentText;
+        charIndex++;
+      } else {
+        charIndex = 0;
+        index++;
       }
-    }
+    };
+
+    const animate = () => {
+      if (index >= MAX_LENGTH) return;
+      const text = descriptionTemplate[index];
+      (isHTML(text) ? printAtOnce : printPerChar)(text);
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
   };
 
   const render = () => {
-    let elem = document.querySelector(".project-content");
-    elem.innerHTML = "";
-    const boxElem = makeHTML();
-    elem.appendChild(boxElem);
+    const parent = document.querySelector(".project-content");
+    const specBox = makeElementWithClasses("div")("project-content__spec");
+    const characterFigure = makeElementWithClasses("figure")(
+      "project-content__spec__character"
+    );
+    const character = makeImg("project-content__spec__character__image")(
+      characterImage
+    )("project character image");
+    const specInnerBox = makeElementWithClasses("div")(
+      "project-content__spec__box"
+    );
+    const descriptionBox = makeElementWithClasses("div")(
+      "project-content__spec__describe__box"
+    );
+    const specDescription = makeElementWithClasses("p")(
+      "project-content__spec__box__describe"
+    );
+    const specEnterButton = makeElementWithClasses("p")(
+      "project-content__spec__box__Enter",
+      "focusable"
+    );
+    characterFigure.appendChild(character);
+    addAttribute(specEnterButton)({ tabIndex: 0, text: "Enter" });
+    descriptionBox.appendChild(specDescription);
+    descriptionBox.appendChild(specEnterButton);
+    specInnerBox.appendChild(descriptionBox);
+    addClickAndEnterHandler(specEnterButton)(renderProject);
+    specBox.appendChild(characterFigure);
+    specBox.appendChild(specInnerBox);
+    parent.innerHTML = "";
+    parent.appendChild(specBox);
+    animateText(specDescription);
+    specEnterButton.focus();
   };
 
   render();

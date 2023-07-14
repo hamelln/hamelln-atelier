@@ -1,15 +1,17 @@
 {
-  "COFFEEN": {
-    "uuid": "95000cc1-beb9-4c77-8812-13a8be2d5a16",
-    "title": "COFFEEN",
-    "siteUrl": "https://coffeen.vercel.app/",
-    "codeUrl": "https://github.com/hamelln/coffeen",
+  "Hamelln": {
+    "uuid": "bea4bbcc-21f3-11ee-be56-0242ac120002",
+    "title": "Hamelln",
+    "siteUrl": "https://hamelln.vercel.app/",
+    "codeUrl": "https://github.com/hamelln/hamelln",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "나를 소개하는 홈페이지",
     "spec": {
-      "period": "6개월",
-      "member": 1,
-      "skill": "Next.js React TypeScript",
+      "startDay": "2023.03",
+      "endDay": "2023.07",
+      "member": "1",
+      "skill": "HTML, CSS, JavaScript",
       "role": "기획, 디자인, 프론트엔드",
       "characterImage": "./public/img/character.png"
     },
@@ -19,24 +21,26 @@
       "outcome": "그 결과 여러 브라우저에 동일한 경험을 제공할 수 있었습니다."
     }
   },
-  "반려in": {
-    "uuid": "6bb4b7ce-a576-423c-96d1-95fc5f376f35",
-    "title": "반려in",
-    "siteUrl": "",
-    "codeUrl": "",
+  "COFFEEN": {
+    "uuid": "95000cc1-beb9-4c77-8812-13a8be2d5a16",
+    "title": "COFFEEN",
+    "siteUrl": "https://coffeen.vercel.app/",
+    "codeUrl": "https://github.com/hamelln/coffeen",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "커피 간단 소개",
     "spec": {
-      "period": "2주",
-      "member": 6,
-      "skill": "HTML CSS JavaScript",
-      "role": "마이페이지",
+      "startDay": "2022.10",
+      "endDay": "2023.04",
+      "member": "1",
+      "skill": "Next.js, React, TypeScript",
+      "role": "기획, 디자인, 프론트엔드",
       "characterImage": "./public/img/character.png"
     },
     "feature": {
-      "challenge": "",
-      "approach": "",
-      "outcome": ""
+      "challenge": "이 사이트는 크롬을 기준으로 만들었어요. 그래서 삼성 인터넷으로 켰을 때 스타일이 무너진 걸 봤죠.",
+      "approach": "스타일을 통일할 필요를 느꼈고, 이러한 크로스 브라우징 대책으로 normalize를 선택했어요.",
+      "outcome": "그 결과 여러 브라우저에 동일한 경험을 제공할 수 있었습니다."
     }
   },
   "Modak": {
@@ -46,10 +50,34 @@
     "codeUrl": "",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "캠핑족에게 정보, 리뷰 제공",
     "spec": {
-      "period": "1개월",
-      "member": 5,
-      "skill": "Next.js React TypeScript Redux",
+      "startDay": "2022.01",
+      "endDay": "2022.02",
+      "member": "5",
+      "skill": "Next.js, React, TypeScript, Redux",
+      "role": "마이페이지",
+      "characterImage": "./public/img/character.png"
+    },
+    "feature": {
+      "challenge": "",
+      "approach": "",
+      "outcome": ""
+    }
+  },
+  "반려in": {
+    "uuid": "6bb4b7ce-a576-423c-96d1-95fc5f376f35",
+    "title": "반려in",
+    "siteUrl": "",
+    "codeUrl": "",
+    "backgroundImage": "./public/img/cafe.png",
+    "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "유기 동물을 반려 동물로 맞이하는 공간",
+    "spec": {
+      "startDay": "2021.12.14",
+      "endDay": "2021.12.25",
+      "member": "6",
+      "skill": "HTML, CSS, JavaScript",
       "role": "마이페이지",
       "characterImage": "./public/img/character.png"
     },

@@ -1,3 +1,5 @@
+import { addAttribute } from "../utils/controllDOM.js";
+
 const setLogo = (theme) => {
   const logo = document.querySelector(".header__logo");
   const imgData = {
@@ -10,11 +12,11 @@ const setLogo = (theme) => {
       alt: "light-mode-logo",
     },
   };
-
+  const src = imgData[theme].src;
+  const alt = imgData[theme].alt;
   logo.innerHTML = "";
   const img = document.createElement("img");
-  img.src = imgData[theme].src;
-  img.alt = imgData[theme].alt;
+  addAttribute(img)({ src, alt });
   logo.appendChild(img);
 };
 

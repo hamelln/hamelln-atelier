@@ -1,10 +1,21 @@
 import addKeyboardController from "../utils/addKeyboardController.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import { addFocus, addFocusHandlers } from "../utils/focus.js";
+import {
+  addBlurHandler,
+  addFocus,
+  addFocusHandler,
+  addFocusHandlers,
+} from "../utils/focus.js";
 import { play, stop } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
+import {
+  addAttribute,
+  makeElementWithClasses,
+  makeImg,
+} from "../utils/controllDOM.js";
+import { saveFocusedElement } from "../utils/storeFocus.js";
 
 export default function Project({
   title,
@@ -15,63 +26,65 @@ export default function Project({
   spec,
   feature,
 }) {
-  const bgm = document.getElementById("bgm");
+  const bgm = document.querySelector("#bgm");
 
-  const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-box");
-    return boxElem;
+  const makeProjectTitle = (className) => {
+    const projectTitle = makeElementWithClasses("h2")(className);
+    return addAttribute(projectTitle)({ text: title });
   };
 
-  const makeImage = () => {
-    const imgElem = document.createElement("img");
-    imgElem.classList.add("project__image");
-    imgElem.src = backgroundImage;
-    imgElem.alt = ".project background image";
-    return imgElem;
+  const makeInfoItem = (content) => {
+    const li = makeElementWithClasses("li")("project-box__info__item");
+    return addAttribute(li)({ dataName: content, text: content });
   };
 
-  const makeTitle = () => {
-    let titleElem = document.createElement("h2");
-    titleElem.classList.add("project-box__title");
-    titleElem.textContent = title;
-    return titleElem;
-  };
-
-  const makeLinkItem = (content) => {
-    const openLinkAndSaveFocus = (url) => {
-      saveFocusedElement(content);
-      window.open(url, "_blank");
-    };
-
-    const li = document.createElement("li");
-    li.classList.add("project-box__info__item");
-    li.setAttribute("data-focus-name", content);
-
-    return (url) => {
-      const anchor = document.createElement("a");
-      anchor.textContent = content;
-      addClickAndEnterHandler(li)(openLinkAndSaveFocus, url);
-      li.appendChild(anchor);
-      return li;
-    };
-  };
-
-  const makeItem = (content) => {
-    const li = document.createElement("li");
-    li.classList.add("project-box__info__item");
-    li.setAttribute("data-focus-name", content);
-    li.textContent = content;
+  const makeInfoLinkItem = (content) => {
+    const li = makeInfoItem(content);
+    const anchor = document.createElement("a");
+    li.appendChild(anchor);
     return li;
   };
 
-  const moveTo = (element) => {
+  const openLink = (url) => {
+    window.open(url, "_blank");
+  };
+
+  const displayDescriptionOfItem = (item) => {
+    const describe = document.querySelector(".project__describe");
+    const itemText = item.textContent.trim();
+    const descriptionMap = new Map([
+      ["homepage", "홈페이지로 이동"],
+      ["code", "GitHub으로 이동"],
+      ["spec", "프로젝트 스펙을 확인"],
+      ["feature", "진행중 겪은 이야기들"],
+      ["exit", "화면을 종료합니다"],
+    ]);
+
+    const handleFocus = () => {
+      describe.textContent = descriptionMap.get(itemText);
+    };
+
+    const handleBlur = () => {
+      describe.textContent = "";
+    };
+
+    addFocusHandler(item)(handleFocus);
+    addBlurHandler(item)(handleBlur);
+  };
+
+  const directPageOnItemByClickAndEnter = (element) => {
     return (callback, ...args) => {
       addClickAndEnterHandler(element)(callback, ...args);
     };
   };
 
-  const quitProject = () => {
+  const focusFirstItemWhenRender = () => {
+    const firstItemOfInfo =
+      document.querySelector(".project-box__info").firstChild;
+    addFocus(firstItemOfInfo);
+  };
+
+  const returnSelectionPage = () => {
     Loading("Thank you!");
     setTimeout(() => {
       Selection(title);
@@ -79,78 +92,50 @@ export default function Project({
     }, 1000);
   };
 
-  const makeInfo = () => {
-    const infoElem = document.createElement("ul");
-    infoElem.classList.add("project-box__info");
-    if (siteUrl) {
-      const homepageLink = makeLinkItem("homepage")(siteUrl);
-      addFocusHandlers(homepageLink);
-      infoElem.appendChild(homepageLink);
-    }
-    if (codeUrl) {
-      const codeLink = makeLinkItem("code")(codeUrl);
-      addFocusHandlers(codeLink);
-      infoElem.appendChild(codeLink);
-    }
-    const specElem = makeItem("spec");
-    const featureElem = makeItem("feature");
-    const exitElem = makeItem("exit");
-    addFocusHandlers(specElem);
-    addFocusHandlers(featureElem);
-    addFocusHandlers(exitElem);
-    moveTo(specElem)(Spec, spec, render);
-    moveTo(featureElem)(() => {});
-    moveTo(exitElem)(quitProject);
-    infoElem.appendChild(specElem);
-    infoElem.appendChild(featureElem);
-    infoElem.appendChild(exitElem);
-    return infoElem;
-  };
-
-  const makeContent = () => {
-    const boxElem = makeBox();
-    const titleElem = makeTitle();
-    const infoElem = makeInfo();
-    const imgElem = makeImage();
-    boxElem.appendChild(titleElem);
-    boxElem.appendChild(infoElem);
-    return [boxElem, imgElem];
-  };
-
-  const saveFocusedElement = (name) => {
-    localStorage.setItem("lastFocusedElement", name);
-  };
-
-  const restoreFocus = () => {
-    const lastFocusedName = localStorage.getItem("lastFocusedElement");
-    if (lastFocusedName) {
-      const elem = document.querySelector(
-        `[data-focus-name="${lastFocusedName}"]`
-      );
-      if (elem) {
-        addFocus(elem);
-        localStorage.removeItem("lastFocusedElement");
-      }
-    }
+  const goSpecPage = () => {
+    Spec(spec, render);
   };
 
   const render = () => {
-    const elem = document.querySelector(".project-content");
-    elem.innerHTML = "";
-    const [box, img] = makeContent();
-    elem.appendChild(box);
-    elem.appendChild(img);
+    const parent = document.querySelector(".project-content");
+    const projectBox = makeElementWithClasses("div")("project-box");
+    const projectTitle = makeProjectTitle("project-box__title");
+    const infoBox = makeElementWithClasses("ul")("project-box__info");
+    const projectImage =
+      makeImg("project__image")(backgroundImage)("project image");
+    const homepageItem = makeInfoLinkItem("homepage");
+    const codeItem = makeInfoLinkItem("code");
+    const specItem = makeInfoItem("spec");
+    const featureItem = makeInfoItem("feature");
+    const exitItem = makeInfoItem("exit");
+    parent.innerHTML = "";
+    addFocusHandlers(homepageItem);
+    addFocusHandlers(codeItem);
+    addFocusHandlers(specItem);
+    addFocusHandlers(featureItem);
+    addFocusHandlers(exitItem);
+    directPageOnItemByClickAndEnter(homepageItem)(openLink, siteUrl);
+    directPageOnItemByClickAndEnter(codeItem)(openLink, codeUrl);
+    directPageOnItemByClickAndEnter(specItem)(goSpecPage);
+    directPageOnItemByClickAndEnter(featureItem)(() => {});
+    directPageOnItemByClickAndEnter(exitItem)(returnSelectionPage);
+    infoBox.appendChild(homepageItem);
+    infoBox.appendChild(codeItem);
+    infoBox.appendChild(specItem);
+    infoBox.appendChild(featureItem);
+    infoBox.appendChild(exitItem);
+    displayDescriptionOfItem(homepageItem);
+    displayDescriptionOfItem(codeItem);
+    displayDescriptionOfItem(specItem);
+    displayDescriptionOfItem(featureItem);
+    displayDescriptionOfItem(exitItem);
+    projectBox.appendChild(projectTitle);
+    projectBox.appendChild(infoBox);
+    parent.appendChild(projectBox);
+    parent.appendChild(projectImage);
     addKeyboardController();
-    focus();
+    focusFirstItemWhenRender();
     play(bgm);
   };
-
-  const focus = () => {
-    const firstItem = document.querySelector(".project-box__info").firstChild;
-    addFocus(firstItem);
-  };
-
-  window.addEventListener("focus", restoreFocus);
-
   render();
 }
