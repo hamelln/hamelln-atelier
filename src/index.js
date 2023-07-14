@@ -5,6 +5,7 @@ import setupMuteButton from "./ui/muteButton.js";
 import setupThemeButton from "./ui/themeButton/index.js";
 import navigateWithScroll from "./utils/navigateWithScroll.js";
 import { setupSound } from "./utils/sound.js";
+import { restoreFocus } from "./utils/storeFocus.js";
 
 window.addEventListener("load", () => {
   setupMuteButton();
@@ -16,3 +17,5 @@ window.addEventListener("load", () => {
   const op = document.querySelector(".opening");
   setTimeout(() => op.remove(), 6000);
 });
+
+window.addEventListener("focus", restoreFocus);
