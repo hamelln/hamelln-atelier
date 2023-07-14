@@ -26,7 +26,7 @@ const setupMuteButton = () => {
   const changeMuteImg = () => {
     const src = srcMap.get(isMuted);
     const alt = altMap.get(isMuted);
-    const img = makeImg()(src)(alt);
+    const img = makeImg()(src, alt);
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   };
