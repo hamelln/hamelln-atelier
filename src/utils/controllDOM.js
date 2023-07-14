@@ -7,6 +7,11 @@ export const makeElementWithClasses = (tag) => {
   };
 };
 
+export const makeImg = (className) => {
+  const imageElement = makeElementWithClasses("img")(className);
+  return (src, alt) => addAttribute(imageElement)({ src, alt });
+};
+
 export const addAttribute = (element) => {
   return (attrs) => {
     for (const attr in attrs) {
@@ -24,9 +29,6 @@ export const addAttribute = (element) => {
         case "tabIndex":
           element.tabIndex = value;
           break;
-        case "url":
-          element.href = value;
-          break;
         case "dataName":
           element.setAttribute("data-focus-name", value);
         default:
@@ -36,15 +38,3 @@ export const addAttribute = (element) => {
     return element;
   };
 };
-
-export const makeImg = (className) => {
-  const element = makeElementWithClasses("img")(className);
-  return (src) => {
-    return (alt) => {
-      return addAttribute(element)({ src, alt });
-    };
-  };
-};
-
-export const getByQuery = (query) => document.querySelector(query);
-export const getByQueryAll = (query) => document.querySelectorAll(query);
