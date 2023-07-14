@@ -824,6 +824,7 @@ button {
 
 .project-content__spec__box__skill {
   color: var(--primary-color);
+  font-weight: bold;
 }
 
 .project-content__spec__box__Enter {
