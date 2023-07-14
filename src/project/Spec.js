@@ -1,66 +1,16 @@
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import {
   addAttribute,
-  getByQuery,
-  getByQueryAll,
+  makeElementWithClasses,
+  makeImg,
 } from "../utils/controllDOM.js";
 
 export default function Spec(
   { startDay, endDay, member, skill, role, characterImage },
   renderProject
 ) {
-  const makeBox = () => {
-    return makeElementWithClasses("div")("project-content__spec");
-  };
-
-  const makeFigure = () => {
-    const src = characterImage;
-    const alt = "project character image";
-    const figureElem = makeElementWithClasses("figure")(
-      "project-content__spec__character"
-    );
-    const imgElem = makeElementWithClasses("img")(
-      "project-content__spec__character__image"
-    );
-    addAttribute(imgElem)({ src, alt });
-    figureElem.appendChild(imgElem);
-    return figureElem;
-  };
-
-  const makeDescribe = () => {
-    const boxElem = makeElementWithClasses("div")("project-content__spec__box");
-    const describeElem = makeElementWithClasses("div")(
-      "project-content__spec__describe__box"
-    );
-    const pElem = makeElementWithClasses("p")(
-      "project-content__spec__box__describe"
-    );
-    const EnterElem = makeElementWithClasses("p")(
-      "project-content__spec__box__Enter",
-      "focusable"
-    );
-    addAttribute(EnterElem)({ tabIndex: 0, text: "Enter" });
-    describeElem.appendChild(pElem);
-    describeElem.appendChild(EnterElem);
-    boxElem.appendChild(describeElem);
-    addClickAndEnterHandler(EnterElem)(renderProject);
-    return boxElem;
-  };
-
-  const makeHTML = () => {
-    const boxElem = makeBox();
-    const figureElem = makeFigure();
-    const describeElem = makeDescribe();
-    boxElem.appendChild(figureElem);
-    boxElem.appendChild(describeElem);
-    return boxElem;
-  };
-
-  const isHTML = (text) => text[0] === "<";
-
-  const updateText = (boxElem) => {
-    const pElem = boxElem.querySelector("p");
-    const htmlArray = [
+  const animateText = (specDescription) => {
+    const descriptionTemplate = [
       `<span class="project-content__spec__box__skill">`,
       member,
       `</span>`,
@@ -91,50 +41,71 @@ export default function Spec(
     let currentText = ``;
     let index = 0;
     let charIndex = 0;
+    const MAX_LENGTH = descriptionTemplate.length;
 
-    const animateText = () => {
-      if (index >= htmlArray.length) return;
-      const text = htmlArray[index];
-      if (isHTML(text)) {
-        currentText += text;
-        pElem.innerHTML = currentText;
-        index++;
-      } else {
-        if (charIndex < text.length) {
-          currentText += text[charIndex];
-          pElem.innerHTML = currentText;
-          charIndex++;
-        } else {
-          charIndex = 0;
-          index++;
-        }
-      }
-      requestAnimationFrame(animateText);
+    const isHTML = (text) => text[0] === "<";
+
+    const printAtOnce = (text) => {
+      currentText += text;
+      specDescription.innerHTML = currentText;
+      index++;
     };
 
-    requestAnimationFrame(animateText);
-  };
-
-  const focus = () => {
-    const list = getByQueryAll(".project-box__info__item");
-    for (const item of list) {
-      if (item.textContent === "spec") {
-        addFocus(item);
-        break;
+    const printPerChar = (text) => {
+      if (charIndex < text.length) {
+        currentText += text[charIndex];
+        specDescription.innerHTML = currentText;
+        charIndex++;
+      } else {
+        charIndex = 0;
+        index++;
       }
-    }
+    };
+
+    const animate = () => {
+      if (index >= MAX_LENGTH) return;
+      const text = descriptionTemplate[index];
+      (isHTML(text) ? printAtOnce : printPerChar)(text);
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
   };
 
   const render = () => {
-    let elem = getByQuery(".project-content");
-    elem.innerHTML = "";
-    const boxElem = makeHTML();
-    elem.appendChild(boxElem);
-    setTimeout(() => {
-      updateText(boxElem);
-      const enterElem = boxElem.querySelector(".focusable");
-      enterElem.focus();
-    }, 100);
+    const parent = document.querySelector(".project-content");
+    const specBox = makeElementWithClasses("div")("project-content__spec");
+    const characterFigure = makeElementWithClasses("figure")(
+      "project-content__spec__character"
+    );
+    const character = makeImg("project-content__spec__character__image")(
+      characterImage
+    )("project character image");
+    const specInnerBox = makeElementWithClasses("div")(
+      "project-content__spec__box"
+    );
+    const descriptionBox = makeElementWithClasses("div")(
+      "project-content__spec__describe__box"
+    );
+    const specDescription = makeElementWithClasses("p")(
+      "project-content__spec__box__describe"
+    );
+    const specEnterButton = makeElementWithClasses("p")(
+      "project-content__spec__box__Enter",
+      "focusable"
+    );
+    characterFigure.appendChild(character);
+    addAttribute(specEnterButton)({ tabIndex: 0, text: "Enter" });
+    descriptionBox.appendChild(specDescription);
+    descriptionBox.appendChild(specEnterButton);
+    specInnerBox.appendChild(descriptionBox);
+    addClickAndEnterHandler(specEnterButton)(renderProject);
+    specBox.appendChild(characterFigure);
+    specBox.appendChild(specInnerBox);
+    parent.innerHTML = "";
+    parent.appendChild(specBox);
+    animateText(specDescription);
+    specEnterButton.focus();
   };
 
   render();

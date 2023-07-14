@@ -1,34 +1,21 @@
-import {
-  addAttribute,
-  getByQuery,
-  makeElementWithClasses,
-} from "../utils/controllDOM.js";
+import { addAttribute, makeElementWithClasses } from "../utils/controllDOM.js";
 
-export default function Loading(loadingText) {
-  const makeBox = () => {
-    return makeElementWithClasses("div")("project-content__loading");
-  };
-
-  const makeText = () => {
-    const textElem = makeElementWithClasses("h2")(
-      "project-content__loading__text"
-    );
-    addAttribute(textElem)({ text: loadingText });
-    return textElem;
-  };
-
-  const makeHTML = () => {
-    const boxElem = makeBox();
-    const textElem = makeText();
-    boxElem.appendChild(textElem);
-    return boxElem;
+export default function Loading(text) {
+  const makeContent = (className) => {
+    const textElem = makeElementWithClasses("h2")(className);
+    return addAttribute(textElem)({ text });
   };
 
   const render = () => {
-    let elem = getByQuery(".project-content");
-    const boxElem = makeHTML();
-    elem.innerHTML = "";
-    elem.appendChild(boxElem);
+    const parent = document.querySelector(".project-content");
+    const loadingBox = makeElementWithClasses("div")(
+      "project-content__loading"
+    );
+    const loadingContent = makeContent("project-content__loading__text");
+
+    parent.innerHTML = "";
+    loadingBox.appendChild(loadingContent);
+    parent.appendChild(loadingBox);
   };
 
   render();

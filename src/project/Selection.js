@@ -7,81 +7,41 @@ import Project from "./Project.js";
 import Loading from "./Loading.js";
 import {
   makeElementWithClasses,
-  getByQuery,
-  getByQueryAll,
   addAttribute,
+  makeImg,
 } from "../utils/controllDOM.js";
 
 export default function Selection(projectTitle = undefined) {
-  const makeBox = () => {
-    return makeElementWithClasses("div")("project-content__selection");
-  };
-
-  const makeTitle = () => {
-    const titleElem = makeElementWithClasses("h2")(
-      "project-content__selection__title"
-    );
-    addAttribute(titleElem)({ text: "Project Select" });
-    return titleElem;
-  };
-
-  const makeProjectList = () => {
-    const ulElem = makeElementWithClasses("ul")(
-      "project-content__selection__list"
-    );
-    const keys = Object.keys(data);
-    keys.map((key) => {
-      const projectItem = makeProjectItem(key);
-      addEventProjectItem(projectItem, key);
-      ulElem.appendChild(projectItem);
-    });
-    return ulElem;
+  const makeTitle = (className) => {
+    const titleElem = makeElementWithClasses("h2")(className);
+    return addAttribute(titleElem)({ text: "Project Select" });
   };
 
   const makeProjectItem = (projectTitle) => {
-    const liElem = makeElementWithClasses("li")(
+    const projectItem = makeElementWithClasses("li")(
       "project-content__selection__item",
       "focusable"
     );
-    addAttribute(liElem)({ tabIndex: 0, text: projectTitle });
-    return liElem;
+    return addAttribute(projectItem)({ tabIndex: 0, text: projectTitle });
   };
 
-  const makeFigure = () => {
-    const src = "./public/img/cafe.png";
-    const alt = "project image";
-    const figureElem = makeElementWithClasses("figure")(
-      "project-content__overview"
-    );
-    const imgElem = makeElementWithClasses("img")(
-      "project-content__overview__image"
-    );
-    addAttribute(imgElem)({ src, alt });
-    const ulElem = makeElementWithClasses("ul")(
-      ".project-content__overview__skill"
-    );
-
-    figureElem.appendChild(imgElem);
-    figureElem.appendChild(ulElem);
-    return figureElem;
+  const insertProjectsIntoList = (projectList) => {
+    const projectArray = Object.keys(data);
+    projectArray.map((projectTitle) => {
+      const projectItem = makeProjectItem(projectTitle);
+      projectList.appendChild(projectItem);
+    });
+    return projectList;
   };
 
-  const makeSelectionBox = () => {
-    const boxElem = makeBox();
-    const listElem = makeProjectList();
-    const titleElem = makeTitle();
-    boxElem.appendChild(titleElem);
-    boxElem.appendChild(listElem);
-    return boxElem;
-  };
-
-  const addEventProjectItem = (project, projectTitle) => {
+  const addEventProjectItem = (project) => {
+    const projectTitle = project.textContent.trim();
     const projectData = data[projectTitle];
     const projectSkill = projectData.spec.skill.split(", ");
-    const selectSound = getByQuery("#project-sound");
-    const startSound = getByQuery("#game-start");
-    const describe = getByQuery(".project__describe");
-    const ulElem = getByQuery(".project-content__overview__skill");
+    const selectSound = document.querySelector("#project-sound");
+    const startSound = document.querySelector("#game-start");
+    const describe = document.querySelector(".project__describe");
+    const ulElem = document.querySelector(".project-content__overview__skill");
     const startProject = () => {
       play(startSound);
       Loading("Hamelln");
@@ -94,7 +54,9 @@ export default function Selection(projectTitle = undefined) {
       addAttribute(describe)({ text: projectData.describe });
 
       projectSkill.map((skill) => {
-        const liElem = makeElementWithClasses("li");
+        const liElem = makeElementWithClasses("li")(
+          "project-content__overview__skill__item"
+        );
         addAttribute(liElem)({ text: skill });
         ulElem.appendChild(liElem);
       });
@@ -112,28 +74,53 @@ export default function Selection(projectTitle = undefined) {
     addClickAndEnterHandler(project)(startProject);
   };
 
-  const render = () => {
-    const elem = getByQuery(".project-content");
-    elem.innerHTML = "";
-    const box = makeSelectionBox();
-    const figure = makeFigure();
-    elem.appendChild(box);
-    elem.appendChild(figure);
-    addKeyboardController();
-    prevFocus(projectTitle);
-  };
-
   const prevFocus = (focusedProjectTitle) => {
     if (!focusedProjectTitle) return;
 
-    const list = getByQueryAll(".project-content__selection__item");
-    for (const project of list) {
+    const projectList = document.querySelectorAll(
+      ".project-content__selection__item"
+    );
+
+    for (const project of projectList) {
       const title = project.textContent.trim();
       if (title === focusedProjectTitle) {
         addFocus(project);
-        break;
+        return;
       }
     }
+  };
+
+  const render = () => {
+    const parent = document.querySelector(".project-content");
+    const selectionBox = makeElementWithClasses("div")(
+      "project-content__selection"
+    );
+    const selectionTitle = makeTitle("project-content__selection__title");
+    const selectionList = makeElementWithClasses("ul")(
+      "project-content__selection__list"
+    );
+    const figure = makeElementWithClasses("figure")(
+      "project-content__overview"
+    );
+    const projectImg = makeImg("project-content__overview__image")(
+      "./public/img/cafe.png"
+    )("project image");
+    const projectSkill = makeElementWithClasses("ul")(
+      "project-content__overview__skill"
+    );
+    selectionBox.appendChild(selectionTitle);
+    selectionBox.appendChild(selectionList);
+    insertProjectsIntoList(selectionList);
+    figure.appendChild(projectImg);
+    figure.appendChild(projectSkill);
+    parent.innerHTML = "";
+    parent.appendChild(selectionBox);
+    parent.appendChild(figure);
+    selectionList.childNodes.forEach((project) => {
+      addEventProjectItem(project, projectTitle);
+    });
+    addKeyboardController();
+    prevFocus(projectTitle);
   };
 
   render();
