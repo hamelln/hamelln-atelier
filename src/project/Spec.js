@@ -66,7 +66,7 @@ export default function Spec(
       `<span class="project-content__spec__box__skill">`,
       startDay,
       `</span>`,
-      `부터`,
+      `부터 `,
       `<span class="project-content__spec__box__skill">`,
       endDay,
       `</span>`,

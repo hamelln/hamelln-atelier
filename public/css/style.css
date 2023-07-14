@@ -720,11 +720,12 @@ button {
   opacity: 0.7;
 }
 
-.project__skills {
+.project__describe {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #295eae;
+  font-size: var(--font-size-l);
   color: #f4f4f4;
   column-gap: 10px;
   word-spacing: 0.5em;
@@ -1020,7 +1021,7 @@ footer {
   }
 
   .project-content__selection__item,
-  .project__skills,
+  .project__describe,
   .header-nav-list li {
     font-size: var(--font-size-xs);
   }

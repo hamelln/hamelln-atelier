@@ -6,6 +6,7 @@
     "codeUrl": "https://github.com/hamelln/hamelln",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "나를 소개하는 홈페이지",
     "spec": {
       "startDay": "2023.03",
       "endDay": "2023.07",
@@ -27,6 +28,7 @@
     "codeUrl": "https://github.com/hamelln/coffeen",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "커피 간단 소개",
     "spec": {
       "startDay": "2022.10",
       "endDay": "2023.04",
@@ -41,18 +43,19 @@
       "outcome": "그 결과 여러 브라우저에 동일한 경험을 제공할 수 있었습니다."
     }
   },
-  "반려in": {
-    "uuid": "6bb4b7ce-a576-423c-96d1-95fc5f376f35",
-    "title": "반려in",
+  "Modak": {
+    "uuid": "2d36e029-2d89-48a0-a919-7ad06030fe9b",
+    "title": "Modak",
     "siteUrl": "",
     "codeUrl": "",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "캠핑족에게 정보, 리뷰 제공",
     "spec": {
-      "startDay": "2021.12.14",
-      "endDay": "2021.12.25",
-      "member": "6",
-      "skill": "HTML, CSS, JavaScript",
+      "startDay": "2022.01",
+      "endDay": "2022.02",
+      "member": "5",
+      "skill": "Next.js, React, TypeScript, Redux",
       "role": "마이페이지",
       "characterImage": "./public/img/character.png"
     },
@@ -62,18 +65,19 @@
       "outcome": ""
     }
   },
-  "Modak": {
-    "uuid": "2d36e029-2d89-48a0-a919-7ad06030fe9b",
-    "title": "Modak",
+  "반려in": {
+    "uuid": "6bb4b7ce-a576-423c-96d1-95fc5f376f35",
+    "title": "반려in",
     "siteUrl": "",
     "codeUrl": "",
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
+    "describe": "유기 동물을 반려 동물로 맞이하는 공간",
     "spec": {
-      "startDay": "2022.01",
-      "endDay": "2022.02",
-      "member": "5",
-      "skill": "Next.js, React, TypeScript, Redux",
+      "startDay": "2021.12.14",
+      "endDay": "2021.12.25",
+      "member": "6",
+      "skill": "HTML, CSS, JavaScript",
       "role": "마이페이지",
       "characterImage": "./public/img/character.png"
     },

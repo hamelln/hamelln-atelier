@@ -65,7 +65,7 @@ export default function Selection(projectTitle = undefined) {
     const projectData = data[projectTitle];
     const selectSound = document.getElementById("project-sound");
     const startSound = document.getElementById("game-start");
-    const skills = document.querySelector(".project__skills");
+    const describe = document.querySelector(".project__describe");
 
     const startProject = () => {
       play(startSound);
@@ -76,13 +76,13 @@ export default function Selection(projectTitle = undefined) {
     };
 
     const handleFocus = () => {
-      const skillText = projectData.spec.skill;
-      skills.textContent = skillText;
+      const describeText = projectData.describe;
+      describe.textContent = describeText;
       play(selectSound);
     };
 
     const handleBlur = () => {
-      skills.textContent = "";
+      describe.textContent = "";
     };
 
     addFocusHandler(project)(handleFocus);
