@@ -1,6 +1,11 @@
 import addKeyboardController from "../utils/addKeyboardController.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import { addFocus, addFocusHandlers } from "../utils/focus.js";
+import {
+  addBlurHandler,
+  addFocus,
+  addFocusHandler,
+  addFocusHandlers,
+} from "../utils/focus.js";
 import { play, stop } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
@@ -17,6 +22,27 @@ export default function Project({
 }) {
   const bgm = document.getElementById("bgm");
 
+  const addEventProjectItem = (select, text) => {
+    const describe = document.querySelector(".project__describe");
+    const textMap = new Map([
+      ["homepage", "홈페이지로 이동"],
+      ["code", "GitHub으로 이동"],
+      ["spec", "프로젝트 스펙을 확인"],
+      ["feature", "진행중 겪은 이야기들"],
+      ["exit", "화면을 종료합니다"],
+    ]);
+
+    const handleFocus = () => {
+      describe.textContent = textMap.get(text);
+    };
+
+    const handleBlur = () => {
+      describe.textContent = "";
+    };
+
+    addFocusHandler(select)(handleFocus);
+    addBlurHandler(select)(handleBlur);
+  };
   const makeBox = () => {
     const boxElem = document.createElement("div");
     boxElem.classList.add("project-box");
@@ -52,6 +78,7 @@ export default function Project({
       const anchor = document.createElement("a");
       anchor.textContent = content;
       addClickAndEnterHandler(li)(openLinkAndSaveFocus, url);
+      addEventProjectItem(li, content);
       li.appendChild(anchor);
       return li;
     };
@@ -62,6 +89,7 @@ export default function Project({
     li.classList.add("project-box__info__item");
     li.setAttribute("data-focus-name", content);
     li.textContent = content;
+    addEventProjectItem(li, content);
     return li;
   };
 
