@@ -10,7 +10,11 @@ import { play, stop } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
-import { getByQuery, makeElementWithClasses } from "../utils/controllDOM.js";
+import {
+  addAttribute,
+  getByQuery,
+  makeElementWithClasses,
+} from "../utils/controllDOM.js";
 
 export default function Project({
   title,
@@ -50,14 +54,14 @@ export default function Project({
 
   const makeImage = () => {
     const imgElem = makeElementWithClasses("img")("project__image");
-    imgElem.src = backgroundImage;
-    imgElem.alt = ".project background image";
+    const alt = "project background image";
+    addAttribute(imgElem)({ src: backgroundImage, alt });
     return imgElem;
   };
 
   const makeTitle = () => {
     let titleElem = makeElementWithClasses("h2")("project-box__title");
-    titleElem.textContent = title;
+    addAttribute(titleElem)({ text: title });
     return titleElem;
   };
 
@@ -68,11 +72,11 @@ export default function Project({
     };
 
     const li = makeElementWithClasses("li")("project-box__info__item");
-    li.setAttribute("data-focus-name", content);
+    addAttribute(li)({ dataName: content });
 
     return (url) => {
       const anchor = makeElementWithClasses("a");
-      anchor.textContent = content;
+      addAttribute(anchor)({ text: content });
       addClickAndEnterHandler(li)(openLinkAndSaveFocus, url);
       addEventProjectItem(li, content);
       li.appendChild(anchor);
@@ -82,8 +86,7 @@ export default function Project({
 
   const makeItem = (content) => {
     const li = makeElementWithClasses("li")("project-box__info__item");
-    li.setAttribute("data-focus-name", content);
-    li.textContent = content;
+    addAttribute(li)({ text: content, dataName: content });
     addEventProjectItem(li, content);
     return li;
   };

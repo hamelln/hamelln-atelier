@@ -1,6 +1,6 @@
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import {
-  addSrcAndAlt,
+  addAttribute,
   getByQuery,
   getByQueryAll,
 } from "../utils/controllDOM.js";
@@ -19,9 +19,10 @@ export default function Spec(
     const figureElem = makeElementWithClasses("figure")(
       "project-content__spec__character"
     );
-    const imgElem = addSrcAndAlt(
-      makeElementWithClasses("img")("project-content__spec__character__image")
-    )(src)(alt);
+    const imgElem = makeElementWithClasses("img")(
+      "project-content__spec__character__image"
+    );
+    addAttribute(imgElem)({ src, alt });
     figureElem.appendChild(imgElem);
     return figureElem;
   };
@@ -38,14 +39,11 @@ export default function Spec(
       "project-content__spec__box__Enter",
       "focusable"
     );
-
-    EnterElem.tabIndex = 0;
-    EnterElem.textContent = "Enter";
+    addAttribute(EnterElem)({ tabIndex: 0, text: "Enter" });
     describeElem.appendChild(pElem);
     describeElem.appendChild(EnterElem);
     boxElem.appendChild(describeElem);
     addClickAndEnterHandler(EnterElem)(renderProject);
-
     return boxElem;
   };
 

@@ -1,4 +1,8 @@
-import { getByQuery, makeElementWithClasses } from "../utils/controllDOM.js";
+import {
+  addAttribute,
+  getByQuery,
+  makeElementWithClasses,
+} from "../utils/controllDOM.js";
 
 export default function Loading(loadingText) {
   const makeBox = () => {
@@ -9,7 +13,7 @@ export default function Loading(loadingText) {
     const textElem = makeElementWithClasses("h2")(
       "project-content__loading__text"
     );
-    textElem.textContent = loadingText;
+    addAttribute(textElem)({ text: loadingText });
     return textElem;
   };
 

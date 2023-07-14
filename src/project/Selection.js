@@ -7,9 +7,9 @@ import Project from "./Project.js";
 import Loading from "./Loading.js";
 import {
   makeElementWithClasses,
-  addSrcAndAlt,
   getByQuery,
   getByQueryAll,
+  addAttribute,
 } from "../utils/controllDOM.js";
 
 export default function Selection(projectTitle = undefined) {
@@ -21,7 +21,7 @@ export default function Selection(projectTitle = undefined) {
     const titleElem = makeElementWithClasses("h2")(
       "project-content__selection__title"
     );
-    titleElem.textContent = "Project Select";
+    addAttribute(titleElem)({ text: "Project Select" });
     return titleElem;
   };
 
@@ -43,8 +43,7 @@ export default function Selection(projectTitle = undefined) {
       "project-content__selection__item",
       "focusable"
     );
-    liElem.tabIndex = 0;
-    liElem.textContent = projectTitle;
+    addAttribute(liElem)({ tabIndex: 0, text: projectTitle });
     return liElem;
   };
 
@@ -54,9 +53,10 @@ export default function Selection(projectTitle = undefined) {
     const figureElem = makeElementWithClasses("figure")(
       "project-content__overview"
     );
-    const imgElem = addSrcAndAlt(
-      makeElementWithClasses("img")("project-content__overview__image")
-    )(src)(alt);
+    const imgElem = makeElementWithClasses("img")(
+      "project-content__overview__image"
+    );
+    addAttribute(imgElem)({ src, alt });
     const ulElem = makeElementWithClasses("ul")(
       ".project-content__overview__skill"
     );
@@ -91,12 +91,11 @@ export default function Selection(projectTitle = undefined) {
     };
 
     const handleFocus = () => {
-      const describeText = projectData.describe;
-      describe.textContent = describeText;
+      addAttribute(describe)({ text: projectData.describe });
 
       projectSkill.map((skill) => {
-        const liElem = document.createElement("li");
-        liElem.textContent = skill;
+        const liElem = makeElementWithClasses("li");
+        addAttribute(liElem)({ text: skill });
         ulElem.appendChild(liElem);
       });
 
