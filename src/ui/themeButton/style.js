@@ -1,5 +1,7 @@
 "use strict";
 
+import { addSrcAndAlt, getByQuery } from "../../utils/controllDOM.js";
+
 export const { displayCanvas, foldCanvas, handleSign } = (() => {
   const setup = () => {
     const sunImage = "./public/img/sun.webp";
@@ -13,27 +15,26 @@ export const { displayCanvas, foldCanvas, handleSign } = (() => {
   };
 
   const displayCanvas = () => {
-    const container = document.querySelector(".mode__container");
+    const container = getByQuery(".mode__container");
     clearTimeout(timeoutId);
     container.classList.remove("hide");
   };
 
   const foldCanvas = () => {
-    const container = document.querySelector(".mode__container");
+    const container = getByQuery(".mode__container");
     timeoutId = setTimeout(() => {
       container.classList.add("hide");
     }, 800);
   };
 
   const setButtonImage = (themeSign, phaseMap) => {
-    const img = document.querySelector(".mode__button__image");
-    const button = document.querySelector(".mode__button");
+    const img = getByQuery(".mode__button__image");
+    const button = getByQuery(".mode__button");
     button.classList.add("clicked");
     setTimeout(() => {
       const src = phaseMap.get(themeSign)[0];
       const alt = phaseMap.get(themeSign)[1];
-      img.src = src;
-      img.alt = alt;
+      addSrcAndAlt(img)(src)(alt);
       button.classList.remove("clicked");
     }, 400);
   };

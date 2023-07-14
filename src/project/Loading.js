@@ -1,13 +1,14 @@
+import { getByQuery, makeElementWithClasses } from "../utils/controllDOM.js";
+
 export default function Loading(loadingText) {
   const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-content__loading");
-    return boxElem;
+    return makeElementWithClasses("div")("project-content__loading");
   };
 
   const makeText = () => {
-    const textElem = document.createElement("h2");
-    textElem.classList.add("project-content__loading__text");
+    const textElem = makeElementWithClasses("h2")(
+      "project-content__loading__text"
+    );
     textElem.textContent = loadingText;
     return textElem;
   };
@@ -20,7 +21,7 @@ export default function Loading(loadingText) {
   };
 
   const render = () => {
-    let elem = document.querySelector(".project-content");
+    let elem = getByQuery(".project-content");
     const boxElem = makeHTML();
     elem.innerHTML = "";
     elem.appendChild(boxElem);

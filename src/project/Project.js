@@ -10,6 +10,7 @@ import { play, stop } from "../utils/sound.js";
 import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
+import { getByQuery, makeElementWithClasses } from "../utils/controllDOM.js";
 
 export default function Project({
   title,
@@ -20,10 +21,10 @@ export default function Project({
   spec,
   feature,
 }) {
-  const bgm = document.getElementById("bgm");
+  const bgm = getByQuery("#bgm");
 
   const addEventProjectItem = (select, text) => {
-    const describe = document.querySelector(".project__describe");
+    const describe = getByQuery(".project__describe");
     const textMap = new Map([
       ["homepage", "홈페이지로 이동"],
       ["code", "GitHub으로 이동"],
@@ -44,22 +45,18 @@ export default function Project({
     addBlurHandler(select)(handleBlur);
   };
   const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-box");
-    return boxElem;
+    return makeElementWithClasses("div")("project-box");
   };
 
   const makeImage = () => {
-    const imgElem = document.createElement("img");
-    imgElem.classList.add("project__image");
+    const imgElem = makeElementWithClasses("img")("project__image");
     imgElem.src = backgroundImage;
     imgElem.alt = ".project background image";
     return imgElem;
   };
 
   const makeTitle = () => {
-    let titleElem = document.createElement("h2");
-    titleElem.classList.add("project-box__title");
+    let titleElem = makeElementWithClasses("h2")("project-box__title");
     titleElem.textContent = title;
     return titleElem;
   };
@@ -70,12 +67,11 @@ export default function Project({
       window.open(url, "_blank");
     };
 
-    const li = document.createElement("li");
-    li.classList.add("project-box__info__item");
+    const li = makeElementWithClasses("li")("project-box__info__item");
     li.setAttribute("data-focus-name", content);
 
     return (url) => {
-      const anchor = document.createElement("a");
+      const anchor = makeElementWithClasses("a");
       anchor.textContent = content;
       addClickAndEnterHandler(li)(openLinkAndSaveFocus, url);
       addEventProjectItem(li, content);
@@ -85,8 +81,7 @@ export default function Project({
   };
 
   const makeItem = (content) => {
-    const li = document.createElement("li");
-    li.classList.add("project-box__info__item");
+    const li = makeElementWithClasses("li")("project-box__info__item");
     li.setAttribute("data-focus-name", content);
     li.textContent = content;
     addEventProjectItem(li, content);
@@ -108,8 +103,7 @@ export default function Project({
   };
 
   const makeInfo = () => {
-    const infoElem = document.createElement("ul");
-    infoElem.classList.add("project-box__info");
+    const infoElem = makeElementWithClasses("ul")("project-box__info");
     if (siteUrl) {
       const homepageLink = makeLinkItem("homepage")(siteUrl);
       addFocusHandlers(homepageLink);
@@ -152,9 +146,7 @@ export default function Project({
   const restoreFocus = () => {
     const lastFocusedName = localStorage.getItem("lastFocusedElement");
     if (lastFocusedName) {
-      const elem = document.querySelector(
-        `[data-focus-name="${lastFocusedName}"]`
-      );
+      const elem = getByQuery(`[data-focus-name="${lastFocusedName}"]`);
       if (elem) {
         addFocus(elem);
         localStorage.removeItem("lastFocusedElement");
@@ -163,7 +155,7 @@ export default function Project({
   };
 
   const render = () => {
-    const elem = document.querySelector(".project-content");
+    const elem = getByQuery(".project-content");
     elem.innerHTML = "";
     const [box, img] = makeContent();
     elem.appendChild(box);
@@ -174,7 +166,7 @@ export default function Project({
   };
 
   const focus = () => {
-    const firstItem = document.querySelector(".project-box__info").firstChild;
+    const firstItem = getByQuery(".project-box__info").firstChild;
     addFocus(firstItem);
   };
 

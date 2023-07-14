@@ -1,44 +1,49 @@
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
+import {
+  addSrcAndAlt,
+  getByQuery,
+  getByQueryAll,
+} from "../utils/controllDOM.js";
 
 export default function Spec(
   { startDay, endDay, member, skill, role, characterImage },
   renderProject
 ) {
   const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-content__spec");
-    return boxElem;
+    return makeElementWithClasses("div")("project-content__spec");
   };
 
   const makeFigure = () => {
-    const figureElem = document.createElement("figure");
-    const imgElem = document.createElement("img");
-    figureElem.classList.add("project-content__spec__character");
-    imgElem.classList.add("project-content__spec__character__image");
-    imgElem.src = characterImage;
-    imgElem.alt = ".project character image";
+    const src = characterImage;
+    const alt = "project character image";
+    const figureElem = makeElementWithClasses("figure")(
+      "project-content__spec__character"
+    );
+    const imgElem = addSrcAndAlt(
+      makeElementWithClasses("img")("project-content__spec__character__image")
+    )(src)(alt);
     figureElem.appendChild(imgElem);
     return figureElem;
   };
 
   const makeDescribe = () => {
-    const boxElem = document.createElement("div");
-    const describeElem = document.createElement("div");
-    const pElem = document.createElement("p");
-    const EnterElem = document.createElement("p");
+    const boxElem = makeElementWithClasses("div")("project-content__spec__box");
+    const describeElem = makeElementWithClasses("div")(
+      "project-content__spec__describe__box"
+    );
+    const pElem = makeElementWithClasses("p")(
+      "project-content__spec__box__describe"
+    );
+    const EnterElem = makeElementWithClasses("p")(
+      "project-content__spec__box__Enter",
+      "focusable"
+    );
 
-    boxElem.classList.add("project-content__spec__box");
-    describeElem.classList.add("project-content__spec__describe__box");
-    pElem.classList.add("project-content__spec__box__describe");
-    EnterElem.classList.add("project-content__spec__box__Enter");
-    EnterElem.classList.add("focusable");
     EnterElem.tabIndex = 0;
-
+    EnterElem.textContent = "Enter";
     describeElem.appendChild(pElem);
     describeElem.appendChild(EnterElem);
     boxElem.appendChild(describeElem);
-
-    EnterElem.textContent = "Enter";
     addClickAndEnterHandler(EnterElem)(renderProject);
 
     return boxElem;
@@ -113,7 +118,7 @@ export default function Spec(
   };
 
   const focus = () => {
-    const list = document.querySelectorAll(".project-box__info__item");
+    const list = getByQueryAll(".project-box__info__item");
     for (const item of list) {
       if (item.textContent === "spec") {
         addFocus(item);
@@ -123,7 +128,7 @@ export default function Spec(
   };
 
   const render = () => {
-    let elem = document.querySelector(".project-content");
+    let elem = getByQuery(".project-content");
     elem.innerHTML = "";
     const boxElem = makeHTML();
     elem.appendChild(boxElem);

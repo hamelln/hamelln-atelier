@@ -5,24 +5,30 @@ import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
 import { play } from "../utils/sound.js";
 import Project from "./Project.js";
 import Loading from "./Loading.js";
+import {
+  makeElementWithClasses,
+  addSrcAndAlt,
+  getByQuery,
+  getByQueryAll,
+} from "../utils/controllDOM.js";
 
 export default function Selection(projectTitle = undefined) {
   const makeBox = () => {
-    const boxElem = document.createElement("div");
-    boxElem.classList.add("project-content__selection");
-    return boxElem;
+    return makeElementWithClasses("div")("project-content__selection");
   };
 
   const makeTitle = () => {
-    const titleElem = document.createElement("h2");
+    const titleElem = makeElementWithClasses("h2")(
+      "project-content__selection__title"
+    );
     titleElem.textContent = "Project Select";
-    titleElem.classList.add("project-content__selection__title");
     return titleElem;
   };
 
   const makeProjectList = () => {
-    const ulElem = document.createElement("ul");
-    ulElem.classList.add("project-content__selection__list");
+    const ulElem = makeElementWithClasses("ul")(
+      "project-content__selection__list"
+    );
     const keys = Object.keys(data);
     keys.map((key) => {
       const projectItem = makeProjectItem(key);
@@ -33,22 +39,30 @@ export default function Selection(projectTitle = undefined) {
   };
 
   const makeProjectItem = (projectTitle) => {
-    const liElem = document.createElement("li");
-    liElem.classList.add("project-content__selection__item");
-    liElem.classList.add("focusable");
+    const liElem = makeElementWithClasses("li")(
+      "project-content__selection__item",
+      "focusable"
+    );
     liElem.tabIndex = 0;
     liElem.textContent = projectTitle;
     return liElem;
   };
 
   const makeFigure = () => {
-    const figureElem = document.createElement("figure");
-    const imgElem = document.createElement("img");
-    figureElem.classList.add("project-content__overview");
-    imgElem.classList.add("project-content__overview__image");
-    imgElem.src = "./public/img/cafe.png";
-    imgElem.alt = "project image";
+    const src = "./public/img/cafe.png";
+    const alt = "project image";
+    const figureElem = makeElementWithClasses("figure")(
+      "project-content__overview"
+    );
+    const imgElem = addSrcAndAlt(
+      makeElementWithClasses("img")("project-content__overview__image")
+    )(src)(alt);
+    const ulElem = makeElementWithClasses("ul")(
+      ".project-content__overview__skill"
+    );
+
     figureElem.appendChild(imgElem);
+    figureElem.appendChild(ulElem);
     return figureElem;
   };
 
@@ -63,10 +77,11 @@ export default function Selection(projectTitle = undefined) {
 
   const addEventProjectItem = (project, projectTitle) => {
     const projectData = data[projectTitle];
-    const selectSound = document.getElementById("project-sound");
-    const startSound = document.getElementById("game-start");
-    const describe = document.querySelector(".project__describe");
-
+    const projectSkill = projectData.spec.skill.split(", ");
+    const selectSound = getByQuery("#project-sound");
+    const startSound = getByQuery("#game-start");
+    const describe = getByQuery(".project__describe");
+    const ulElem = getByQuery(".project-content__overview__skill");
     const startProject = () => {
       play(startSound);
       Loading("Hamelln");
@@ -78,11 +93,19 @@ export default function Selection(projectTitle = undefined) {
     const handleFocus = () => {
       const describeText = projectData.describe;
       describe.textContent = describeText;
+
+      projectSkill.map((skill) => {
+        const liElem = document.createElement("li");
+        liElem.textContent = skill;
+        ulElem.appendChild(liElem);
+      });
+
       play(selectSound);
     };
 
     const handleBlur = () => {
       describe.textContent = "";
+      ulElem.innerHTML = "";
     };
 
     addFocusHandler(project)(handleFocus);
@@ -91,7 +114,7 @@ export default function Selection(projectTitle = undefined) {
   };
 
   const render = () => {
-    const elem = document.querySelector(".project-content");
+    const elem = getByQuery(".project-content");
     elem.innerHTML = "";
     const box = makeSelectionBox();
     const figure = makeFigure();
@@ -104,7 +127,7 @@ export default function Selection(projectTitle = undefined) {
   const prevFocus = (focusedProjectTitle) => {
     if (!focusedProjectTitle) return;
 
-    const list = document.querySelectorAll(".project-content__selection__item");
+    const list = getByQueryAll(".project-content__selection__item");
     for (const project of list) {
       const title = project.textContent.trim();
       if (title === focusedProjectTitle) {
