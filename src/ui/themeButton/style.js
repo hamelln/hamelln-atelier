@@ -1,6 +1,6 @@
 "use strict";
 
-import { addSrcAndAlt, getByQuery } from "../../utils/controllDOM.js";
+import { getByQuery } from "../../utils/controllDOM.js";
 
 export const { displayCanvas, foldCanvas, handleSign } = (() => {
   const setup = () => {
@@ -34,7 +34,8 @@ export const { displayCanvas, foldCanvas, handleSign } = (() => {
     setTimeout(() => {
       const src = phaseMap.get(themeSign)[0];
       const alt = phaseMap.get(themeSign)[1];
-      addSrcAndAlt(img)(src)(alt);
+      img.src = src;
+      img.alt = alt;
       button.classList.remove("clicked");
     }, 400);
   };

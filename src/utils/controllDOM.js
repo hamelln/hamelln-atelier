@@ -12,17 +12,20 @@ export const addAttribute = (element) => {
     for (const attr in attrs) {
       const value = attrs[attr];
       switch (attr) {
-        case "text":
-          element.textContent = value;
-          break;
         case "src":
           element.src = value;
           break;
         case "alt":
           element.alt = value;
           break;
+        case "text":
+          element.textContent = value;
+          break;
         case "tabIndex":
           element.tabIndex = value;
+          break;
+        case "url":
+          element.href = value;
           break;
         case "dataName":
           element.setAttribute("data-focus-name", value);
@@ -34,12 +37,11 @@ export const addAttribute = (element) => {
   };
 };
 
-export const addSrcAndAlt = (element) => {
+export const makeImg = (className) => {
+  const element = makeElementWithClasses("img")(className);
   return (src) => {
-    element.src = src;
     return (alt) => {
-      element.alt = alt;
-      return element;
+      return addAttribute(element)({ src, alt });
     };
   };
 };
