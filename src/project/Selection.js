@@ -58,6 +58,7 @@ const addEventProjectItem = (project) => {
       );
       addAttribute(liElem)({ text: skill });
       ulElem.appendChild(liElem);
+      setProjectImage(projectTitle);
     });
 
     play(selectSound);
@@ -100,14 +101,21 @@ const createSelections = () => {
 
 const createFigureItems = () => {
   const figure = makeElementWithClasses("figure")("project-content__overview");
-  const projectImg = makeImg("project-content__overview__image")(
-    "./public/img/cafe.png",
-    "project image"
-  );
+  const projectImg = makeImg("project-content__overview__image")("", "");
   const projectSkill = makeElementWithClasses("ul")(
     "project-content__overview__skill"
   );
   return { figure, projectImg, projectSkill };
+};
+
+const setProjectImage = (projectTitle) => {
+  const imageSrc = data[projectTitle].backgroundImage;
+  const imageAlt = `${projectTitle} image`;
+  const imgElement = document.querySelector(
+    ".project-content__overview__image"
+  );
+  imgElement.src = imageSrc;
+  imgElement.alt = imageAlt;
 };
 
 const render = (parent, projectTitle) => {
