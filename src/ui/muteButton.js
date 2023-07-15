@@ -2,11 +2,17 @@
 
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import { makeImg } from "../utils/controllDOM.js";
-import { changeMute } from "../utils/sound.js";
+import { changeMute, setupSound } from "../utils/sound.js";
+
+let isMuted = true;
+let isFirstClick = true;
 
 const setupMuteButton = () => {
   const muteButton = document.querySelector(".mute-button");
-  let isMuted = true;
+  const setupSoundWhenFirstClick = () => {
+    isFirstClick = false;
+    setupSound();
+  };
 
   const srcMap = new Map([
     [true, "public/img/icons/mute.svg"],
@@ -18,6 +24,7 @@ const setupMuteButton = () => {
   ]);
 
   const handleMute = () => {
+    if (isFirstClick) setupSoundWhenFirstClick();
     isMuted = !isMuted;
     changeMuteImg();
     changeMute();
