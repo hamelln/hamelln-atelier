@@ -48,7 +48,7 @@
     "title": "Modak",
     "siteUrl": null,
     "codeUrl": null,
-    "backgroundImage": "./public/img/night.webp",
+    "backgroundImage": "./public/img/about.png",
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "캠핑족에게 정보, 리뷰 제공",
     "spec": {
@@ -70,7 +70,7 @@
     "title": "반려in",
     "siteUrl": null,
     "codeUrl": null,
-    "backgroundImage": "./public/img/sun.webp",
+    "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "유기 동물을 반려 동물로 맞이하는 공간",
     "spec": {

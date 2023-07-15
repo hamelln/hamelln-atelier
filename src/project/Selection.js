@@ -67,6 +67,7 @@ const addEventProjectItem = (project) => {
   const handleBlur = () => {
     describe.textContent = "";
     ulElem.innerHTML = "";
+    clearProjectImage();
   };
 
   addFocusHandler(project)(handleFocus);
@@ -109,13 +110,24 @@ const createFigureItems = () => {
 };
 
 const setProjectImage = (projectTitle) => {
-  const imageSrc = data[projectTitle].backgroundImage;
-  const imageAlt = `${projectTitle} image`;
-  const imgElement = document.querySelector(
-    ".project-content__overview__image"
-  );
-  imgElement.src = imageSrc;
-  imgElement.alt = imageAlt;
+  const oldImg = document.querySelector(".project-content__overview__image");
+  const src = data[projectTitle].backgroundImage;
+  const alt = `${projectTitle} image`;
+  const parent = oldImg.parentNode;
+  const newImg = makeImg("project-content__overview__image")(src, alt);
+  parent.replaceChild(newImg, oldImg);
+};
+
+const clearProjectImage = () => {
+  const oldImg = document.querySelector(".project-content__overview__image");
+  const parent = oldImg.parentNode;
+  const newImg = oldImg.cloneNode();
+  newImg.classList.add("blink");
+  parent.replaceChild(newImg, oldImg);
+  setTimeout(() => {
+    newImg.src = "";
+    newImg.alt = "";
+  }, 400);
 };
 
 const render = (parent, projectTitle) => {
