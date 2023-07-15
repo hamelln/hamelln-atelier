@@ -20,6 +20,8 @@
   --darker-bg-color: #f4f4f4;
   --header-bg-color: #d6d6d6;
   --text-color: #333;
+  --text-color-filter: invert(16%) sepia(0%) saturate(3815%) hue-rotate(21deg)
+    brightness(92%) contrast(83%);
   --button-shadow: 2px 2px 4px rgba(20, 20, 20, 0.6);
   --button-background-color: var(--pale-white);
   --button-change-background-color: white;
@@ -33,6 +35,8 @@
   --darker-bg-color: #2d2d2d;
   --header-bg-color: #282c34;
   --text-color: #efefef;
+  --text-color-filter: invert(100%) sepia(33%) saturate(79%) hue-rotate(214deg)
+    brightness(114%) contrast(87%);
   --button-shadow: 2px 2px 4px rgba(233, 230, 59, 0.6);
   --button-background-color: var(--pale-black);
   --button-change-background-color: rgba(27, 27, 27, 0.4);
@@ -274,12 +278,14 @@ button {
 .mute-button {
   position: absolute;
   right: 60px;
-  background-color: #7d95b8;
+  background-color: var(--button-background-color);
+  transition: background-color 0.45s ease;
 }
 
 .mute-button img {
-  width: 30px;
-  height: 30px;
+  width: 72%;
+  height: 72%;
+  filter: var(--text-color-filter);
 }
 
 .mode__button,
@@ -885,14 +891,21 @@ button {
 /*? contact */
 
 #contact {
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: var(--darker-bg-color);
+  color: var(--text-color);
   padding: 20px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
 }
 
 #contact h2 {
   text-align: center;
-  font-size: 24px;
+  font-size: var(--title-size-l);
 }
 
 #contact ul {
@@ -906,9 +919,11 @@ button {
 #contact a {
   display: flex;
   align-items: center;
-  color: #333;
   text-decoration: none;
   padding: 5px;
+  background-color: #f8f8f8a2;
+  border-radius: var(--border-radius-l);
+  border: 2px solid var(--block-color);
 }
 
 #contact img {

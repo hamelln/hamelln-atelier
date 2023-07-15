@@ -10,11 +10,11 @@ const setupMuteButton = () => {
 
   const srcMap = new Map([
     [true, "public/img/icons/mute.svg"],
-    [false, "public/img/icons/speaker.svg"],
+    [false, "public/img/icons/unmute.svg"],
   ]);
   const altMap = new Map([
-    [true, "mute button - crossed-out speaker icon"],
-    [false, "unmute button - speaker icon"],
+    [true, "mute button - crossed-out unmute icon"],
+    [false, "unmute button - unmute icon"],
   ]);
 
   const handleMute = () => {
