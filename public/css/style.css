@@ -90,6 +90,10 @@ button {
   cursor: pointer;
 }
 
+img[src=""] {
+  display: none;
+}
+
 /*? 헤더 */
 .header {
   background-color: var(--header-bg-color);
@@ -179,8 +183,8 @@ button {
 
 .about__subtitle {
   font-size: var(--title-size-l);
-  margin-top: 6vh;
-  margin-bottom: 20vh;
+  margin-top: 10%;
+  margin-bottom: 20%;
 }
 
 .about__nav {
@@ -689,18 +693,51 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .project-content__overview__image {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.1);
+  opacity: 1;
+  animation: focus-project 1s ease;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.project-content__overview__image.blink {
+  width: 100%;
+  height: 100%;
+  animation: clear-project-image 0.4s ease;
+}
+
+@keyframes focus-project {
+  0% {
+    opacity: 0.8;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes clear-project-image {
+  0% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
 }
 
 .project-content__overview__skill {
   position: absolute;
   display: flex;
-  top: 10%;
-  left: 8%;
+  top: 4%;
+  left: 2%;
   gap: 10px;
   flex-wrap: wrap;
 }
