@@ -127,7 +127,7 @@ const clearProjectImage = () => {
   setTimeout(() => {
     newImg.src = "";
     newImg.alt = "";
-  }, 400);
+  }, 300);
 };
 
 const render = (parent, projectTitle) => {
