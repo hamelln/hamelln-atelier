@@ -7,13 +7,10 @@ import navigateWithScroll from "./utils/navigateWithScroll.js";
 import { restoreFocus } from "./utils/storeFocus.js";
 
 window.addEventListener("load", () => {
+  Selection();
   setupMuteButton();
   setupThemeButton();
   navigateWithScroll();
-  Selection();
-
-  const op = document.querySelector(".opening");
-  setTimeout(() => op.remove(), 6000);
 });
 
 window.addEventListener("focus", restoreFocus);

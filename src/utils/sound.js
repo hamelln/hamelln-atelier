@@ -6,6 +6,7 @@ const mute = (sound) => {
 };
 
 export const play = (sound) => {
+  if (isMuted) return;
   sound.currentTime = 0;
   sound.play();
 };
