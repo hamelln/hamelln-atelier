@@ -1069,6 +1069,66 @@ footer {
     border-radius: var(--border-radius-l);
   }
 
+  .project-content__carousel {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .project-content__carousel__cards {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-content__carousel__card {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: transform 0.4s ease;
+  }
+
+  .project-content__carousel__card__image {
+    width: 100%;
+    height: 60%;
+    border-radius: var(--border-radius-l);
+    object-fit: cover;
+  }
+
+  #current-project:checked ~ .project-content__carousel__cards .prev,
+  #next-project:checked ~ .project-content__carousel__cards .current,
+  #prev-project:checked ~ .project-content__carousel__cards .next {
+    transform: translatex(-40%) scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #current-project:checked ~ .project-content__carousel__cards .next,
+  #next-project:checked ~ .project-content__carousel__cards .prev,
+  #prev-project:checked ~ .project-content__carousel__cards .current {
+    transform: translatex(40%) scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #current-project:checked ~ .project-content__carousel__cards .current,
+  #next-project:checked ~ .project-content__carousel__cards .next,
+  #prev-project:checked ~ .project-content__carousel__cards .prev {
+    transform: translatex(0) scale(1);
+    opacity: 1;
+    z-index: 1;
+  }
+
   /*? 폰트  */
 
   .project-header__title,

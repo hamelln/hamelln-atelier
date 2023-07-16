@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
     <script type="module" src="./src/index.js" defer></script>
+    <script type="module" src="./src/project/asd.js" defer></script>
     <title>Hamelln's Atelier</title>
   </head>
 
@@ -91,7 +92,39 @@
           <p class="project-header__subtitle">COLLECTION</p>
         </div>
       </div>
-      <div class="project-content"></div>
+      <div class="project-content">
+        <div class="project-content__carousel">
+          <input type="radio" name="slider" id="prev-project" />
+          <input type="radio" name="slider" id="current-project" checked />
+          <input type="radio" name="slider" id="next-project" />
+          <div class="project-content__carousel__cards">
+            <label class="project-content__carousel__card prev" for="prev-project">
+              <img
+                class="project-content__carousel__card__image"
+                src="/public/img/character.png"
+                alt="project"
+                loading="lazy"
+              />
+            </label>
+            <label class="project-content__carousel__card current" for="current-project">
+              <img
+              class="project-content__carousel__card__image"
+                src="/public/img/about.png"
+                alt="project"
+                loading="lazy"
+              />
+            </label>
+            <label class="project-content__carousel__card next" for="next-project">
+              <img
+                class="project-content__carousel__card__image"
+                src="/public/img/cafe.png"
+                alt="project"
+                loading="lazy"
+              />
+            </label>
+          </div>
+        </div>    
+      </div>
       <p class="project__describe"></p>
     </section>
 
