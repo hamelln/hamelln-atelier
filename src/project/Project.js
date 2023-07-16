@@ -29,6 +29,7 @@ const makeInfoLinkItem = (content) => {
 };
 
 const openLink = (url) => {
+  sessionStorage.setItem("key", "vvvllalal");
   window.open(url, "_blank");
 };
 

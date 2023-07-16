@@ -2,12 +2,12 @@
 
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import { makeImg } from "../utils/controllDOM.js";
-import { changeMute, setupSound } from "../utils/sound.js";
+import { changeMute } from "../utils/sound.js";
 
 let isMuted = true;
 let isFirstClick = true;
 
-const setupMuteButton = () => {
+const setupMuteButton = (setupSound) => {
   const muteButton = document.querySelector(".mute-button");
   const setupSoundWhenFirstClick = () => {
     isFirstClick = false;
