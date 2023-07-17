@@ -1086,6 +1086,12 @@ footer {
   }
 
   .project-content__carousel__card {
+    display: none;
+  }
+
+  .project-content__carousel__card.prev,
+  .project-content__carousel__card.active,
+  .project-content__carousel__card.next {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -1105,25 +1111,25 @@ footer {
     object-fit: cover;
   }
 
-  #current-project:checked ~ .project-content__carousel__cards .prev,
-  #next-project:checked ~ .project-content__carousel__cards .current,
-  #prev-project:checked ~ .project-content__carousel__cards .next {
+  #item-2:checked ~ .project-content__carousel__cards #project-1,
+  #item-3:checked ~ .project-content__carousel__cards #project-2,
+  #item-1:checked ~ .project-content__carousel__cards #project-3 {
     transform: translatex(-40%) scale(0.8);
     opacity: 0.4;
     z-index: 0;
   }
 
-  #current-project:checked ~ .project-content__carousel__cards .next,
-  #next-project:checked ~ .project-content__carousel__cards .prev,
-  #prev-project:checked ~ .project-content__carousel__cards .current {
+  #item-2:checked ~ .project-content__carousel__cards #project-3,
+  #item-3:checked ~ .project-content__carousel__cards #project-1,
+  #item-1:checked ~ .project-content__carousel__cards #project-2 {
     transform: translatex(40%) scale(0.8);
     opacity: 0.4;
     z-index: 0;
   }
 
-  #current-project:checked ~ .project-content__carousel__cards .current,
-  #next-project:checked ~ .project-content__carousel__cards .next,
-  #prev-project:checked ~ .project-content__carousel__cards .prev {
+  #item-2:checked ~ .project-content__carousel__cards #project-2,
+  #item-3:checked ~ .project-content__carousel__cards #project-3,
+  #item-1:checked ~ .project-content__carousel__cards #project-1 {
     transform: translatex(0) scale(1);
     opacity: 1;
     z-index: 1;

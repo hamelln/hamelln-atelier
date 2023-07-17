@@ -7,19 +7,31 @@
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <meta name="description" content="이태현 포트폴리오" />
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hamelln.vercel.app/" />
     <meta property="og:title" content="Hamelln" />
     <meta property="og:image" content="/img/about.png" />
     <meta property="og:image:alt" content="COFFEEN Thumbnail" />
     <meta property="og:description" content="이태현 포트폴리오" />
     <meta property="og:site_name" content="Hamelln" />
-    <meta property="og:locale" content="ko_KR">
+    <meta property="og:locale" content="ko_KR" />
     <meta property="og:locale:alternate" content="ko_KR" />
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff" as="font" type="font/woff" crossorigin>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
     <link rel="icon" type="image/x-icon" href="public/img/dark-logo.svg" />
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
@@ -38,7 +50,7 @@
       src="./public/sound/default-select.wav"
       id="default-sound"
       muted
-    /></audio>
+    ></audio>
     <audio
       src="./public/sound/project-select.wav"
       id="project-sound"
@@ -49,21 +61,13 @@
       id="contact-sound"
       muted
     ></audio>
-    <audio
-    src="./public/sound/game-start.mp3"
-    id="game-start"
-    muted
-  ></audio>
-  <audio
-  src="./public/sound/bgm.mp3"
-  id="bgm"
-  muted
-></audio>
+    <audio src="./public/sound/game-start.mp3" id="game-start" muted></audio>
+    <audio src="./public/sound/bgm.mp3" id="bgm" muted></audio>
 
     <!-- 헤더 -->
     <header class="header">
       <div class="header__logo focusable" tabindex="0">
-        <img src="public/img/logo.svg" alt="logo">
+        <img src="public/img/logo.svg" alt="logo" />
       </div>
       <nav class="header-nav">
         <ul class="header-nav-list">
@@ -77,11 +81,15 @@
     <!-- 소개 섹션 -->
     <section id="about">
       <div class="about__intro">
-      <h2 class="about__title">이태현</h2>
-      <h2 class="about__subtitle">Frontend Developer</h2>
-      <button class="about__nav focusable">Press</button>
-    </div>
-      <img src="./public/img/about.png" alt="about image" class="about__image">
+        <h2 class="about__title">이태현</h2>
+        <h2 class="about__subtitle">Frontend Developer</h2>
+        <button class="about__nav focusable">Press</button>
+      </div>
+      <img
+        src="./public/img/about.png"
+        alt="about image"
+        class="about__image"
+      />
     </section>
 
     <!-- 프로젝트 섹션 -->
@@ -94,11 +102,15 @@
       </div>
       <div class="project-content">
         <div class="project-content__carousel">
-          <input type="radio" name="slider" id="prev-project" />
-          <input type="radio" name="slider" id="current-project" checked />
-          <input type="radio" name="slider" id="next-project" />
+          <input type="radio" name="slider" id="item-1" />
+          <input type="radio" name="slider" id="item-2" checked />
+          <input type="radio" name="slider" id="item-3" />
           <div class="project-content__carousel__cards">
-            <label class="project-content__carousel__card prev" for="prev-project">
+            <label
+              class="project-content__carousel__card prev"
+              for="item-1"
+              id="project-1"
+            >
               <img
                 class="project-content__carousel__card__image"
                 src="/public/img/character.png"
@@ -106,15 +118,23 @@
                 loading="lazy"
               />
             </label>
-            <label class="project-content__carousel__card current" for="current-project">
+            <label
+              class="project-content__carousel__card active"
+              for="item-2"
+              id="project-2"
+            >
               <img
-              class="project-content__carousel__card__image"
+                class="project-content__carousel__card__image"
                 src="/public/img/about.png"
                 alt="project"
                 loading="lazy"
               />
             </label>
-            <label class="project-content__carousel__card next" for="next-project">
+            <label
+              class="project-content__carousel__card next"
+              for="item-3"
+              id="project-3"
+            >
               <img
                 class="project-content__carousel__card__image"
                 src="/public/img/cafe.png"
@@ -122,8 +142,32 @@
                 loading="lazy"
               />
             </label>
+            <label
+              class="project-content__carousel__card"
+              for=""
+              id="project-4"
+            >
+              <img
+                class="project-content__carousel__card__image"
+                src="/public/img/morning.webp"
+                alt="project"
+                loading="lazy"
+              />
+            </label>
+            <label
+              class="project-content__carousel__card"
+              for=""
+              id="project-5"
+            >
+              <img
+                class="project-content__carousel__card__image"
+                src="/public/img/loading-text-light.png"
+                alt="project"
+                loading="lazy"
+              />
+            </label>
           </div>
-        </div>    
+        </div>
       </div>
       <p class="project__describe"></p>
     </section>
@@ -137,7 +181,11 @@
             href="https://github.com/hamelln"
             target="_blank"
           >
-            <img src="./public/img/icons/github.png" alt="GitHub" loading="lazy"/>
+            <img
+              src="./public/img/icons/github.png"
+              alt="GitHub"
+              loading="lazy"
+            />
           </a>
         </li>
         <li>
@@ -146,12 +194,20 @@
             href="https://www.linkedin.com/in/%ED%83%9C%ED%98%84-%EC%9D%B4-531077273/"
             target="_blank"
           >
-            <img src="./public/img/icons/linkedin.svg" alt="Linkedin" loading="lazy"/>
+            <img
+              src="./public/img/icons/linkedin.svg"
+              alt="Linkedin"
+              loading="lazy"
+            />
           </a>
         </li>
         <li>
           <a class="profile focusable" href="mailto:vusdus91@gmail.com">
-            <img src="./public/img/icons/email.png" alt="Email" loading="lazy"/>
+            <img
+              src="./public/img/icons/email.png"
+              alt="Email"
+              loading="lazy"
+            />
           </a>
         </li>
         <li>
@@ -160,7 +216,7 @@
             href="https://blog.cinntiq.synology.me/"
             target="_blank"
           >
-            <img src="./public/img/icons/ghost.png" alt="blog" loading="lazy"/>
+            <img src="./public/img/icons/ghost.png" alt="blog" loading="lazy" />
           </a>
         </li>
       </ul>
