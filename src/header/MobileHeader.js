@@ -15,7 +15,7 @@ const closeHeader = () => {
 const createHamburger = () => {
   const src = "/public/img/icons/hamburger.png";
   const alt = "header navigation";
-  return makeImg("header__hamberger")(src, alt);
+  return makeImg("header__hamberger", "focusable")(src, alt);
 };
 
 const addHeaderHandler = (hamburger) => {

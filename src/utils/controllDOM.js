@@ -7,8 +7,8 @@ export const makeElementWithClasses = (tag) => {
   };
 };
 
-export const makeImg = (className) => {
-  const imageElement = makeElementWithClasses("img")(className);
+export const makeImg = (className1, className2) => {
+  const imageElement = makeElementWithClasses("img")(className1, className2);
   return (src, alt) => addAttribute(imageElement)({ src, alt });
 };
 
