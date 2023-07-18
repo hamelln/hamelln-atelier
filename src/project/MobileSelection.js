@@ -40,9 +40,14 @@ const createLabelElements = (inputElements) => {
   return inputElements.map((input, index) => {
     const projectTitle = PROJECT_ID_LIST[index];
     const labelElement = makeElementWithClasses("label")(
-      "project-content__carousel__card"
+      "project-content__carousel__card",
+      "focusable"
     );
-    addAttribute(labelElement)({ for: input.id, id: projectTitle });
+    addAttribute(labelElement)({
+      for: input.id,
+      id: projectTitle,
+      tabIndex: 0,
+    });
     const imgElement = createImgElement(projectTitle);
     labelElement.appendChild(imgElement);
     return labelElement;
