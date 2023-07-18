@@ -186,6 +186,10 @@ const addTouchEvent = () => {
   const nextButton = document.querySelector(
     ".project-content__carousel__title-box__next"
   );
+  const titleElement = document.querySelector(
+    ".project-content__carousel__title-box__title"
+  );
+  const projectData = data[titleElement.textContent.trim()];
   let beginX;
   let distance;
   carousel.addEventListener("touchstart", (e) => {
@@ -203,6 +207,9 @@ const addTouchEvent = () => {
   });
   prevButton.addEventListener("click", prevProject);
   nextButton.addEventListener("click", nextProject);
+  titleElement.addEventListener("click", () => {
+    startProject(projectData);
+  });
 };
 
 const checkInput = (title) => {
