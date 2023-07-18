@@ -1067,6 +1067,11 @@ footer {
   }
 
   /*? 헤더  */
+
+  .header {
+    width: 100%;
+  }
+
   .header__logo {
     padding: 4px 8px;
   }
