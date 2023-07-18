@@ -73,7 +73,6 @@ const createTitleBoxElements = () => {
   return { titleBox, prevButton, titleElement, nextButton };
 };
 
-const isActive = (label) => label.classList.contains("active");
 const findLabelByInputId = (id) => document.querySelector(`label[for=${id}]`);
 const resetClassesOfLabels = () => {
   labelList().forEach((label) => {
@@ -82,6 +81,7 @@ const resetClassesOfLabels = () => {
     label.classList.remove("next");
   });
 };
+
 const startProject = (projectData) => {
   play(START_SOUND);
   Loading("Hamelln");
@@ -147,10 +147,6 @@ const addEventToInputs = () => {
       displayContent(titleElement, projectTitle);
       displayContent(describeElement, projectDescribe);
     });
-
-    input.addEventListener("click", () => {
-      isActive(labelElement) && startProject(projectData);
-    });
   });
 };
 
@@ -192,6 +188,7 @@ const addTouchEvent = () => {
   const projectData = data[titleElement.textContent.trim()];
   let beginX;
   let distance;
+
   carousel.addEventListener("touchstart", (e) => {
     beginX = e.touches[0].clientX;
     distance = 0;
