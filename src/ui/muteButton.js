@@ -39,6 +39,11 @@ const setupMuteButton = (setupSound) => {
   };
 
   addClickAndEnterHandler(muteButton)(handleMute);
+  document.body.addEventListener("keydown", (e) => {
+    if (e.key === "x" || e.key === "X") {
+      handleMute();
+    }
+  });
 };
 
 export default setupMuteButton;
