@@ -13,7 +13,7 @@ import {
 
 const createTitle = (className) => {
   const titleElem = makeElementWithClasses("h2")(className);
-  return addAttribute(titleElem)({ text: "Project Select" });
+  return addAttribute(titleElem)({ textContent: "Project Select" });
 };
 
 const createProjectItem = (projectTitle) => {
@@ -21,7 +21,7 @@ const createProjectItem = (projectTitle) => {
     "project-content__selection__item",
     "focusable"
   );
-  return addAttribute(projectItem)({ tabIndex: 0, text: projectTitle });
+  return addAttribute(projectItem)({ tabIndex: 0, textContent: projectTitle });
 };
 
 const insertProjectsIntoList = (projectList) => {
@@ -36,11 +36,13 @@ const insertProjectsIntoList = (projectList) => {
 const addEventProjectItem = (project) => {
   const projectTitle = project.textContent.trim();
   const projectData = data[projectTitle];
-  const projectSkill = projectData.spec.skill.split(", ");
+  const projectSkillArray = projectData.spec.skill.split(", ");
   const selectSound = document.querySelector("#project-sound");
   const startSound = document.querySelector("#game-start");
   const describe = document.querySelector(".project__describe");
-  const ulElem = document.querySelector(".project-content__overview__skill");
+  const projectSkillList = document.querySelector(
+    ".project-content__overview__skill"
+  );
   const startProject = () => {
     play(startSound);
     Loading("Hamelln");
@@ -50,14 +52,14 @@ const addEventProjectItem = (project) => {
   };
 
   const handleFocus = () => {
-    addAttribute(describe)({ text: projectData.describe });
+    addAttribute(describe)({ textContent: projectData.describe });
 
-    projectSkill.map((skill) => {
-      const liElem = makeElementWithClasses("li")(
+    projectSkillArray.map((skill) => {
+      const projectSkillItem = makeElementWithClasses("li")(
         "project-content__overview__skill__item"
       );
-      addAttribute(liElem)({ text: skill });
-      ulElem.appendChild(liElem);
+      addAttribute(projectSkillItem)({ textContent: skill });
+      projectSkillList.appendChild(projectSkillItem);
       setProjectImage(projectTitle);
     });
 
@@ -66,7 +68,7 @@ const addEventProjectItem = (project) => {
 
   const handleBlur = () => {
     describe.textContent = "";
-    ulElem.innerHTML = "";
+    projectSkillList.innerHTML = "";
     clearProjectImage();
   };
 
@@ -151,7 +153,8 @@ const render = (parent, projectTitle) => {
   focusPreviousItem(projectTitle);
 };
 
-export default function Selection(projectTitle = undefined) {
+export default function Selection(title = undefined) {
   const parent = document.querySelector(".project-content");
+  const projectTitle = title ? title : "Hamelln";
   render(parent, projectTitle);
 }

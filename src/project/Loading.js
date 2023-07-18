@@ -1,9 +1,9 @@
 import { addAttribute, makeElementWithClasses } from "../utils/controllDOM.js";
 
-export default function Loading(text) {
+export default function Loading(textContent) {
   const makeContent = (className) => {
     const textElem = makeElementWithClasses("h2")(className);
-    return addAttribute(textElem)({ text });
+    return addAttribute(textElem)({ textContent });
   };
 
   const render = () => {
