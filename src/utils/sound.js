@@ -25,7 +25,6 @@ export const setupSound = () => {
   const defaultSound = document.getElementById("default-sound");
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
-  const projectStart = document.getElementById("game-start");
   const focusableElements = document.querySelectorAll(".focusable");
 
   focusableElements.forEach((element) => {
@@ -36,12 +35,6 @@ export const setupSound = () => {
         play(contactSound);
       } else {
         play(defaultSound);
-      }
-    });
-
-    element.addEventListener("click", () => {
-      if (element.closest("#project")) {
-        play(projectStart);
       }
     });
   });
