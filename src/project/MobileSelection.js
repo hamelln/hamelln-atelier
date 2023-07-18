@@ -147,6 +147,12 @@ const addEventToInputs = () => {
       displayContent(titleElement, projectTitle);
       displayContent(describeElement, projectDescribe);
     });
+
+    input.addEventListener("click", () => {
+      if (labelElement.classList.contains("active")) {
+        startProject(projectData);
+      }
+    });
   });
 };
 
