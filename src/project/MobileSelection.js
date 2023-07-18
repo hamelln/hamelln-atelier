@@ -114,13 +114,13 @@ const addEventToInputs = () => {
     );
 
     input.addEventListener("change", () => {
+      setInputIndex(Number(input.id[5]) - 1);
       play(SELECT_SOUND);
       const projectTitle = projectData.title;
       const projectDescribe = projectData.describe;
       const activeIndex = labelArr().findIndex(
         (label) => label === labelElement
       );
-
       changeClassFromPrevToNext(labelElement, activeIndex);
       displayProjectSkill(projectSkillList, projectData);
       displayContent(titleElement, projectTitle);
@@ -133,37 +133,37 @@ const addEventToInputs = () => {
   });
 };
 
+const fireChangeEvent = () => {
+  const input = inputList()[inputIndex];
+  input.checked = true;
+  input.dispatchEvent(new Event("change"));
+};
+
 const setInputIndex = (currentIndex) => {
   const inputs = inputList();
   const length = inputs.length;
   if (currentIndex < 0) inputIndex = length + currentIndex;
   else if (currentIndex >= length) inputIndex = currentIndex % length;
   else inputIndex = currentIndex;
-
-  const input = inputs[inputIndex];
-  input.checked = true;
-  input.dispatchEvent(new Event("change"));
 };
 
 const addTouchEvent = () => {
   const carousel = document.querySelector(".project-content__carousel");
-  let beginX = 0;
-  let distance = 0;
+  let beginX;
+  let distance;
   carousel.addEventListener("touchstart", (e) => {
     beginX = e.touches[0].clientX;
+    distance = 0;
   });
   carousel.addEventListener("touchmove", (e) => {
     const currentX = e.touches[0].clientX;
     distance = currentX - beginX;
   });
   carousel.addEventListener("touchend", () => {
-    if (distance >= 100) {
-      setInputIndex(inputIndex - 1);
-      return;
-    }
-    if (distance <= -100) {
-      setInputIndex(inputIndex + 1);
-    }
+    if (distance < 100 && distance > -100) return;
+    if (distance >= 100) setInputIndex(inputIndex - 1);
+    else setInputIndex(inputIndex + 1);
+    fireChangeEvent();
   });
 };
 

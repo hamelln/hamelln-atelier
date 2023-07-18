@@ -1101,7 +1101,23 @@ footer {
     left: 0;
     right: 0;
     margin: auto;
-    transition: transform 0.4s ease, left 0.4s ease, right 0.4s ease;
+  }
+
+  .project-content__carousel__card.active {
+    width: 50%;
+    animation: selected 0.4s ease-in;
+  }
+
+  @keyframes selected {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   .project-content__carousel__card__image {
@@ -1115,7 +1131,7 @@ footer {
   #item-3:checked ~ .project-content__carousel__cards #Hamelln,
   #item-2:checked ~ .project-content__carousel__cards #반려in,
   #item-1:checked ~ .project-content__carousel__cards #Modak {
-    left: 40%;
+    right: 40%;
     transform: scale(0.8);
     opacity: 0.4;
     z-index: 0;
@@ -1125,7 +1141,7 @@ footer {
   #item-2:checked ~ .project-content__carousel__cards #COFFEEN,
   #item-3:checked ~ .project-content__carousel__cards #Modak,
   #item-4:checked ~ .project-content__carousel__cards #반려in {
-    right: 40%;
+    left: 40%;
     transform: scale(0.8);
     opacity: 0.4;
     z-index: 0;
@@ -1137,7 +1153,6 @@ footer {
   #item-4:checked ~ .project-content__carousel__cards #Modak {
     left: 0;
     right: 0;
-    transform: translatex(0) scale(1);
     opacity: 1;
     z-index: 9;
   }
@@ -1154,7 +1169,7 @@ footer {
     width: 60%;
     gap: 4px;
     top: 10%;
-    left: 20%;
+    left: 25%;
     flex-wrap: nowrap;
   }
 
