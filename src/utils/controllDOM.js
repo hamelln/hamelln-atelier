@@ -14,24 +14,14 @@ export const makeImg = (className) => {
 
 export const addAttribute = (element) => {
   return (attrs) => {
-    for (const attr in attrs) {
-      const value = attrs[attr];
-      switch (attr) {
-        case "src":
-          element.src = value;
-          break;
-        case "alt":
-          element.alt = value;
-          break;
-        case "text":
+    for (const key in attrs) {
+      const value = attrs[key];
+      switch (key) {
+        case "textContent":
           element.textContent = value;
           break;
-        case "tabIndex":
-          element.tabIndex = value;
-          break;
-        case "dataName":
-          element.setAttribute("data-focus-name", value);
         default:
+          element.setAttribute(key, value);
           break;
       }
     }

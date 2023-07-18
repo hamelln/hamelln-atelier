@@ -7,7 +7,6 @@ import {
   addFocusHandlers,
 } from "../utils/focus.js";
 import { play, stop } from "../utils/sound.js";
-import Selection from "./Selection.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
 import {
@@ -15,10 +14,11 @@ import {
   makeElementWithClasses,
   makeImg,
 } from "../utils/controllDOM.js";
+import renderSelection from "./index.js";
 
 const makeInfoItem = (content) => {
   const li = makeElementWithClasses("li")("project-box__info__item");
-  return addAttribute(li)({ dataName: content, text: content });
+  return addAttribute(li)({ dataName: content, textContent: content });
 };
 
 const makeInfoLinkItem = (content) => {
@@ -29,14 +29,13 @@ const makeInfoLinkItem = (content) => {
 };
 
 const openLink = (url) => {
-  sessionStorage.setItem("key", "vvvllalal");
   window.open(url, "_blank");
 };
 
 const onClose = (title, bgm) => {
   Loading("Thank you!");
   setTimeout(() => {
-    Selection(title);
+    renderSelection(title);
     stop(bgm);
   }, 1000);
 };

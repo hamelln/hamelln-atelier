@@ -833,6 +833,7 @@ img[src=""] {
   padding: 16px;
   display: flex;
   animation: balloon 0.2s ease-in;
+  overflow: scroll;
 }
 
 @keyframes balloon {
@@ -1069,6 +1070,91 @@ footer {
     border-radius: var(--border-radius-l);
   }
 
+  .project-content__carousel {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .project-content__carousel__cards {
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-content__carousel__card {
+    display: none;
+  }
+
+  .project-content__carousel__card.prev,
+  .project-content__carousel__card.active,
+  .project-content__carousel__card.next {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: transform 0.4s ease, left 0.4s ease, right 0.4s ease;
+  }
+
+  .project-content__carousel__card__image {
+    width: 100%;
+    height: 60%;
+    border-radius: var(--border-radius-l);
+    object-fit: cover;
+  }
+
+  #item-4:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-3:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-2:checked ~ .project-content__carousel__cards #반려in,
+  #item-1:checked ~ .project-content__carousel__cards #Modak {
+    left: 40%;
+    transform: scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #item-1:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-2:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-3:checked ~ .project-content__carousel__cards #Modak,
+  #item-4:checked ~ .project-content__carousel__cards #반려in {
+    right: 40%;
+    transform: scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #item-1:checked ~ .project-content__carousel__cards #반려in,
+  #item-2:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-3:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-4:checked ~ .project-content__carousel__cards #Modak {
+    left: 0;
+    right: 0;
+    transform: translatex(0) scale(1);
+    opacity: 1;
+    z-index: 9;
+  }
+
+  .project__title {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  ..project-content__overview__skill {
+    top: 0;
+    left: 0;
+  }
+
   /*? 폰트  */
 
   .project-header__title,
@@ -1084,6 +1170,14 @@ footer {
   .project-content__selection__item,
   .project__describe,
   .header-nav-list li {
+    font-size: var(--font-size-xs);
+  }
+
+  .project-content__spec__box__describe {
+    font-size: var(--font-size-s);
+  }
+
+  .project-content__overview__skill__item {
     font-size: var(--font-size-xs);
   }
 
