@@ -72,7 +72,7 @@
     "codeUrl": null,
     "backgroundImage": "./public/img/cafe.png",
     "bgmUrl": "./public/sound/bgm.mp3",
-    "describe": "유기 동물을 반려 동물로 맞이하는 공간",
+    "describe": "유기 동물 입양 커뮤니티",
     "spec": {
       "startDay": "2021.12.14",
       "endDay": "2021.12.25",
