@@ -1150,9 +1150,17 @@ footer {
     color: var(--text-color);
   }
 
-  ..project-content__overview__skill {
-    top: 0;
-    left: 0;
+  .project-content__overview__skill {
+    width: 60%;
+    gap: 4px;
+    top: 10%;
+    left: 20%;
+    flex-wrap: nowrap;
+  }
+
+  .project-content__overview__skill__item {
+    font-size: var(--font-size-xs);
+    padding: 2px 4px;
   }
 
   /*? 폰트  */
@@ -1175,10 +1183,6 @@ footer {
 
   .project-content__spec__box__describe {
     font-size: var(--font-size-s);
-  }
-
-  .project-content__overview__skill__item {
-    font-size: var(--font-size-xs);
   }
 
   /*? 푸터 */

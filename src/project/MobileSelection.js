@@ -82,6 +82,20 @@ const changeClassFromPrevToNext = (labelElement, activeIndex) => {
   findLabelByIndex(activeIndex + 1).classList.add("next");
 };
 
+const displayProjectSkill = (projectSkillList, projectData) => {
+  projectSkillList.innerHTML = "";
+  const projectSkillArray = projectData.spec.skill.split(", ");
+
+  for (let i = 0; i < 3; i++) {
+    const skill = projectSkillArray[i];
+    const projectSkillItem = makeElementWithClasses("li")(
+      "project-content__overview__skill__item"
+    );
+    projectSkillItem.textContent = skill;
+    projectSkillList.appendChild(projectSkillItem);
+  }
+};
+
 const addEventToInputs = () => {
   inputList().forEach((input) => {
     const labelElement = findLabelByInputId(input.id);
@@ -92,7 +106,6 @@ const addEventToInputs = () => {
     const projectSkillList = document.querySelector(
       ".project-content__overview__skill"
     );
-    const projectSkillArray = projectData.spec.skill.split(", ");
 
     input.addEventListener("change", () => {
       play(SELECT_SOUND);
@@ -101,15 +114,9 @@ const addEventToInputs = () => {
       const activeIndex = labelArr().findIndex(
         (label) => label === labelElement
       );
-      projectSkillList.innerHTML = "";
-      projectSkillArray.map((skill) => {
-        const projectSkillItem = makeElementWithClasses("li")(
-          "project-content__overview__skill__item"
-        );
-        addAttribute(projectSkillItem)({ textContent: skill });
-        projectSkillList.appendChild(projectSkillItem);
-      });
+
       changeClassFromPrevToNext(labelElement, activeIndex);
+      displayProjectSkill(projectSkillList, projectData);
       displayContent(titleElement, projectTitle);
       displayContent(describeElement, projectDescribe);
     });
@@ -142,7 +149,7 @@ const render = (projectTitle) => {
   const titleElement = makeElementWithClasses("p")("project__title");
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
-  const projectSkill = makeElementWithClasses("ul")(
+  const projectSkillList = makeElementWithClasses("ul")(
     "project-content__overview__skill"
   );
 
@@ -153,9 +160,10 @@ const render = (projectTitle) => {
     projectBox.appendChild(labelElement);
   });
   carousel.appendChild(projectBox);
-  carousel.appendChild(projectSkill);
+  carousel.appendChild(projectSkillList);
   carousel.appendChild(titleElement);
 
+  displayProjectSkill(projectSkillList, data[projectTitle]);
   displayContent(titleElement, projectTitle);
   displayContent(describeElement, projectDescribe);
 
