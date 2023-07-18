@@ -155,6 +155,5 @@ const render = (parent, projectTitle) => {
 
 export default function Selection(title = undefined) {
   const parent = document.querySelector(".project-content");
-  const projectTitle = title ? title : "Hamelln";
-  render(parent, projectTitle);
+  render(parent, title);
 }

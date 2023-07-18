@@ -98,6 +98,14 @@ const render = ({
 
   characterFigure.appendChild(character);
   descriptionBox.appendChild(specDescription);
+
+  specInnerBox.appendChild(descriptionBox);
+  specBox.appendChild(characterFigure);
+  specBox.appendChild(specInnerBox);
+  parent.innerHTML = "";
+  parent.appendChild(specBox);
+  animateText(specDescription, descriptionTemplate);
+  addKeyboardController();
   if (!isMobile()) {
     const specEnterButton = makeElementWithClasses("p")(
       "project-content__spec__box__Enter",
@@ -106,19 +114,12 @@ const render = ({
     addAttribute(specEnterButton)({ tabIndex: 0, textContent: "Enter" });
     addClickAndEnterHandler(specEnterButton)(handleEnter);
     descriptionBox.appendChild(specEnterButton);
+    specEnterButton.focus();
   } else {
     addClickAndEnterHandler(descriptionBox)(handleEnter);
+    addAttribute(descriptionBox)({ tabIndex: 0 });
+    descriptionBox.focus();
   }
-  specInnerBox.appendChild(descriptionBox);
-  specBox.appendChild(characterFigure);
-  specBox.appendChild(specInnerBox);
-  parent.innerHTML = "";
-  parent.appendChild(specBox);
-  animateText(specDescription, descriptionTemplate);
-  addKeyboardController();
-  if (!isMobile()) specEnterButton.focus();
-  else addAttribute(descriptionBox)({ tabIndex: 0 });
-  descriptionBox.focus();
 };
 
 export default function Spec(spec, returnTitleScreen) {
