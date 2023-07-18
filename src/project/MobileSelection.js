@@ -12,6 +12,7 @@ const SELECT_SOUND = document.querySelector("#project-sound");
 const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
 const DEFAULT_CHECKED_INPUT_NUMBER = 2;
+let inputIndex = DEFAULT_CHECKED_INPUT_NUMBER - 1;
 const inputList = () => document.querySelectorAll("input");
 const labelList = () =>
   document.querySelectorAll(".project-content__carousel__card");
@@ -82,6 +83,20 @@ const changeClassFromPrevToNext = (labelElement, activeIndex) => {
   findLabelByIndex(activeIndex + 1).classList.add("next");
 };
 
+const displayProjectSkill = (projectSkillList, projectData) => {
+  projectSkillList.innerHTML = "";
+  const projectSkillArray = projectData.spec.skill.split(", ");
+
+  for (let i = 0; i < 3; i++) {
+    const skill = projectSkillArray[i];
+    const projectSkillItem = makeElementWithClasses("li")(
+      "project-content__overview__skill__item"
+    );
+    projectSkillItem.textContent = skill;
+    projectSkillList.appendChild(projectSkillItem);
+  }
+};
+
 const addEventToInputs = () => {
   inputList().forEach((input) => {
     const labelElement = findLabelByInputId(input.id);
@@ -92,7 +107,6 @@ const addEventToInputs = () => {
     const projectSkillList = document.querySelector(
       ".project-content__overview__skill"
     );
-    const projectSkillArray = projectData.spec.skill.split(", ");
 
     input.addEventListener("change", () => {
       play(SELECT_SOUND);
@@ -101,15 +115,9 @@ const addEventToInputs = () => {
       const activeIndex = labelArr().findIndex(
         (label) => label === labelElement
       );
-      projectSkillList.innerHTML = "";
-      projectSkillArray.map((skill) => {
-        const projectSkillItem = makeElementWithClasses("li")(
-          "project-content__overview__skill__item"
-        );
-        addAttribute(projectSkillItem)({ textContent: skill });
-        projectSkillList.appendChild(projectSkillItem);
-      });
+
       changeClassFromPrevToNext(labelElement, activeIndex);
+      displayProjectSkill(projectSkillList, projectData);
       displayContent(titleElement, projectTitle);
       displayContent(describeElement, projectDescribe);
     });
@@ -117,6 +125,40 @@ const addEventToInputs = () => {
     input.addEventListener("click", () => {
       isActive(labelElement) && startProject(projectData);
     });
+  });
+};
+
+const setInputIndex = (currentIndex) => {
+  const inputs = inputList();
+  const length = inputs.length;
+  if (currentIndex < 0) inputIndex = length + currentIndex;
+  else if (currentIndex >= length) inputIndex = currentIndex % length;
+  else inputIndex = currentIndex;
+
+  const input = inputs[inputIndex];
+  input.checked = true;
+  input.dispatchEvent(new Event("change"));
+};
+
+const addTouchEvent = () => {
+  const carousel = document.querySelector(".project-content__carousel");
+  let beginX = 0;
+  let distance = 0;
+  carousel.addEventListener("touchstart", (e) => {
+    beginX = e.touches[0].clientX;
+  });
+  carousel.addEventListener("touchmove", (e) => {
+    const currentX = e.touches[0].clientX;
+    distance = currentX - beginX;
+  });
+  carousel.addEventListener("touchend", () => {
+    if (distance >= 100) {
+      setInputIndex(inputIndex - 1);
+      return;
+    }
+    if (distance <= -100) {
+      setInputIndex(inputIndex + 1);
+    }
   });
 };
 
@@ -142,7 +184,7 @@ const render = (projectTitle) => {
   const titleElement = makeElementWithClasses("p")("project__title");
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
-  const projectSkill = makeElementWithClasses("ul")(
+  const projectSkillList = makeElementWithClasses("ul")(
     "project-content__overview__skill"
   );
 
@@ -153,9 +195,10 @@ const render = (projectTitle) => {
     projectBox.appendChild(labelElement);
   });
   carousel.appendChild(projectBox);
-  carousel.appendChild(projectSkill);
+  carousel.appendChild(projectSkillList);
   carousel.appendChild(titleElement);
 
+  displayProjectSkill(projectSkillList, data[projectTitle]);
   displayContent(titleElement, projectTitle);
   displayContent(describeElement, projectDescribe);
 
@@ -167,6 +210,7 @@ const MobileSelection = (title) => {
   const projectTitle = title ? title : "Hamelln";
   render(projectTitle);
   addEventToInputs();
+  addTouchEvent();
   checkInput(projectTitle);
 };
 
