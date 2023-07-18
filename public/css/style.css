@@ -138,16 +138,13 @@ img[src=""] {
 }
 
 .header-nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 20px;
 }
 
 .header-nav-list li {
-  margin: 0 20px;
   color: var(--text-color);
   font-weight: bold;
   letter-spacing: 0.2em;
@@ -190,6 +187,7 @@ img[src=""] {
 .about__nav {
   background-color: #2b2b2bbb;
   border: 1px solid var(--pale-white);
+  border-radius: var(--border-radius-s);
   padding: 6px 1em;
   color: var(--primary-color);
 }
@@ -1054,6 +1052,12 @@ footer {
   .header__logo {
     padding: 4px 8px;
   }
+  .header-nav-list {
+    column-gap: 1em;
+  }
+  .header-nav-list li {
+    font-size: var(--font-size-xs);
+  }
 
   /*? 프로젝트  */
   .project-header {
@@ -1214,8 +1218,7 @@ footer {
     font-size: var(--font-size-s);
   }
 
-  .project-content__selection__item,
-  .header-nav-list li {
+  .project-content__selection__item {
     font-size: var(--font-size-xs);
   }
 
