@@ -13,6 +13,7 @@ const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
 const DEFAULT_CHECKED_INPUT_NUMBER = 2;
 let inputIndex = DEFAULT_CHECKED_INPUT_NUMBER - 1;
+
 const inputList = () => document.querySelectorAll("input");
 const labelList = () =>
   document.querySelectorAll(".project-content__carousel__card");
@@ -52,6 +53,24 @@ const createLabelElements = (inputElements) => {
     labelElement.appendChild(imgElement);
     return labelElement;
   });
+};
+
+const createTitleBoxElements = () => {
+  const titleBox = makeElementWithClasses("div")(
+    "project-content__carousel__title-box"
+  );
+  const prevButton = makeElementWithClasses("button")(
+    "project-content__carousel__title-box__prev"
+  );
+  const titleElement = makeElementWithClasses("p")(
+    "project-content__carousel__title-box__title"
+  );
+  const nextButton = makeElementWithClasses("button")(
+    "project-content__carousel__title-box__next"
+  );
+  prevButton.textContent = "←";
+  nextButton.textContent = "→";
+  return { titleBox, prevButton, titleElement, nextButton };
 };
 
 const isActive = (label) => label.classList.contains("active");
@@ -107,7 +126,9 @@ const addEventToInputs = () => {
     const labelElement = findLabelByInputId(input.id);
     const projectId = labelElement.id;
     const projectData = data[projectId];
-    const titleElement = document.querySelector(".project__title");
+    const titleElement = document.querySelector(
+      ".project-content__carousel__title-box__title"
+    );
     const describeElement = document.querySelector(".project__describe");
     const projectSkillList = document.querySelector(
       ".project-content__overview__skill"
@@ -147,8 +168,24 @@ const setInputIndex = (currentIndex) => {
   else inputIndex = currentIndex;
 };
 
+const nextProject = () => {
+  setInputIndex(inputIndex + 1);
+  fireChangeEvent();
+};
+
+const prevProject = () => {
+  setInputIndex(inputIndex - 1);
+  fireChangeEvent();
+};
+
 const addTouchEvent = () => {
   const carousel = document.querySelector(".project-content__carousel");
+  const prevButton = document.querySelector(
+    ".project-content__carousel__title-box__prev"
+  );
+  const nextButton = document.querySelector(
+    ".project-content__carousel__title-box__next"
+  );
   let beginX;
   let distance;
   carousel.addEventListener("touchstart", (e) => {
@@ -161,10 +198,11 @@ const addTouchEvent = () => {
   });
   carousel.addEventListener("touchend", () => {
     if (distance < 100 && distance > -100) return;
-    if (distance >= 100) setInputIndex(inputIndex - 1);
-    else setInputIndex(inputIndex + 1);
-    fireChangeEvent();
+    if (distance >= 100) prevProject();
+    else nextProject();
   });
+  prevButton.addEventListener("click", prevProject);
+  nextButton.addEventListener("click", nextProject);
 };
 
 const checkInput = (title) => {
@@ -186,7 +224,8 @@ const render = (projectTitle) => {
   );
   const inputElements = createInputElements();
   const labelElements = createLabelElements(inputElements);
-  const titleElement = makeElementWithClasses("p")("project__title");
+  const { titleBox, prevButton, titleElement, nextButton } =
+    createTitleBoxElements();
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
   const projectSkillList = makeElementWithClasses("ul")(
@@ -199,9 +238,12 @@ const render = (projectTitle) => {
   labelElements.map((labelElement) => {
     projectBox.appendChild(labelElement);
   });
+  titleBox.appendChild(prevButton);
+  titleBox.appendChild(titleElement);
+  titleBox.appendChild(nextButton);
   carousel.appendChild(projectBox);
   carousel.appendChild(projectSkillList);
-  carousel.appendChild(titleElement);
+  carousel.appendChild(titleBox);
 
   displayProjectSkill(projectSkillList, data[projectTitle]);
   displayContent(titleElement, projectTitle);
