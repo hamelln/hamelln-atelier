@@ -1,3 +1,5 @@
+import isMobile from "./isMobile.js";
+
 let isMuted = true;
 
 const mute = (sound) => {
@@ -26,9 +28,10 @@ export const setupSound = () => {
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
   const focusableElements = document.querySelectorAll(".focusable");
+  const event = isMobile() ? "click" : "focus";
 
   focusableElements.forEach((element) => {
-    element.addEventListener("focus", () => {
+    element.addEventListener(event, () => {
       if (element.closest("#project")) {
         play(projectSound);
       } else if (element.closest("#contact")) {
