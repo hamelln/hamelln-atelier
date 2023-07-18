@@ -5,6 +5,7 @@ import {
   makeImg,
 } from "../utils/controllDOM.js";
 import addKeyboardController from "../utils/addKeyboardController.js";
+import isMobile from "../utils/isMobile.js";
 
 const animateText = (specDescription, descriptionTemplate) => {
   let currentText = ``;
@@ -94,23 +95,30 @@ const render = ({
   const specDescription = makeElementWithClasses("p")(
     "project-content__spec__box__describe"
   );
-  const specEnterButton = makeElementWithClasses("p")(
-    "project-content__spec__box__Enter",
-    "focusable"
-  );
+
   characterFigure.appendChild(character);
-  addAttribute(specEnterButton)({ tabIndex: 0, text: "Enter" });
   descriptionBox.appendChild(specDescription);
-  descriptionBox.appendChild(specEnterButton);
+  if (!isMobile()) {
+    const specEnterButton = makeElementWithClasses("p")(
+      "project-content__spec__box__Enter",
+      "focusable"
+    );
+    addAttribute(specEnterButton)({ tabIndex: 0, textContent: "Enter" });
+    addClickAndEnterHandler(specEnterButton)(handleEnter);
+    descriptionBox.appendChild(specEnterButton);
+  } else {
+    addClickAndEnterHandler(descriptionBox)(handleEnter);
+  }
   specInnerBox.appendChild(descriptionBox);
-  addClickAndEnterHandler(specEnterButton)(handleEnter);
   specBox.appendChild(characterFigure);
   specBox.appendChild(specInnerBox);
   parent.innerHTML = "";
   parent.appendChild(specBox);
   animateText(specDescription, descriptionTemplate);
   addKeyboardController();
-  specEnterButton.focus();
+  if (!isMobile()) specEnterButton.focus();
+  else addAttribute(descriptionBox)({ tabIndex: 0 });
+  descriptionBox.focus();
 };
 
 export default function Spec(spec, returnTitleScreen) {
