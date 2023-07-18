@@ -833,6 +833,7 @@ img[src=""] {
   padding: 16px;
   display: flex;
   animation: balloon 0.2s ease-in;
+  overflow: scroll;
 }
 
 @keyframes balloon {
@@ -1070,7 +1071,6 @@ footer {
   }
 
   .project-content__carousel {
-    position: absolute;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
@@ -1081,10 +1081,6 @@ footer {
   }
 
   .project-content__carousel__cards {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
     width: 100%;
     height: 100%;
   }
@@ -1115,35 +1111,48 @@ footer {
     object-fit: cover;
   }
 
-  #item-4:checked ~ .project-content__carousel__cards #project-3,
-  #item-3:checked ~ .project-content__carousel__cards #project-2,
-  #item-2:checked ~ .project-content__carousel__cards #project-1,
-  #item-1:checked ~ .project-content__carousel__cards #project-4 {
+  #item-4:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-3:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-2:checked ~ .project-content__carousel__cards #반려in,
+  #item-1:checked ~ .project-content__carousel__cards #Modak {
     left: 40%;
     transform: scale(0.8);
     opacity: 0.4;
     z-index: 0;
   }
 
-  #item-1:checked ~ .project-content__carousel__cards #project-2,
-  #item-2:checked ~ .project-content__carousel__cards #project-3,
-  #item-3:checked ~ .project-content__carousel__cards #project-4,
-  #item-4:checked ~ .project-content__carousel__cards #project-1 {
+  #item-1:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-2:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-3:checked ~ .project-content__carousel__cards #Modak,
+  #item-4:checked ~ .project-content__carousel__cards #반려in {
     right: 40%;
     transform: scale(0.8);
     opacity: 0.4;
     z-index: 0;
   }
 
-  #item-1:checked ~ .project-content__carousel__cards #project-1,
-  #item-2:checked ~ .project-content__carousel__cards #project-2,
-  #item-3:checked ~ .project-content__carousel__cards #project-3,
-  #item-4:checked ~ .project-content__carousel__cards #project-4 {
+  #item-1:checked ~ .project-content__carousel__cards #반려in,
+  #item-2:checked ~ .project-content__carousel__cards #Hamelln,
+  #item-3:checked ~ .project-content__carousel__cards #COFFEEN,
+  #item-4:checked ~ .project-content__carousel__cards #Modak {
     left: 0;
     right: 0;
     transform: translatex(0) scale(1);
     opacity: 1;
     z-index: 9;
+  }
+
+  .project__title {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  ..project-content__overview__skill {
+    top: 0;
+    left: 0;
   }
 
   /*? 폰트  */
@@ -1161,6 +1170,14 @@ footer {
   .project-content__selection__item,
   .project__describe,
   .header-nav-list li {
+    font-size: var(--font-size-xs);
+  }
+
+  .project-content__spec__box__describe {
+    font-size: var(--font-size-s);
+  }
+
+  .project-content__overview__skill__item {
     font-size: var(--font-size-xs);
   }
 
