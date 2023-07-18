@@ -12,6 +12,7 @@ const SELECT_SOUND = document.querySelector("#project-sound");
 const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
 const DEFAULT_CHECKED_INPUT_NUMBER = 2;
+let inputIndex = DEFAULT_CHECKED_INPUT_NUMBER - 1;
 const inputList = () => document.querySelectorAll("input");
 const labelList = () =>
   document.querySelectorAll(".project-content__carousel__card");
@@ -127,6 +128,40 @@ const addEventToInputs = () => {
   });
 };
 
+const setInputIndex = (currentIndex) => {
+  const inputs = inputList();
+  const length = inputs.length;
+  if (currentIndex < 0) inputIndex = length + currentIndex;
+  else if (currentIndex >= length) inputIndex = currentIndex % length;
+  else inputIndex = currentIndex;
+
+  const input = inputs[inputIndex];
+  input.checked = true;
+  input.dispatchEvent(new Event("change"));
+};
+
+const addTouchEvent = () => {
+  const carousel = document.querySelector(".project-content__carousel");
+  let beginX = 0;
+  let distance = 0;
+  carousel.addEventListener("touchstart", (e) => {
+    beginX = e.touches[0].clientX;
+  });
+  carousel.addEventListener("touchmove", (e) => {
+    const currentX = e.touches[0].clientX;
+    distance = currentX - beginX;
+  });
+  carousel.addEventListener("touchend", () => {
+    if (distance >= 100) {
+      setInputIndex(inputIndex - 1);
+      return;
+    }
+    if (distance <= -100) {
+      setInputIndex(inputIndex + 1);
+    }
+  });
+};
+
 const checkInput = (title) => {
   const inputIdNumber = title
     ? PROJECT_ID_LIST.findIndex((projectTitle) => projectTitle === title) + 1
@@ -175,6 +210,7 @@ const MobileSelection = (title) => {
   const projectTitle = title ? title : "Hamelln";
   render(projectTitle);
   addEventToInputs();
+  addTouchEvent();
   checkInput(projectTitle);
 };
 
