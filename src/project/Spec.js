@@ -1,9 +1,5 @@
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import {
-  addAttribute,
-  makeElementWithClasses,
-  makeImg,
-} from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 import addKeyboardController from "../utils/addKeyboardController.js";
 import isMobile from "../utils/isMobile.js";
 
@@ -78,23 +74,24 @@ const render = ({
   descriptionTemplate,
   handleEnter,
 }) => {
-  const specBox = makeElementWithClasses("div")("project-content__spec");
-  const characterFigure = makeElementWithClasses("figure")(
-    "project-content__spec__character"
-  );
-  const character = makeImg("project-content__spec__character__image")(
-    characterImage,
-    "project character image"
-  );
-  const specInnerBox = makeElementWithClasses("div")(
-    "project-content__spec__box"
-  );
-  const descriptionBox = makeElementWithClasses("div")(
-    "project-content__spec__describe__box"
-  );
-  const specDescription = makeElementWithClasses("p")(
-    "project-content__spec__box__describe"
-  );
+  const specBox = createElement("div", { class: "project-content__spec" });
+  const characterFigure = createElement("figure", {
+    class: "project-content__spec__character",
+  });
+  const character = createElement("img", {
+    class: "project-content__spec__character__image",
+    src: characterImage,
+    alt: "project character image",
+  });
+  const specInnerBox = createElement("div", {
+    class: "project-content__spec__box",
+  });
+  const descriptionBox = createElement("div", {
+    class: "project-content__spec__describe__box",
+  });
+  const specDescription = createElement("p", {
+    class: "project-content__spec__box__describe",
+  });
 
   characterFigure.appendChild(character);
   descriptionBox.appendChild(specDescription);
@@ -107,17 +104,17 @@ const render = ({
   animateText(specDescription, descriptionTemplate);
   addKeyboardController();
   if (!isMobile()) {
-    const specEnterButton = makeElementWithClasses("p")(
-      "project-content__spec__box__Enter",
-      "focusable"
-    );
-    addAttribute(specEnterButton)({ tabIndex: 0, textContent: "Enter" });
+    const specEnterButton = createElement("p", {
+      class: "project-content__spec__box__Enter focusable",
+      tabIndex: 0,
+      textContent: "Enter",
+    });
     addClickAndEnterHandler(specEnterButton)(handleEnter);
     descriptionBox.appendChild(specEnterButton);
     specEnterButton.focus();
   } else {
     addClickAndEnterHandler(descriptionBox)(handleEnter);
-    addAttribute(descriptionBox)({ tabIndex: 0 });
+    descriptionBox.tabIndex = 0;
     descriptionBox.focus();
   }
 };

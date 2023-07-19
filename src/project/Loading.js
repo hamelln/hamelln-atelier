@@ -1,17 +1,17 @@
-import { addAttribute, makeElementWithClasses } from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 
 export default function Loading(textContent) {
-  const makeContent = (className) => {
-    const textElem = makeElementWithClasses("h2")(className);
-    return addAttribute(textElem)({ textContent });
-  };
-
   const render = () => {
     const parent = document.querySelector(".project-content");
-    const loadingBox = makeElementWithClasses("div")(
-      "project-content__loading"
-    );
-    const loadingContent = makeContent("project-content__loading__text");
+
+    const loadingBox = createElement("div", {
+      class: "project-content__loading",
+    });
+
+    const loadingContent = createElement("h2", {
+      class: "project-content__loading__text",
+      textContent,
+    });
 
     parent.innerHTML = "";
     loadingBox.appendChild(loadingContent);

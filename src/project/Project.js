@@ -9,16 +9,15 @@ import {
 import { play, stop } from "../utils/sound.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
-import {
-  addAttribute,
-  makeElementWithClasses,
-  makeImg,
-} from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 import renderSelection from "./index.js";
 
 const makeInfoItem = (content) => {
-  const li = makeElementWithClasses("li")("project-box__info__item");
-  return addAttribute(li)({ dataName: content, textContent: content });
+  return createElement("li", {
+    class: "project-box__info__item",
+    dataName: content,
+    textContent: content,
+  });
 };
 
 const makeInfoLinkItem = (content) => {
@@ -57,15 +56,17 @@ const focusPreviousItem = (infoBox, className, textContent) => {
 };
 
 const createElements = (projectTitle, backgroundImage) => {
-  const projectBox = makeElementWithClasses("div")("project-box");
-  const projectTitleElement =
-    makeElementWithClasses("h2")("project-box__title");
-  projectTitleElement.textContent = projectTitle;
-  const infoBox = makeElementWithClasses("ul")("project-box__info");
-  const projectImage = makeImg("project__image")(
-    backgroundImage,
-    "project image"
-  );
+  const projectBox = createElement("div", { class: "project-box" });
+  const projectTitleElement = createElement("h2", {
+    class: "project-box__title",
+    textContent: projectTitle,
+  });
+  const infoBox = createElement("ul", { class: "project-box__info" });
+  const projectImage = createElement("img", {
+    class: "project__image",
+    src: backgroundImage,
+    alt: "project image",
+  });
 
   return { projectBox, projectTitleElement, infoBox, projectImage };
 };

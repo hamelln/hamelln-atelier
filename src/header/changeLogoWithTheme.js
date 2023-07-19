@@ -1,4 +1,4 @@
-import { makeImg } from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 
 const setLogo = (theme) => {
   const logo = document.querySelector(".header__logo");
@@ -15,7 +15,7 @@ const setLogo = (theme) => {
   const src = imgData[theme].src;
   const alt = imgData[theme].alt;
   logo.innerHTML = "";
-  const img = makeImg()(src, alt);
+  const img = createElement("img", { src, alt });
   logo.appendChild(img);
 };
 
