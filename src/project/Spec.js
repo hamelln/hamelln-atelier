@@ -1,4 +1,3 @@
-import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
 import createElement from "../utils/createElement.js";
 import addKeyboardController from "../utils/addKeyboardController.js";
 import isMobile from "../utils/isMobile.js";
@@ -68,8 +67,12 @@ const render = ({
   parent,
   characterImage,
   descriptionTemplate,
-  handleEnter,
+  backToProjectTitle,
 }) => {
+  const quitSpec = () => {
+    backToProjectTitle(".project-box__info__item", "spec");
+  };
+
   const specBox = createElement("div", { class: "project-content__spec" });
   const characterFigure = createElement("figure", {
     class: "project-content__spec__character",
@@ -104,12 +107,13 @@ const render = ({
       class: "project-content__spec__box__Enter focusable",
       tabIndex: 0,
       textContent: "Enter",
+      onClick: [quitSpec],
+      onEnter: [quitSpec],
     });
-    addClickAndEnterHandler(specEnterButton)(handleEnter);
     descriptionBox.appendChild(specEnterButton);
     specEnterButton.focus();
   } else {
-    addClickAndEnterHandler(descriptionBox)(handleEnter);
+    descriptionBox.addEventListener("click", quitSpec);
     descriptionBox.tabIndex = 0;
     descriptionBox.focus();
   }
@@ -120,14 +124,10 @@ export default function Spec(spec, backToProjectTitle) {
   const descriptionTemplate = getDescriptionTemplate(spec);
   const { characterImage } = spec;
 
-  const handleEnter = () => {
-    backToProjectTitle(".project-box__info__item", "spec");
-  };
-
   render({
     parent,
     characterImage,
     descriptionTemplate,
-    handleEnter,
+    backToProjectTitle,
   });
 }

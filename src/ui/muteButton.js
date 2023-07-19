@@ -6,33 +6,33 @@ import { changeMute } from "../utils/sound.js";
 
 let isMuted = true;
 let isFirstClick = true;
+const SRC_MAP = new Map([
+  [true, "public/img/icons/mute.svg"],
+  [false, "public/img/icons/unmute.svg"],
+]);
+const ALT_MAP = new Map([
+  [true, "mute button - crossed-out unmute icon"],
+  [false, "unmute button - unmute icon"],
+]);
 
 const setupMuteButton = (setupSound) => {
   const muteButton = document.querySelector(".mute-button");
+
   const setupSoundWhenFirstClick = () => {
     isFirstClick = false;
     setupSound();
   };
 
-  const srcMap = new Map([
-    [true, "public/img/icons/mute.svg"],
-    [false, "public/img/icons/unmute.svg"],
-  ]);
-  const altMap = new Map([
-    [true, "mute button - crossed-out unmute icon"],
-    [false, "unmute button - unmute icon"],
-  ]);
-
   const handleMute = () => {
-    if (isFirstClick) setupSoundWhenFirstClick();
+    isFirstClick && setupSoundWhenFirstClick();
     isMuted = !isMuted;
     changeMuteImg();
     changeMute();
   };
 
   const changeMuteImg = () => {
-    const src = srcMap.get(isMuted);
-    const alt = altMap.get(isMuted);
+    const src = SRC_MAP.get(isMuted);
+    const alt = ALT_MAP.get(isMuted);
     const img = createElement("img", { src, alt });
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
