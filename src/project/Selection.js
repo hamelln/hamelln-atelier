@@ -126,7 +126,7 @@ const findPrevFocusItem = (className, textContent) => {
   return items.find((item) => item.textContent.trim() === textContent);
 };
 
-const focusPreviousItem = (projectTitle) => {
+const focusPrevItem = (projectTitle) => {
   if (!projectTitle) return;
   const focusedItem = findPrevFocusItem(
     ".project-content__selection__item",
@@ -149,7 +149,7 @@ const render = (parent, projectTitle) => {
   });
 
   addKeyboardController();
-  focusPreviousItem(projectTitle);
+  focusPrevItem(projectTitle);
 };
 
 export default function Selection(title = undefined) {

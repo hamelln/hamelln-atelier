@@ -7,72 +7,177 @@ import Project from "./Project.js";
 const SELECT_SOUND = document.querySelector("#project-sound");
 const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
-const DEFAULT_CHECKED_INPUT_NUMBER = 2;
-let inputIndex = DEFAULT_CHECKED_INPUT_NUMBER - 1;
+const LIST_LENGTH = PROJECT_ID_LIST.length;
+const DEFAULT_INPUT_NUMBER = 2;
+let inputIndex = DEFAULT_INPUT_NUMBER - 1;
 
 const inputList = () => document.querySelectorAll("input");
 const labelList = () =>
   document.querySelectorAll(".project-content__carousel__card");
-const labelLength = () => labelList().length;
-const labelArr = () => Array.from(labelList());
 
-const createInputElements = () => {
-  return Object.keys(data).map((_, i) => {
-    return createElement("input", {
-      type: "radio",
-      name: "slider",
-      id: `item-${i + 1}`,
-    });
+const createCarousel = (projectTitle) => {
+  const carousel = createElement("div", { class: "project-content__carousel" });
+  const inputs = createInputs();
+  const projectBox = createCarouselCards(inputs);
+  const projectSkillBox = createSkillBox(data[projectTitle]);
+  const titleBox = createTitleBox(projectTitle);
+
+  inputs.map((inputElement) => {
+    carousel.appendChild(inputElement);
+  });
+  carousel.appendChild(projectBox);
+  carousel.appendChild(projectSkillBox);
+  carousel.appendChild(titleBox);
+  return carousel;
+};
+
+//? 캐러셀 1st child
+const createInputs = () => Object.keys(data).map(createInput);
+const createInput = (_, labelIndex) => {
+  const inputId = `item-${labelIndex + 1}`;
+  const hasActiveClass = (label) => label.classList.contains("active");
+  const handleClick = () => {
+    const label = findLabelByInputId(inputId);
+    const projectId = label.id;
+    const projectData = data[projectId];
+    hasActiveClass(label) && startProject(projectData);
+  };
+
+  const handleChange = () => {
+    const label = findLabelByInputId(inputId);
+    const projectTitle = label.id;
+    const projectData = data[projectTitle];
+    const describeElement = document.querySelector(".project__describe");
+    const titleElement = document.querySelector(
+      ".project-content__carousel__title-box__title"
+    );
+    const projectDescribe = projectData.describe;
+    titleElement.textContent = projectTitle;
+    describeElement.textContent = projectDescribe;
+
+    play(SELECT_SOUND);
+    setInputIndex(labelIndex);
+    refreshLabelClasses(labelIndex);
+    changeSkillBox(projectData);
+  };
+
+  return createElement("input", {
+    type: "radio",
+    name: "slider",
+    id: inputId,
+    onClick: [handleClick],
+    onChange: [handleChange],
   });
 };
 
-const createImgElement = (projectTitle) => {
-  return createElement("img", {
+//? 캐러셀 2nd child
+const createCarouselCards = (inputs) => {
+  const box = createElement("div", {
+    class: "project-content__carousel__cards",
+  });
+  const labels = createLabels(inputs);
+  labels.map((label) => box.appendChild(label));
+  return box;
+};
+
+const createLabels = (inputs) => inputs.map(createLabel);
+const createLabel = (input, index) => {
+  const projectTitle = PROJECT_ID_LIST[index];
+  const labelElement = createElement("label", {
+    class: "project-content__carousel__card focusable",
+    for: input.id,
+    id: projectTitle,
+    tabIndex: 0,
+  });
+  const imgElement = createElement("img", {
     class: "project-content__carousel__card__image",
     src: data[projectTitle].backgroundImage,
     alt: "project image",
   });
+
+  labelElement.appendChild(imgElement);
+  return labelElement;
 };
 
-const createLabelElements = (inputElements) => {
-  return inputElements.map((input, index) => {
-    const projectTitle = PROJECT_ID_LIST[index];
-    const labelElement = createElement("label", {
-      class: "project-content__carousel__card focusable",
-      for: input.id,
-      id: projectTitle,
-      tabIndex: 0,
-    });
-    const imgElement = createImgElement(projectTitle);
-    labelElement.appendChild(imgElement);
-    return labelElement;
+//? 캐러셀 3rd child
+const createSkillBox = (projectData) => {
+  const skillList = createElement("ul", {
+    class: "project-content__overview__skill",
+  });
+  const skillItems = createSkillItems(projectData);
+  skillItems.map((skillItem) => skillList.appendChild(skillItem));
+  return skillList;
+};
+
+const changeSkillBox = (projectData) => {
+  const skillList = document.querySelector(".project-content__overview__skill");
+  skillList.innerHTML = "";
+  const skillItems = createSkillItems(projectData);
+  skillItems.map((skillItem) => skillList.appendChild(skillItem));
+};
+
+const createSkillItems = (projectData) => {
+  const skills = projectData.spec.skill.split(", ").slice(0, 3);
+  return skills.map(createSkillItem);
+};
+
+const createSkillItem = (textContent) => {
+  return createElement("li", {
+    class: "project-content__overview__skill__item",
+    textContent,
   });
 };
 
-const createTitleBoxElements = () => {
+//? 캐러셀 4th child
+const createTitleBox = (projectTitle) => {
+  const projectData = data[projectTitle];
   const titleBox = createElement("div", {
     class: "project-content__carousel__title-box",
   });
   const prevButton = createElement("button", {
     class: "project-content__carousel__title-box__prev",
     textContent: "←",
+    onClick: [prevProject],
   });
   const titleElement = createElement("p", {
     class: "project-content__carousel__title-box__title",
+    textContent: projectTitle,
+    onClick: [startProject, projectData],
   });
   const nextButton = createElement("button", {
     class: "project-content__carousel__title-box__next",
     textContent: "→",
+    onClick: [nextProject],
   });
-  return { titleBox, prevButton, titleElement, nextButton };
+  titleBox.appendChild(prevButton);
+  titleBox.appendChild(titleElement);
+  titleBox.appendChild(nextButton);
+  return titleBox;
 };
 
+//? 그 외 유틸
 const findLabelByInputId = (id) => document.querySelector(`label[for=${id}]`);
-const resetClassesOfLabels = () => {
-  labelList().forEach((label) => {
+
+const refreshLabelClasses = (labelIndex) => {
+  const prevIndex = labelIndex - 1 < 0 ? LIST_LENGTH - 1 : labelIndex - 1;
+  const nextIndex = labelIndex + 1 >= LIST_LENGTH ? 0 : labelIndex + 1;
+  labelList().forEach((label, index) => {
     label.classList.remove("prev");
     label.classList.remove("active");
     label.classList.remove("next");
+    switch (index) {
+      case prevIndex:
+        label.classList.add("prev");
+        break;
+      case labelIndex:
+        label.classList.add("active");
+        break;
+      case nextIndex:
+        label.classList.add("next");
+        break;
+      default:
+        break;
+    }
   });
 };
 
@@ -84,72 +189,6 @@ const startProject = (projectData) => {
   }, 1000);
 };
 
-const displayContent = (element, content) => {
-  element.textContent = content;
-};
-
-const findLabelByIndex = (index) => {
-  if (index < 0) return labelArr()[labelLength() + index];
-  else if (index >= labelLength()) return labelArr()[index % labelLength()];
-  return labelArr()[index];
-};
-
-const changeClassFromPrevToNext = (labelElement, activeIndex) => {
-  resetClassesOfLabels();
-  labelElement.classList.add("active");
-  findLabelByIndex(activeIndex - 1).classList.add("prev");
-  findLabelByIndex(activeIndex + 1).classList.add("next");
-};
-
-const displayProjectSkill = (projectSkillList, projectData) => {
-  projectSkillList.innerHTML = "";
-  const projectSkillArray = projectData.spec.skill.split(", ");
-
-  for (let i = 0; i < 3; i++) {
-    const skill = projectSkillArray[i];
-    const projectSkillItem = createElement("li", {
-      class: "project-content__overview__skill__item",
-      textContent: skill,
-    });
-    projectSkillList.appendChild(projectSkillItem);
-  }
-};
-
-const addEventToInputs = () => {
-  inputList().forEach((input) => {
-    const labelElement = findLabelByInputId(input.id);
-    const projectId = labelElement.id;
-    const projectData = data[projectId];
-    const titleElement = document.querySelector(
-      ".project-content__carousel__title-box__title"
-    );
-    const describeElement = document.querySelector(".project__describe");
-    const projectSkillList = document.querySelector(
-      ".project-content__overview__skill"
-    );
-
-    input.addEventListener("change", () => {
-      setInputIndex(Number(input.id[5]) - 1);
-      play(SELECT_SOUND);
-      const projectTitle = projectData.title;
-      const projectDescribe = projectData.describe;
-      const activeIndex = labelArr().findIndex(
-        (label) => label === labelElement
-      );
-      changeClassFromPrevToNext(labelElement, activeIndex);
-      displayProjectSkill(projectSkillList, projectData);
-      displayContent(titleElement, projectTitle);
-      displayContent(describeElement, projectDescribe);
-    });
-
-    input.addEventListener("click", () => {
-      if (labelElement.classList.contains("active")) {
-        startProject(projectData);
-      }
-    });
-  });
-};
-
 const fireChangeEvent = () => {
   const input = inputList()[inputIndex];
   input.checked = true;
@@ -157,10 +196,8 @@ const fireChangeEvent = () => {
 };
 
 const setInputIndex = (currentIndex) => {
-  const inputs = inputList();
-  const length = inputs.length;
-  if (currentIndex < 0) inputIndex = length + currentIndex;
-  else if (currentIndex >= length) inputIndex = currentIndex % length;
+  if (currentIndex < 0) inputIndex = LIST_LENGTH + currentIndex;
+  else if (currentIndex >= LIST_LENGTH) inputIndex = currentIndex % LIST_LENGTH;
   else inputIndex = currentIndex;
 };
 
@@ -174,21 +211,9 @@ const prevProject = () => {
   fireChangeEvent();
 };
 
-const addTouchEvent = () => {
-  const carousel = document.querySelector(".project-content__carousel");
-  const prevButton = document.querySelector(
-    ".project-content__carousel__title-box__prev"
-  );
-  const nextButton = document.querySelector(
-    ".project-content__carousel__title-box__next"
-  );
-  const titleElement = document.querySelector(
-    ".project-content__carousel__title-box__title"
-  );
-  const projectData = data[titleElement.textContent.trim()];
+const addTouchCarousel = (carousel) => {
   let beginX;
   let distance;
-
   carousel.addEventListener("touchstart", (e) => {
     beginX = e.touches[0].clientX;
     distance = 0;
@@ -202,67 +227,33 @@ const addTouchEvent = () => {
     if (distance >= 100) prevProject();
     else nextProject();
   });
-  prevButton.addEventListener("click", prevProject);
-  nextButton.addEventListener("click", nextProject);
-  titleElement.addEventListener("click", () => {
-    startProject(projectData);
-  });
 };
 
-const checkInput = (title) => {
+const initializeInput = (title) => {
   const inputIdNumber = title
     ? PROJECT_ID_LIST.findIndex((projectTitle) => projectTitle === title) + 1
-    : DEFAULT_CHECKED_INPUT_NUMBER;
+    : DEFAULT_INPUT_NUMBER;
   const inputId = `item-${inputIdNumber}`;
   const input = document.getElementById(inputId);
   input.checked = true;
-  const labelElement = findLabelByInputId(inputId);
-  changeClassFromPrevToNext(labelElement, inputIdNumber - 1);
+  refreshLabelClasses(inputIdNumber - 1);
 };
 
 const render = (projectTitle) => {
   const parent = document.querySelector(".project-content");
-  const carousel = createElement("div", { class: "project-content__carousel" });
-  const projectBox = createElement("div", {
-    class: "project-content__carousel__cards",
-  });
-  const inputElements = createInputElements();
-  const labelElements = createLabelElements(inputElements);
-  const { titleBox, prevButton, titleElement, nextButton } =
-    createTitleBoxElements();
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
-  const projectSkillList = createElement("ul", {
-    class: "project-content__overview__skill",
-  });
-
-  inputElements.map((inputElement) => {
-    carousel.appendChild(inputElement);
-  });
-  labelElements.map((labelElement) => {
-    projectBox.appendChild(labelElement);
-  });
-  titleBox.appendChild(prevButton);
-  titleBox.appendChild(titleElement);
-  titleBox.appendChild(nextButton);
-  carousel.appendChild(projectBox);
-  carousel.appendChild(projectSkillList);
-  carousel.appendChild(titleBox);
-
-  displayProjectSkill(projectSkillList, data[projectTitle]);
-  displayContent(titleElement, projectTitle);
-  displayContent(describeElement, projectDescribe);
-
+  describeElement.textContent = projectDescribe;
+  const carousel = createCarousel(projectTitle);
   parent.innerHTML = "";
   parent.appendChild(carousel);
+  addTouchCarousel(carousel);
 };
 
 const MobileSelection = (title) => {
   const projectTitle = title ? title : "Hamelln";
   render(projectTitle);
-  addEventToInputs();
-  addTouchEvent();
-  checkInput(projectTitle);
+  initializeInput(projectTitle);
 };
 
 export default MobileSelection;
