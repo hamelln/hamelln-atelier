@@ -42,6 +42,12 @@ const createElement = (tagName, option) => {
           handleBlur(...blurArgs);
         });
         break;
+      case "onChange":
+        const [handleChange, ...changeArgs] = value;
+        element.addEventListener("change", () => {
+          handleChange(...changeArgs);
+        });
+        break;
       default:
         element.setAttribute(key, value);
         break;
