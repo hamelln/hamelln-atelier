@@ -28,8 +28,8 @@ https://hamelln.vercel.app/
   pixabay(프로젝트 선택 효과음)  
   https://pixabay.com/sound-effects/
 
-  icons8(이메일 아이콘)
+  icons8(이메일 아이콘)  
   https://icons8.com/
 
-  ドット絵こんばーた(이미지 픽셀화)
+  ドット絵こんばーた(이미지 픽셀화)  
   https://app.monopro.org/pixel/
