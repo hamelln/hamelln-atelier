@@ -1078,15 +1078,15 @@ footer {
 
   .header__hamberger {
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 
   .header-nav {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 30%;
+    width: 42%;
     height: 100vh;
     background-color: #fff;
     transition: right 0.3s ease-in-out;
@@ -1099,13 +1099,15 @@ footer {
     align-items: start;
     background-color: var(--block-color);
   }
+
   .header-nav-list {
     display: flex;
     flex-direction: column;
   }
+
   .header-nav-list__item {
     padding: 2em;
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-s);
     color: var(--pale-white);
   }
 

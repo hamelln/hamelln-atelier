@@ -5,32 +5,53 @@ import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
 import { play } from "../utils/sound.js";
 import Project from "./Project.js";
 import Loading from "./Loading.js";
-import {
-  makeElementWithClasses,
-  addAttribute,
-  makeImg,
-} from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 
-const createTitle = (className) => {
-  const titleElem = makeElementWithClasses("h2")(className);
-  return addAttribute(titleElem)({ textContent: "Project Select" });
+const createSelectionBox = (selectionList) => {
+  const selectionBox = createElement("div", {
+    class: "project-content__selection",
+  });
+  const selectionTitle = createElement("h2", {
+    class: "project-content__selection__title",
+    textContent: "Project Select",
+  });
+
+  selectionBox.appendChild(selectionTitle);
+  selectionBox.appendChild(selectionList);
+  return selectionBox;
 };
 
-const createProjectItem = (projectTitle) => {
-  const projectItem = makeElementWithClasses("li")(
-    "project-content__selection__item",
-    "focusable"
-  );
-  return addAttribute(projectItem)({ tabIndex: 0, textContent: projectTitle });
-};
+const createProjectList = () => {
+  const projectTitles = Object.keys(data);
+  const projectList = createElement("ul", {
+    class: "project-content__selection__list",
+  });
 
-const insertProjectsIntoList = (projectList) => {
-  const projectArray = Object.keys(data);
-  projectArray.map((projectTitle) => {
-    const projectItem = createProjectItem(projectTitle);
+  projectTitles.map((projectTitle) => {
+    const projectItem = createElement("li", {
+      class: "project-content__selection__item focusable",
+      tabIndex: 0,
+      textContent: projectTitle,
+    });
     projectList.appendChild(projectItem);
   });
   return projectList;
+};
+
+const createProjectFigure = () => {
+  const figure = createElement("figure", {
+    class: "project-content__overview",
+  });
+  const projectImg = createElement("img", {
+    class: "project-content__overview__image",
+  });
+  const projectSkill = createElement("ul", {
+    class: "project-content__overview__skill",
+  });
+
+  figure.appendChild(projectImg);
+  figure.appendChild(projectSkill);
+  return figure;
 };
 
 const addEventProjectItem = (project) => {
@@ -43,6 +64,30 @@ const addEventProjectItem = (project) => {
   const projectSkillList = document.querySelector(
     ".project-content__overview__skill"
   );
+
+  const setProjectImage = (projectTitle) => {
+    const oldImg = document.querySelector(".project-content__overview__image");
+    const parent = oldImg.parentNode;
+    const newImg = createElement("img", {
+      class: "project-content__overview__image",
+      src: data[projectTitle].backgroundImage,
+      alt: `${projectTitle} image`,
+    });
+    parent.replaceChild(newImg, oldImg);
+  };
+
+  const clearProjectImage = () => {
+    const oldImg = document.querySelector(".project-content__overview__image");
+    const parent = oldImg.parentNode;
+    const newImg = oldImg.cloneNode();
+    newImg.classList.add("blink");
+    parent.replaceChild(newImg, oldImg);
+    setTimeout(() => {
+      newImg.src = "";
+      newImg.alt = "";
+    }, 300);
+  };
+
   const startProject = () => {
     play(startSound);
     Loading("Hamelln");
@@ -52,13 +97,12 @@ const addEventProjectItem = (project) => {
   };
 
   const handleFocus = () => {
-    addAttribute(describe)({ textContent: projectData.describe });
-
+    describe.textContent = projectData.describe;
     projectSkillArray.map((skill) => {
-      const projectSkillItem = makeElementWithClasses("li")(
-        "project-content__overview__skill__item"
-      );
-      addAttribute(projectSkillItem)({ textContent: skill });
+      const projectSkillItem = createElement("li", {
+        class: "project-content__overview__skill__item",
+        textContent: skill,
+      });
       projectSkillList.appendChild(projectSkillItem);
       setProjectImage(projectTitle);
     });
@@ -91,64 +135,19 @@ const focusPreviousItem = (projectTitle) => {
   addFocus(focusedItem);
 };
 
-const createSelections = () => {
-  const selectionBox = makeElementWithClasses("div")(
-    "project-content__selection"
-  );
-  const selectionTitle = createTitle("project-content__selection__title");
-  const selectionList = makeElementWithClasses("ul")(
-    "project-content__selection__list"
-  );
-  return { selectionBox, selectionTitle, selectionList };
-};
-
-const createFigureItems = () => {
-  const figure = makeElementWithClasses("figure")("project-content__overview");
-  const projectImg = makeImg("project-content__overview__image")("", "");
-  const projectSkill = makeElementWithClasses("ul")(
-    "project-content__overview__skill"
-  );
-  return { figure, projectImg, projectSkill };
-};
-
-const setProjectImage = (projectTitle) => {
-  const oldImg = document.querySelector(".project-content__overview__image");
-  const src = data[projectTitle].backgroundImage;
-  const alt = `${projectTitle} image`;
-  const parent = oldImg.parentNode;
-  const newImg = makeImg("project-content__overview__image")(src, alt);
-  parent.replaceChild(newImg, oldImg);
-};
-
-const clearProjectImage = () => {
-  const oldImg = document.querySelector(".project-content__overview__image");
-  const parent = oldImg.parentNode;
-  const newImg = oldImg.cloneNode();
-  newImg.classList.add("blink");
-  parent.replaceChild(newImg, oldImg);
-  setTimeout(() => {
-    newImg.src = "";
-    newImg.alt = "";
-  }, 300);
-};
-
 const render = (parent, projectTitle) => {
-  const { selectionBox, selectionTitle, selectionList } = createSelections();
-  const { figure, projectImg, projectSkill } = createFigureItems();
-
-  insertProjectsIntoList(selectionList);
-  selectionBox.appendChild(selectionTitle);
-  selectionBox.appendChild(selectionList);
-  figure.appendChild(projectImg);
-  figure.appendChild(projectSkill);
+  const selectionList = createProjectList();
+  const selectionBox = createSelectionBox(selectionList);
+  const projectFigure = createProjectFigure();
 
   parent.innerHTML = "";
   parent.appendChild(selectionBox);
-  parent.appendChild(figure);
+  parent.appendChild(projectFigure);
 
   selectionList.childNodes.forEach((project) => {
     addEventProjectItem(project, projectTitle);
   });
+
   addKeyboardController();
   focusPreviousItem(projectTitle);
 };

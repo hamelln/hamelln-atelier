@@ -1,7 +1,7 @@
 "use strict";
 
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import { makeImg } from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 import { changeMute } from "../utils/sound.js";
 
 let isMuted = true;
@@ -33,7 +33,7 @@ const setupMuteButton = (setupSound) => {
   const changeMuteImg = () => {
     const src = srcMap.get(isMuted);
     const alt = altMap.get(isMuted);
-    const img = makeImg()(src, alt);
+    const img = createElement("img", { src, alt });
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   };

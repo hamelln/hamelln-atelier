@@ -1,4 +1,4 @@
-import { makeImg } from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 
 const headerNav = document.querySelector(".header-nav");
 const modeElement = document.querySelector(".mode");
@@ -12,17 +12,10 @@ const closeHeader = () => {
   modeElement.classList.remove("active");
 };
 
-const createHamburger = () => {
-  const src = "/public/img/icons/hamburger.png";
-  const alt = "header navigation";
-  return makeImg("header__hamberger", "focusable")(src, alt);
-};
-
 const addHeaderHandler = (hamburger) => {
   hamburger.addEventListener("click", openHeader);
-
   document.body.addEventListener("click", (e) => {
-    const cutline = window.innerWidth * 0.7;
+    const cutline = window.innerWidth * 0.6;
     const clickPoint = e.clientX;
     if (clickPoint <= cutline) closeHeader();
   });
@@ -30,9 +23,20 @@ const addHeaderHandler = (hamburger) => {
 
 const MobileHeader = () => {
   const header = document.querySelector(".header");
-  const hamburger = createHamburger();
-  addHeaderHandler(hamburger);
+  const navList = document.querySelector(".header-nav-list");
+  const hamburger = createElement("img", {
+    class: "header__hamberger focusable",
+    src: "/public/img/icons/hamburger.png",
+    alt: "header navigation",
+  });
+  const closeButton = createElement("li", {
+    class: "header-nav-list__item focusable",
+    textContent: "Close",
+    tabIndex: 0,
+  });
+  navList.appendChild(closeButton);
   header.appendChild(hamburger);
+  addHeaderHandler(hamburger);
 };
 
 export default MobileHeader;

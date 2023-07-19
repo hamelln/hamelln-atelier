@@ -1,28 +1,23 @@
 import addKeyboardController from "../utils/addKeyboardController.js";
 import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import {
-  addBlurHandler,
-  addFocus,
-  addFocusHandler,
-  addFocusHandlers,
-} from "../utils/focus.js";
+import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
 import { play, stop } from "../utils/sound.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
-import {
-  addAttribute,
-  makeElementWithClasses,
-  makeImg,
-} from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 import renderSelection from "./index.js";
 
-const makeInfoItem = (content) => {
-  const li = makeElementWithClasses("li")("project-box__info__item");
-  return addAttribute(li)({ dataName: content, textContent: content });
+const createInfoItem = (content) => {
+  return createElement("li", {
+    class: "project-box__info__item focusable",
+    dataName: content,
+    textContent: content,
+    tabIndex: 0,
+  });
 };
 
-const makeInfoLinkItem = (content) => {
-  const li = makeInfoItem(content);
+const createInfoLinkItem = (content) => {
+  const li = createInfoItem(content);
   const anchor = document.createElement("a");
   li.appendChild(anchor);
   return li;
@@ -40,34 +35,40 @@ const onClose = (title, bgm) => {
   }, 1000);
 };
 
-const directPageOnItemByClickAndEnter = (element, callback, ...args) => {
-  addClickAndEnterHandler(element)(callback, ...args);
-};
-
 const findPrevFocusItem = (className, textContent) => {
   const items = Array.from(document.querySelectorAll(className));
   return items.find((item) => item.textContent.trim() === textContent);
 };
 
-const focusPreviousItem = (infoBox, className, textContent) => {
+const focusPrevItem = (infoBox, className, textContent) => {
   const focusItem = className
     ? findPrevFocusItem(className, textContent)
     : infoBox.firstChild;
   addFocus(focusItem);
 };
 
-const createElements = (projectTitle, backgroundImage) => {
-  const projectBox = makeElementWithClasses("div")("project-box");
-  const projectTitleElement =
-    makeElementWithClasses("h2")("project-box__title");
-  projectTitleElement.textContent = projectTitle;
-  const infoBox = makeElementWithClasses("ul")("project-box__info");
-  const projectImage = makeImg("project__image")(
-    backgroundImage,
-    "project image"
-  );
-
+const createInfoBox = (projectTitle, backgroundImage) => {
+  const projectBox = createElement("div", { class: "project-box" });
+  const projectTitleElement = createElement("h2", {
+    class: "project-box__title",
+    textContent: projectTitle,
+  });
+  const infoBox = createElement("ul", { class: "project-box__info" });
+  const projectImage = createElement("img", {
+    class: "project__image",
+    src: backgroundImage,
+    alt: "project image",
+  });
   return { projectBox, projectTitleElement, infoBox, projectImage };
+};
+
+const createInfoItems = (siteUrl, codeUrl) => {
+  const homepageItem = siteUrl && createInfoLinkItem("homepage");
+  const codeItem = codeUrl && createInfoLinkItem("code");
+  const specItem = createInfoItem("spec");
+  const featureItem = createInfoItem("feature");
+  const exitItem = createInfoItem("exit");
+  return [homepageItem, codeItem, specItem, featureItem, exitItem];
 };
 
 const renderContent = (parent, elements) => {
@@ -77,15 +78,6 @@ const renderContent = (parent, elements) => {
   projectBox.appendChild(infoBox);
   parent.appendChild(projectBox);
   parent.appendChild(projectImage);
-};
-
-const createInfoItems = (siteUrl, codeUrl) => {
-  const homepageItem = siteUrl && makeInfoLinkItem("homepage");
-  const codeItem = codeUrl && makeInfoLinkItem("code");
-  const specItem = makeInfoItem("spec");
-  const featureItem = makeInfoItem("feature");
-  const exitItem = makeInfoItem("exit");
-  return { homepageItem, codeItem, specItem, featureItem, exitItem };
 };
 
 export default function Project({
@@ -106,11 +98,8 @@ export default function Project({
     ["exit", "화면을 종료합니다"],
   ]);
 
-  const goSpecPage = () => {
-    Spec(spec, render);
-  };
-
-  const displayDescriptionOfItem = (item) => {
+  const displayDescOnItem = (item) => {
+    if (!item) return;
     const describe = document.querySelector(".project__describe");
     const itemText = item.textContent.trim();
 
@@ -127,33 +116,26 @@ export default function Project({
   };
 
   const appendChildrenToInfoBox = (infoBox, infoItems) => {
-    Object.values(infoItems).forEach(
-      (item) => item && infoBox.appendChild(item)
-    );
+    infoItems.map((item) => item && infoBox.appendChild(item));
+  };
+
+  const goSpecPage = () => {
+    Spec(spec, render);
   };
 
   const applyEventHandlers = (infoItems) => {
-    const { homepageItem, codeItem, specItem, featureItem, exitItem } =
-      infoItems;
-
-    if (homepageItem)
-      directPageOnItemByClickAndEnter(homepageItem, openLink, siteUrl);
-    if (codeItem) directPageOnItemByClickAndEnter(codeItem, openLink, codeUrl);
-    directPageOnItemByClickAndEnter(specItem, goSpecPage);
-    directPageOnItemByClickAndEnter(featureItem, () => {});
-    directPageOnItemByClickAndEnter(exitItem, onClose, title, bgm);
-
-    Object.values(infoItems).forEach((item) => {
-      if (item) {
-        displayDescriptionOfItem(item);
-        addFocusHandlers(item);
-      }
-    });
+    const [homepageItem, codeItem, specItem, featureItem, exitItem] = infoItems;
+    if (homepageItem) addClickAndEnterHandler(homepageItem)(openLink, siteUrl);
+    if (codeItem) addClickAndEnterHandler(codeItem)(openLink, codeUrl);
+    addClickAndEnterHandler(specItem)(goSpecPage);
+    addClickAndEnterHandler(featureItem)(() => {});
+    addClickAndEnterHandler(exitItem)(onClose, title, bgm);
+    Object.values(infoItems).forEach(displayDescOnItem);
   };
 
   const render = (className, textContent) => {
     const parent = document.querySelector(".project-content");
-    const elements = createElements(title, backgroundImage);
+    const elements = createInfoBox(title, backgroundImage);
     const infoItems = createInfoItems(siteUrl, codeUrl);
     parent.innerHTML = "";
 
@@ -161,7 +143,7 @@ export default function Project({
     applyEventHandlers(infoItems);
     renderContent(parent, elements);
     addKeyboardController();
-    focusPreviousItem(elements.infoBox, className, textContent);
+    focusPrevItem(elements.infoBox, className, textContent);
     play(bgm);
   };
 

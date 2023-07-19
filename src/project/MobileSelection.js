@@ -1,9 +1,5 @@
 import data from "../data/project.json" assert { type: "json" };
-import {
-  addAttribute,
-  makeElementWithClasses,
-  makeImg,
-} from "../utils/controllDOM.js";
+import createElement from "../utils/createElement.js";
 import { play } from "../utils/sound.js";
 import Loading from "./Loading.js";
 import Project from "./Project.js";
@@ -22,8 +18,7 @@ const labelArr = () => Array.from(labelList());
 
 const createInputElements = () => {
   return Object.keys(data).map((_, i) => {
-    const inputElement = document.createElement("input");
-    return addAttribute(inputElement)({
+    return createElement("input", {
       type: "radio",
       name: "slider",
       id: `item-${i + 1}`,
@@ -32,19 +27,18 @@ const createInputElements = () => {
 };
 
 const createImgElement = (projectTitle) => {
-  const src = data[projectTitle].backgroundImage;
-  const alt = "project image";
-  return makeImg("project-content__carousel__card__image")(src, alt);
+  return createElement("img", {
+    class: "project-content__carousel__card__image",
+    src: data[projectTitle].backgroundImage,
+    alt: "project image",
+  });
 };
 
 const createLabelElements = (inputElements) => {
   return inputElements.map((input, index) => {
     const projectTitle = PROJECT_ID_LIST[index];
-    const labelElement = makeElementWithClasses("label")(
-      "project-content__carousel__card",
-      "focusable"
-    );
-    addAttribute(labelElement)({
+    const labelElement = createElement("label", {
+      class: "project-content__carousel__card focusable",
       for: input.id,
       id: projectTitle,
       tabIndex: 0,
@@ -56,20 +50,20 @@ const createLabelElements = (inputElements) => {
 };
 
 const createTitleBoxElements = () => {
-  const titleBox = makeElementWithClasses("div")(
-    "project-content__carousel__title-box"
-  );
-  const prevButton = makeElementWithClasses("button")(
-    "project-content__carousel__title-box__prev"
-  );
-  const titleElement = makeElementWithClasses("p")(
-    "project-content__carousel__title-box__title"
-  );
-  const nextButton = makeElementWithClasses("button")(
-    "project-content__carousel__title-box__next"
-  );
-  prevButton.textContent = "←";
-  nextButton.textContent = "→";
+  const titleBox = createElement("div", {
+    class: "project-content__carousel__title-box",
+  });
+  const prevButton = createElement("button", {
+    class: "project-content__carousel__title-box__prev",
+    textContent: "←",
+  });
+  const titleElement = createElement("p", {
+    class: "project-content__carousel__title-box__title",
+  });
+  const nextButton = createElement("button", {
+    class: "project-content__carousel__title-box__next",
+    textContent: "→",
+  });
   return { titleBox, prevButton, titleElement, nextButton };
 };
 
@@ -113,10 +107,10 @@ const displayProjectSkill = (projectSkillList, projectData) => {
 
   for (let i = 0; i < 3; i++) {
     const skill = projectSkillArray[i];
-    const projectSkillItem = makeElementWithClasses("li")(
-      "project-content__overview__skill__item"
-    );
-    projectSkillItem.textContent = skill;
+    const projectSkillItem = createElement("li", {
+      class: "project-content__overview__skill__item",
+      textContent: skill,
+    });
     projectSkillList.appendChild(projectSkillItem);
   }
 };
@@ -228,19 +222,19 @@ const checkInput = (title) => {
 
 const render = (projectTitle) => {
   const parent = document.querySelector(".project-content");
-  const carousel = makeElementWithClasses("div")("project-content__carousel");
-  const projectBox = makeElementWithClasses("div")(
-    "project-content__carousel__cards"
-  );
+  const carousel = createElement("div", { class: "project-content__carousel" });
+  const projectBox = createElement("div", {
+    class: "project-content__carousel__cards",
+  });
   const inputElements = createInputElements();
   const labelElements = createLabelElements(inputElements);
   const { titleBox, prevButton, titleElement, nextButton } =
     createTitleBoxElements();
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
-  const projectSkillList = makeElementWithClasses("ul")(
-    "project-content__overview__skill"
-  );
+  const projectSkillList = createElement("ul", {
+    class: "project-content__overview__skill",
+  });
 
   inputElements.map((inputElement) => {
     carousel.appendChild(inputElement);
