@@ -72,8 +72,8 @@ const createInfoItem = (content, callback, ...args) => {
   });
 };
 
-const createInfoLinkItem = (content) => {
-  const li = createInfoItem(content);
+const createInfoLinkItem = (content, callback, ...args) => {
+  const li = createInfoItem(content, callback, ...args);
   const anchor = document.createElement("a");
   li.appendChild(anchor);
   return li;
