@@ -9,14 +9,12 @@ const animateText = (specDescription, descriptionTemplate) => {
   let charIndex = 0;
   const MAX_LENGTH = descriptionTemplate.length;
 
-  const isHTML = (text) => text[0] === "<";
-
+  const isHTMLCode = (text) => text[0] === "<";
   const printAtOnce = (text) => {
     currentText += text;
     specDescription.innerHTML = currentText;
     index++;
   };
-
   const printPerChar = (text) => {
     if (charIndex < text.length) {
       currentText += text[charIndex];
@@ -27,14 +25,12 @@ const animateText = (specDescription, descriptionTemplate) => {
       index++;
     }
   };
-
   const animate = () => {
     if (index >= MAX_LENGTH) return;
     const text = descriptionTemplate[index];
-    (isHTML(text) ? printAtOnce : printPerChar)(text);
+    (isHTMLCode(text) ? printAtOnce : printPerChar)(text);
     requestAnimationFrame(animate);
   };
-
   requestAnimationFrame(animate);
 };
 
@@ -93,16 +89,16 @@ const render = ({
     class: "project-content__spec__box__describe",
   });
 
+  parent.innerHTML = "";
   characterFigure.appendChild(character);
   descriptionBox.appendChild(specDescription);
-
   specInnerBox.appendChild(descriptionBox);
   specBox.appendChild(characterFigure);
   specBox.appendChild(specInnerBox);
-  parent.innerHTML = "";
   parent.appendChild(specBox);
   animateText(specDescription, descriptionTemplate);
   addKeyboardController();
+
   if (!isMobile()) {
     const specEnterButton = createElement("p", {
       class: "project-content__spec__box__Enter focusable",
@@ -119,13 +115,13 @@ const render = ({
   }
 };
 
-export default function Spec(spec, returnTitleScreen) {
+export default function Spec(spec, backToProjectTitle) {
   const parent = document.querySelector(".project-content");
   const descriptionTemplate = getDescriptionTemplate(spec);
   const { characterImage } = spec;
 
   const handleEnter = () => {
-    returnTitleScreen(".project-box__info__item", "spec");
+    backToProjectTitle(".project-box__info__item", "spec");
   };
 
   render({
