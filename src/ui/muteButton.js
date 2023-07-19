@@ -39,10 +39,8 @@ const setupMuteButton = (setupSound) => {
   };
 
   addClickAndEnterHandler(muteButton)(handleMute);
-  document.body.addEventListener("keydown", (e) => {
-    if (e.key === "x" || e.key === "X") {
-      handleMute();
-    }
+  document.body.addEventListener("keydown", ({ key }) => {
+    if (key === "x" || key === "X") muteButton.click();
   });
 };
 

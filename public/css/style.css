@@ -192,10 +192,13 @@ img[src=""] {
 }
 
 .about__nav {
+  width: 40%;
+  margin-top: 2em;
+  padding: 10px 1em;
   background-color: rgba(0, 0, 0, 0.63);
+  font-size: var(--font-size-l);
   border: 1px solid var(--pale-white);
   border-radius: var(--border-radius-s);
-  padding: 6px 1em;
   color: var(--primary-color);
 }
 

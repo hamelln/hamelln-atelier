@@ -13,7 +13,7 @@ const navigateToElements = (event, focusableArray) => {
   const currentIndex = focusableArray.findIndex(
     (element) => element === document.activeElement
   );
-  let nextIndex = -1;
+  let nextIndex = 0;
 
   event.preventDefault();
 
@@ -37,17 +37,12 @@ const navigateToElements = (event, focusableArray) => {
       return;
   }
 
-  if (nextIndex < 0) {
-    nextIndex = focusableArray.length - 1;
-  } else if (nextIndex >= focusableArray.length) {
-    nextIndex = 0;
-  }
+  if (nextIndex < 0) nextIndex = focusableArray.length - 1;
+  else if (nextIndex >= focusableArray.length) nextIndex = 0;
 
   const nextElement = focusableArray[nextIndex];
   removeFocus(focusableArray[currentIndex]);
   addFocus(nextElement);
-  const parentSection = nextElement.closest("section");
-  parentSection?.scrollIntoView({ block: "nearest" });
 };
 
 const addKeyboardController = () => {
