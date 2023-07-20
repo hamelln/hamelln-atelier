@@ -9,15 +9,27 @@ const setupSound = () => {
   const event = isMobile() ? "click" : "focus";
 
   focusableElements.forEach((element) => {
-    element.addEventListener(event, () => {
-      if (element.closest("#project")) {
-        play(projectSound);
-      } else if (element.closest("#contact")) {
-        play(contactSound);
-      } else {
-        play(defaultSound);
+    const playSectionSound = () => {
+      const sectionId = element.closest("section")?.id;
+      switch (sectionId) {
+        case "project":
+          play(projectSound);
+          break;
+        case "contact":
+          play(contactSound);
+          break;
+        default:
+          if (
+            element.classList.contains("mode__mute") ||
+            element.classList.contains("mode__theme")
+          ) {
+            return;
+          }
+          play(defaultSound);
+          break;
       }
-    });
+    };
+    element.addEventListener(event, playSectionSound);
   });
 };
 
