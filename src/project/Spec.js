@@ -1,7 +1,7 @@
-import createElement from "../utils/createElement.js";
-import addKeyboardController from "../utils/addKeyboardController.js";
-import isMobile from "../utils/isMobile.js";
-import { play, stop } from "../utils/sound.js";
+import createElement from "../handlers/element-creater.js";
+import addKeyboardController from "../controllers/keyboard-controller.js";
+import isMobile from "../handlers/mobile-recognizer.js";
+import { play, stop } from "../handlers/sound-handler.js";
 
 const SPEC_BGM = document.getElementById("spec-sound");
 

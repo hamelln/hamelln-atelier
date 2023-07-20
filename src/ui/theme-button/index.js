@@ -1,11 +1,11 @@
 "use strict";
 
-import setLogo from "../../header/changeLogoWithTheme.js";
-import addClickAndEnterHandler from "../../utils/addClickAndEnterHandler.js";
-import isMobile from "../../utils/isMobile.js";
-import { handleAnimation, stopAnimation } from "./animation.js";
-import handleSoundSign from "./sound.js";
-import { displayCanvas, foldCanvas, handleSign } from "./style.js";
+import isMobile from "../../handlers/mobile-recognizer.js";
+import setLogo from "../../header/logo-handler.js";
+import addClickAndEnterHandler from "../../handlers/click-enter-handler.js";
+import { handleAnimation, stopAnimation } from "./animation-controller.js";
+import handleSoundSign from "./sound-controller.js";
+import { displayCanvas, foldCanvas, handleSign } from "./style-controller.js";
 
 const setupThemeButton = () => {
   const button = document.querySelector(".mode__button");

@@ -1,8 +1,8 @@
 "use strict";
 
-import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import createElement from "../utils/createElement.js";
-import { changeMute } from "../utils/sound.js";
+import addClickAndEnterHandler from "../handlers/click-enter-handler.js";
+import { changeMute } from "../handlers/sound-handler.js";
+import createElement from "../handlers/element-creater.js";
 
 let isMuted = true;
 let isFirstClick = true;

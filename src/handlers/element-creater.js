@@ -1,4 +1,4 @@
-import { addFocus, removeFocus } from "./focus.js";
+import { addFocus, removeFocus } from "./focus-handler.js";
 
 const createElement = (tagName, option) => {
   const element = document.createElement(tagName);

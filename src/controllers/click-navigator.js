@@ -1,7 +1,7 @@
 "use strict";
 
-import addEventForClickAndEnter from "./addClickAndEnterHandler.js";
-import scrollToSection from "./scrollToPosition.js";
+import addEventForClickAndEnter from "../handlers/click-enter-handler.js";
+import scrollToSection from "../handlers/section-scroller.js";
 
 const navigateWithScroll = () => {
   const homeLogo = document.querySelector(".header__logo");

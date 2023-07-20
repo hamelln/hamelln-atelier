@@ -1,4 +1,4 @@
-import createElement from "../utils/createElement.js";
+import createElement from "../handlers/element-creater.js";
 
 const headerNav = document.querySelector(".header-nav");
 const modeElement = document.querySelector(".mode");

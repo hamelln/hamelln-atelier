@@ -1,6 +1,6 @@
 import data from "../data/project.json" assert { type: "json" };
-import createElement from "../utils/createElement.js";
-import { play } from "../utils/sound.js";
+import createElement from "../handlers/element-creater.js";
+import { play } from "../handlers/sound-handler.js";
 import Loading from "./Loading.js";
 import Project from "./Project.js";
 

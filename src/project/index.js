@@ -1,4 +1,4 @@
-import isMobile from "../utils/isMobile.js";
+import isMobile from "../handlers/mobile-recognizer.js";
 import MobileSelection from "./MobileSelection.js";
 import Selection from "./Selection.js";
 

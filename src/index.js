@@ -1,13 +1,13 @@
 "use strict";
 
+import navigateWithScroll from "./controllers/click-navigator.js";
+import isMobile from "./handlers/mobile-recognizer.js";
 import MobileHeader from "./header/MobileHeader.js";
+import setupMuteButton from "./ui/mute-button.js";
+import setupThemeButton from "./ui/theme-button/index.js";
 import renderSelection from "./project/index.js";
-import setupMuteButton from "./ui/muteButton.js";
-import setupThemeButton from "./ui/themeButton/index.js";
-import isMobile from "./utils/isMobile.js";
-import navigateWithScroll from "./utils/navigateWithScroll.js";
-import { setupSound } from "./utils/sound.js";
-import { restoreFocus } from "./utils/storeFocus.js";
+import { restoreFocus } from "./handlers/focus-saver.js";
+import setupSound from "./controllers/sound-controller.js";
 
 window.addEventListener("load", () => {
   renderSelection();
