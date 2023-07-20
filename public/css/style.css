@@ -206,6 +206,10 @@ img[src=""] {
   animation: flash 2s ease infinite;
 }
 
+.about__nav.focus {
+  animation: pulse 0.3s ease-in-out;
+}
+
 .about__guide {
   margin-top: 1em;
   display: flex;
