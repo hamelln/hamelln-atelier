@@ -1,6 +1,9 @@
 import createElement from "../utils/createElement.js";
 import addKeyboardController from "../utils/addKeyboardController.js";
 import isMobile from "../utils/isMobile.js";
+import { play, stop } from "../utils/sound.js";
+
+const SPEC_BGM = document.getElementById("spec-sound");
 
 const animateText = (specDescription, descriptionTemplate) => {
   let currentText = ``;
@@ -71,7 +74,8 @@ const render = ({
   descriptionTemplate,
   backToProjectTitle,
 }) => {
-  const quitSpec = () => {
+  const quitSpec = (SPEC_BGM) => {
+    stop(SPEC_BGM);
     backToProjectTitle(".project-box__info__item", "spec");
   };
 
@@ -109,13 +113,15 @@ const render = ({
       class: "project-content__spec__box__Enter focusable",
       tabIndex: 0,
       textContent: "Enter",
-      onClick: [quitSpec],
-      onEnter: [quitSpec],
+      onClick: [quitSpec, SPEC_BGM],
+      onEnter: [quitSpec, SPEC_BGM],
     });
     descriptionBox.appendChild(specEnterButton);
     specEnterButton.focus();
   } else {
-    descriptionBox.addEventListener("click", quitSpec);
+    descriptionBox.addEventListener("click", () => {
+      quitSpec(SPEC_BGM);
+    });
     descriptionBox.tabIndex = 0;
     descriptionBox.focus();
   }
@@ -125,6 +131,7 @@ export default function Spec(spec, backToProjectTitle) {
   const parent = document.querySelector(".project-content");
   const descriptionTemplate = getDescriptionTemplate(spec);
   const { characterImage } = spec;
+  play(SPEC_BGM);
 
   render({
     parent,
