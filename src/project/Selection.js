@@ -110,7 +110,6 @@ const addEventProjectItem = (project) => {
       projectSkillList.appendChild(projectSkillItem);
       setProjectImage(projectTitle);
     });
-
     play(selectSound);
   };
 
@@ -119,7 +118,10 @@ const addEventProjectItem = (project) => {
     projectSkillList.innerHTML = "";
     clearProjectImage();
   };
-
+  //? 마우스 모드일 땐 focus는 안 하고 이벤트만 실행
+  project.addEventListener("mouseover", handleFocus);
+  project.addEventListener("mouseout", handleBlur);
+  //? 키보드 모드일 땐 focusing도 처리
   addFocusHandler(project)(handleFocus);
   addBlurHandler(project)(handleBlur);
   addClickAndEnterHandler(project)(startProject);
