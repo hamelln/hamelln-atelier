@@ -12,9 +12,6 @@ const addKeyboardController = () => {
   const focusableArray = Array.from(focusableElements);
 
   focusableArray.map((element) => {
-    const handleOnMouse = () => {
-      addFocus(element);
-    };
     const handleFocus = (e) => {
       const sectionId = e.target.closest("section")?.id;
       sectionId && scrollToSection(sectionId);
@@ -23,7 +20,6 @@ const addKeyboardController = () => {
     const handleBlur = () => {
       removeFocus(element);
     };
-
     const handleKeyDown = (e) => {
       const [prevFocus, newFocus] = moveToNextFocus(e, focusableArray);
       if (!prevFocus) return;
@@ -31,14 +27,10 @@ const addKeyboardController = () => {
       addFocus(newFocus);
     };
 
-    element.removeEventListener("mousemove", handleOnMouse);
-    element.removeEventListener("mouseleave", handleBlur);
     element.removeEventListener("focus", handleFocus);
     element.removeEventListener("blur", handleBlur);
     element.removeEventListener("keydown", handleKeyDown);
 
-    element.addEventListener("mousemove", handleOnMouse);
-    element.addEventListener("mouseleave", handleBlur);
     element.addEventListener("focus", handleFocus);
     element.addEventListener("blur", handleBlur);
     element.addEventListener("keydown", handleKeyDown);
