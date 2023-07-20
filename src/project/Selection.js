@@ -57,7 +57,7 @@ const createProjectFigure = () => {
 const addEventProjectItem = (project) => {
   const projectTitle = project.textContent.trim();
   const projectData = data[projectTitle];
-  const projectSkillArray = projectData.spec.skill.split(", ");
+  const projectSkillArray = projectData.skillOverview;
   const selectSound = document.querySelector("#project-sound");
   const startSound = document.querySelector("#game-start");
   const describe = document.querySelector(".project__describe");

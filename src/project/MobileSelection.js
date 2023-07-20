@@ -117,7 +117,7 @@ const changeSkillBox = (projectData) => {
 };
 
 const createSkillItems = (projectData) => {
-  const skills = projectData.spec.skill.split(", ").slice(0, 3);
+  const skills = projectData.skillOverview;
   return skills.map(createSkillItem);
 };
 
