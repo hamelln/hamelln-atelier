@@ -26,7 +26,7 @@
     "title": "COFFEEN",
     "siteUrl": "https://coffeen.vercel.app/",
     "codeUrl": "https://github.com/hamelln/coffeen",
-    "backgroundImage": "./public/img/cafe.png",
+    "backgroundImage": "./public/img/COFFEEN.webp",
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "커피 간단 소개",
     "spec": {
@@ -48,7 +48,7 @@
     "title": "Modak",
     "siteUrl": null,
     "codeUrl": null,
-    "backgroundImage": "./public/img/about.png",
+    "backgroundImage": "./public/img/modak.webp",
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "캠핑족에게 정보, 리뷰 제공",
     "spec": {
@@ -70,7 +70,7 @@
     "title": "반려in",
     "siteUrl": null,
     "codeUrl": null,
-    "backgroundImage": "./public/img/cafe.png",
+    "backgroundImage": "./public/img/banryeoin.webp",
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "유기 동물 입양 커뮤니티",
     "spec": {
