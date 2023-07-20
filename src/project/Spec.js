@@ -34,6 +34,8 @@ const animateText = (specDescription, descriptionTemplate) => {
 };
 
 const getDescriptionTemplate = ({ startDay, endDay, member, skill, role }) => {
+  const skillSentence = skill.reduce((str, skill) => str + ", " + skill);
+
   return [
     `<span class="project-content__spec__box__skill">`,
     member,
@@ -51,7 +53,7 @@ const getDescriptionTemplate = ({ startDay, endDay, member, skill, role }) => {
     `<br />`,
     `이 프로젝트에 사용된 기술은 `,
     `<span class="project-content__spec__box__skill">`,
-    skill,
+    skillSentence,
     `</span>`,
     `입니다.`,
     `<br />`,

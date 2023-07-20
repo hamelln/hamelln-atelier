@@ -22,7 +22,7 @@ const createInfoBox = (projectTitle, backgroundImage, infoItems) => {
   return { projectBox, projectTitleElement, infoBox, projectImage };
 };
 
-const createInfoItems = (siteUrl, codeUrl, spec, title, render) => {
+const createInfoItems = (siteUrl, codeUrl, docsUrl, spec, title, render) => {
   const openLink = (url) => {
     window.open(url, "_blank");
   };
@@ -38,7 +38,7 @@ const createInfoItems = (siteUrl, codeUrl, spec, title, render) => {
   const homepageItem =
     siteUrl && createInfoLinkItem("homepage", openLink, siteUrl);
   const codeItem = codeUrl && createInfoLinkItem("code", openLink, codeUrl);
-  const featureItem = createInfoItem("feature", () => {});
+  const featureItem = createInfoItem("feature", openLink, docsUrl);
   const specItem = createInfoItem("spec", Spec, spec, render);
   const exitItem = createInfoItem("exit", onClose, title, bgm);
   return [homepageItem, codeItem, featureItem, specItem, exitItem];
@@ -104,15 +104,21 @@ export default function Project({
   title,
   siteUrl,
   codeUrl,
+  docsUrl,
   backgroundImage,
-  bgmUrl,
   spec,
-  feature,
 }) {
   const render = (className, textContent) => {
     const bgm = document.querySelector("#bgm");
     const parent = document.querySelector(".project-content");
-    const infoItems = createInfoItems(siteUrl, codeUrl, spec, title, render);
+    const infoItems = createInfoItems(
+      siteUrl,
+      codeUrl,
+      docsUrl,
+      spec,
+      title,
+      render
+    );
     const elements = createInfoBox(title, backgroundImage, infoItems);
     parent.innerHTML = "";
     renderContent(parent, elements);
