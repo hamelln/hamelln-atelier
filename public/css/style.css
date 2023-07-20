@@ -753,7 +753,7 @@ img[src=""] {
   width: 100%;
   height: 100%;
   padding: 20px;
-  gap: 20%;
+  gap: 10%;
   animation: slow-up 0.4s ease;
 }
 
@@ -774,6 +774,7 @@ img[src=""] {
   padding: 10px 20px;
   border: 4px solid var(--text-color);
   border-radius: var(--border-radius-s);
+  background-color: #777777ed;
 }
 
 .project-box__info {
