@@ -37,7 +37,7 @@ const createInfoItems = (siteUrl, codeUrl, docsUrl, spec, title, render) => {
   const homepageItem =
     siteUrl && createInfoLinkItem("homepage", openLink, siteUrl);
   const codeItem = codeUrl && createInfoLinkItem("code", openLink, codeUrl);
-  const featureItem = createInfoItem("feature", openLink, docsUrl);
+  const featureItem = createInfoItem("docs", openLink, docsUrl);
   const specItem = createInfoItem("spec", Spec, spec, render);
   const exitItem = createInfoItem("exit", onClose, title, bgm);
   return [homepageItem, codeItem, featureItem, specItem, exitItem];
