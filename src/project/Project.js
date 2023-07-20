@@ -27,11 +27,10 @@ const createInfoItems = (siteUrl, codeUrl, docsUrl, spec, title, render) => {
     window.open(url, "_blank");
   };
 
-  const onClose = (title, bgm) => {
+  const onClose = (title) => {
     Loading("Thank you!");
     setTimeout(() => {
       renderSelection(title);
-      stop(bgm);
     }, 1000);
   };
 
@@ -53,6 +52,10 @@ const createInfoItem = (content, callback, ...args) => {
     ["exit", "화면을 종료합니다"],
   ]);
   const projectDescription = document.querySelector(".project__describe");
+  const handleClickAndEnter = (callback, ...args) => {
+    stop(bgm);
+    callback(...args);
+  };
   const displayDescription = () => {
     projectDescription.textContent = DESCRIPTION_MAP.get(content);
   };
@@ -65,8 +68,8 @@ const createInfoItem = (content, callback, ...args) => {
     dataName: content,
     textContent: content,
     tabIndex: 0,
-    onClick: [callback, ...args],
-    onEnter: [callback, ...args],
+    onClick: [handleClickAndEnter, callback, ...args],
+    onEnter: [handleClickAndEnter, callback, ...args],
     onFocus: [displayDescription],
     onBlur: [removeDescription],
   });
