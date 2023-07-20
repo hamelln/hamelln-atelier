@@ -297,22 +297,22 @@ img[src=""] {
   z-index: 9999;
 }
 
-.mute-button {
+.mode__mute {
   position: absolute;
   right: 60px;
   background-color: var(--button-background-color);
   transition: background-color 0.45s ease;
 }
 
-.mute-button img {
+.mode__mute__image {
   width: 72%;
   height: 72%;
   filter: var(--text-color-filter);
   transform: translateX(-1px);
 }
 
-.mode__button,
-.mute-button {
+.mode__theme,
+.mode__mute {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -324,7 +324,7 @@ img[src=""] {
   box-shadow: var(--button-shadow);
 }
 
-.mode__button {
+.mode__theme {
   margin-right: 10px;
   margin-top: 10px;
   background-color: var(--button-background-color);
@@ -332,19 +332,19 @@ img[src=""] {
   transition: background-color 0.45s ease-in, color 0.45s ease-in;
 }
 
-.mode__button__image {
+.mode__theme__image {
   width: 72%;
   height: 72%;
   background-color: transparent;
   transition: transform 0.8s, opacity 0.4s;
 }
 
-.mode__button.clicked .mode__button__image {
+.mode__theme.clicked .mode__theme__image {
   opacity: 0;
   transform: translateY(200%);
 }
 
-.mode__button.clicked {
+.mode__theme.clicked {
   background-color: var(--button-change-background-color);
   transition: background-color 0.45s ease-in;
 }
@@ -362,14 +362,14 @@ img[src=""] {
   display: none;
 }
 
-.mode__button:not(:hover):not(:focus) + .mode__container > .mode__frame {
+.mode__theme:not(:hover):not(:focus) + .mode__container > .mode__frame {
   width: 0;
   height: 0;
   padding: 0;
   border: none;
   animation: display-frame-reverse 0.6s ease-in-out;
 }
-.mode__button:not(:hover):not(:focus)
+.mode__theme:not(:hover):not(:focus)
   + .mode__container
   > .mode__frame
   > .mode__canvas {

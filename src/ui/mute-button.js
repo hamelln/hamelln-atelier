@@ -16,7 +16,7 @@ const ALT_MAP = new Map([
 ]);
 
 const setupMuteButton = (setupSound) => {
-  const muteButton = document.querySelector(".mute-button");
+  const muteButton = document.querySelector(".mode__mute");
 
   const setupSoundWhenFirstClick = () => {
     isFirstClick = false;
@@ -33,7 +33,7 @@ const setupMuteButton = (setupSound) => {
   const changeMuteImg = () => {
     const src = SRC_MAP.get(isMuted);
     const alt = ALT_MAP.get(isMuted);
-    const img = createElement("img", { src, alt });
+    const img = createElement("img", { class: "mode__mute__image", src, alt });
     muteButton.innerHTML = "";
     muteButton.appendChild(img);
   };
