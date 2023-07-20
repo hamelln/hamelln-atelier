@@ -8,8 +8,10 @@ import renderSelection from "./index.js";
 
 const createInfoBox = (projectTitle, backgroundImage, infoItems) => {
   const projectBox = createElement("div", { class: "project-box" });
-  const projectTitleElement = createElement("h2", {
+  const projectTitleElement = createElement("div", {
     class: "project-box__title",
+  });
+  const projectTitleText = createElement("h2", {
     textContent: projectTitle,
   });
   const infoBox = createElement("ul", { class: "project-box__info" });
@@ -18,6 +20,7 @@ const createInfoBox = (projectTitle, backgroundImage, infoItems) => {
     src: backgroundImage,
     alt: "project image",
   });
+  projectTitleElement.appendChild(projectTitleText);
   infoItems.map((info) => info && infoBox.appendChild(info));
   return { projectBox, projectTitleElement, infoBox, projectImage };
 };
