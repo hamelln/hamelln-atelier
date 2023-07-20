@@ -26,6 +26,7 @@ const addKeyboardController = () => {
 
     const handleKeyDown = (e) => {
       const [prevFocus, newFocus] = moveToNextFocus(e, focusableArray);
+      if (!prevFocus) return;
       removeFocus(prevFocus);
       addFocus(newFocus);
     };
