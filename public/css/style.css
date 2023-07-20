@@ -1169,7 +1169,7 @@ footer {
   }
 
   .project-content__carousel__card.active {
-    width: 50%;
+    width: 70%;
     animation: selected 0.4s ease-in;
   }
 
@@ -1189,7 +1189,7 @@ footer {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius-l);
-    object-fit: cover;
+    object-fit: fill;
   }
 
   #item-4:checked ~ .project-content__carousel__cards #COFFEEN,
@@ -1252,10 +1252,10 @@ footer {
   }
 
   .project-content__overview__skill {
-    width: 60%;
-    gap: 4px;
-    top: 10%;
-    left: 25%;
+    width: 100%;
+    top: 94%;
+    left: 0;
+    justify-content: center;
     flex-wrap: nowrap;
   }
 
