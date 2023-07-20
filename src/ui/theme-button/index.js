@@ -8,7 +8,7 @@ import handleSoundSign from "./sound-controller.js";
 import { displayCanvas, foldCanvas, handleSign } from "./style-controller.js";
 
 const setupThemeButton = () => {
-  const button = document.querySelector(".mode__button");
+  const button = document.querySelector(".mode__theme");
 
   const handleTheme = () => {
     setTheme();

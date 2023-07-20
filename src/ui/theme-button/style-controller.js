@@ -26,8 +26,8 @@ export const { displayCanvas, foldCanvas, handleSign } = (() => {
   };
 
   const setButtonImage = (themeSign, phaseMap) => {
-    const img = document.querySelector(".mode__button__image");
-    const button = document.querySelector(".mode__button");
+    const img = document.querySelector(".mode__theme__image");
+    const button = document.querySelector(".mode__theme");
     button.classList.add("clicked");
     setTimeout(() => {
       const src = phaseMap.get(themeSign)[0];
