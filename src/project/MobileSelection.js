@@ -130,7 +130,13 @@ const createSkillItem = (textContent) => {
 
 //? 캐러셀 4th child
 const createTitleBox = (projectTitle) => {
-  const projectData = data[projectTitle];
+  const handleClick = () => {
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((i) => {
+      i.checked && i.click();
+    });
+  };
+
   const titleBox = createElement("div", {
     class: "project-content__carousel__title-box",
   });
@@ -142,7 +148,7 @@ const createTitleBox = (projectTitle) => {
   const titleElement = createElement("p", {
     class: "project-content__carousel__title-box__title",
     textContent: projectTitle,
-    onClick: [startProject, projectData],
+    onClick: [handleClick],
   });
   const nextButton = createElement("button", {
     class: "project-content__carousel__title-box__next",
