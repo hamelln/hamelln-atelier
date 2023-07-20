@@ -3,22 +3,24 @@
 import addEventForClickAndEnter from "./addClickAndEnterHandler.js";
 import { addFocus } from "./focus.js";
 
+const calcPosition = (element) => {
+  const windowHeight = window.innerHeight;
+  const headerHeight = document.querySelector("header").offsetHeight;
+  const elementTop = element.offsetTop;
+  const elementHeight = element.offsetHeight;
+  const position =
+    elementTop - (windowHeight - elementHeight) / 2 - headerHeight / 2;
+  return position;
+};
+
+const scrollToPosition = (element) => {
+  const position = calcPosition(element);
+  const firstFocusItem = element.querySelector(".focusable");
+  addFocus(firstFocusItem);
+  scrollTo(0, position);
+};
+
 const navigateWithScroll = () => {
-  const calcPosition = (element) => {
-    const windowHeight = window.innerHeight;
-    const headerHeight = document.querySelector("header").offsetHeight;
-    const elementTop = element.offsetTop;
-    const elementHeight = element.offsetHeight;
-    return elementTop - (windowHeight - elementHeight) / 2 - headerHeight + 25;
-  };
-
-  const scrollToPosition = (element) => {
-    const position = calcPosition(element);
-    const firstFocusItem = element.querySelector(".focusable");
-    addFocus(firstFocusItem);
-    scrollTo(0, position);
-  };
-
   const homeLogo = document.querySelector(".header__logo");
   const tabs = document.querySelectorAll(".header-nav-list__item");
   const [aboutLink, projectsLink, contactLink] = tabs;
