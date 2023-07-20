@@ -47,8 +47,8 @@ const createInfoItem = (content, callback, ...args) => {
   const DESCRIPTION_MAP = new Map([
     ["homepage", "홈페이지로 이동"],
     ["code", "GitHub으로 이동"],
-    ["feature", "진행중 겪은 이야기들"],
-    ["spec", "프로젝트 스펙을 확인"],
+    ["docs", "프로젝트 문서 페이지"],
+    ["spec", "프로젝트 스펙 확인"],
     ["exit", "화면을 종료합니다"],
   ]);
   const projectDescription = document.querySelector(".project__describe");
