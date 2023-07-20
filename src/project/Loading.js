@@ -1,4 +1,4 @@
-import createElement from "../utils/createElement.js";
+import createElement from "../handlers/element-creater.js";
 
 export default function Loading(textContent) {
   const render = () => {

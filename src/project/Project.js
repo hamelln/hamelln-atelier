@@ -1,9 +1,9 @@
-import addKeyboardController from "../utils/addKeyboardController.js";
-import { addFocus } from "../utils/focus.js";
-import { play, stop } from "../utils/sound.js";
+import addKeyboardController from "../controllers/keyboard-controller.js";
+import { addFocus } from "../handlers/focus-handler.js";
+import { play, stop } from "../handlers/sound-handler.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
-import createElement from "../utils/createElement.js";
+import createElement from "../handlers/element-creater.js";
 import renderSelection from "./index.js";
 
 const createInfoBox = (projectTitle, backgroundImage, infoItems) => {

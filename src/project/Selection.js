@@ -1,11 +1,15 @@
 import data from "../data/project.json" assert { type: "json" };
-import addClickAndEnterHandler from "../utils/addClickAndEnterHandler.js";
-import addKeyboardController from "../utils/addKeyboardController.js";
-import { addBlurHandler, addFocus, addFocusHandler } from "../utils/focus.js";
-import { play } from "../utils/sound.js";
+import addClickAndEnterHandler from "../handlers/click-enter-handler.js";
+import addKeyboardController from "../controllers/keyboard-controller.js";
+import {
+  addBlurHandler,
+  addFocus,
+  addFocusHandler,
+} from "../handlers/focus-handler.js";
+import { play } from "../handlers/sound-handler.js";
 import Project from "./Project.js";
 import Loading from "./Loading.js";
-import createElement from "../utils/createElement.js";
+import createElement from "../handlers/element-creater.js";
 
 const createSelectionBox = (selectionList) => {
   const selectionBox = createElement("div", {

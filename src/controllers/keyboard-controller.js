@@ -1,8 +1,8 @@
 "use strict";
 
-import { addFocus, removeFocus } from "./focus.js";
-import isMobile from "./isMobile.js";
-import scrollToSection from "./scrollToPosition.js";
+import { addFocus, removeFocus } from "../handlers/focus-handler.js";
+import isMobile from "../handlers/mobile-recognizer.js";
+import scrollToSection from "../handlers/section-scroller.js";
 
 const handleKeyDown = (event) => {
   const focusableElements = document.querySelectorAll(".focusable");

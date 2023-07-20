@@ -1,6 +1,6 @@
 "use strict";
 
-import { play, stop } from "../../utils/sound.js";
+import { play, stop } from "../../handlers/sound-handler.js";
 
 const handleSoundSign = (() => {
   const setup = () => {

@@ -1,29 +1,7 @@
-import isMobile from "./isMobile.js";
+import isMobile from "../handlers/mobile-recognizer.js";
+import { play } from "../handlers/sound-handler.js";
 
-let isMuted = true;
-
-const mute = (sound) => {
-  stop(sound);
-  sound.muted = isMuted;
-};
-
-export const play = (sound) => {
-  if (isMuted) return;
-  sound.currentTime = 0;
-  sound.play();
-};
-
-export const stop = (sound) => {
-  sound.pause();
-};
-
-export const changeMute = () => {
-  const sounds = document.querySelectorAll("audio");
-  isMuted = !isMuted;
-  sounds.forEach(mute);
-};
-
-export const setupSound = () => {
+const setupSound = () => {
   const defaultSound = document.getElementById("default-sound");
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
@@ -42,3 +20,5 @@ export const setupSound = () => {
     });
   });
 };
+
+export default setupSound;
