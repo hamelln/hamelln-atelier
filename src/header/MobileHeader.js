@@ -19,13 +19,11 @@ const MobileHeader = () => {
     class: "header__hamberger focusable",
     src: "/public/img/icons/hamburger.png",
     alt: "header navigation",
-    onClick: [openHeader],
   });
   const closeButton = createElement("li", {
     class: "header-nav-list__item focusable",
     textContent: "Close",
     tabIndex: 0,
-    onClick: [closeHeader],
   });
   navList.appendChild(closeButton);
   header.appendChild(hamburger);
