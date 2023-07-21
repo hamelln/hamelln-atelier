@@ -3,124 +3,6 @@ import { play } from "../handlers/sound-handler.js";
 import Loading from "./Loading.js";
 import Project from "./Project.js";
 
-const data = {
-  Hamelln: {
-    uuid: "bea4bbcc-21f3-11ee-be56-0242ac120002",
-    title: "Hamelln",
-    siteUrl: "https://hamelln.vercel.app/",
-    codeUrl: "https://github.com/hamelln/hamelln",
-    docsUrl:
-      "https://separate-flea-6a7.notion.site/Hamelln-f06d994d44a64992a90d3d573ef03a50?pvs=4",
-    backgroundImage: "./public/img/about.png",
-    describe: "나를 소개하는 홈페이지",
-    skillOverview: ["HTML", "CSS", "JavaScript"],
-    spec: {
-      startDay: "2023.03",
-      endDay: "2023.07",
-      member: "1",
-      skill: ["HTML", "CSS", "JavaScript"],
-      role: "기획, 디자인, 프론트엔드",
-      characterImage: "./public/img/character.png",
-    },
-    feature: {
-      challenge:
-        "이 사이트는 크롬을 기준으로 만들었어요. 그래서 삼성 인터넷으로 켰을 때 스타일이 무너진 걸 봤죠.",
-      approach:
-        "스타일을 통일할 필요를 느꼈고, 이러한 크로스 브라우징 대책으로 normalize를 선택했어요.",
-      outcome: "그 결과 여러 브라우저에 동일한 경험을 제공할 수 있었습니다.",
-    },
-  },
-  COFFEEN: {
-    uuid: "95000cc1-beb9-4c77-8812-13a8be2d5a16",
-    title: "COFFEEN",
-    siteUrl: "https://coffeen.vercel.app/",
-    codeUrl: "https://github.com/hamelln/coffeen",
-    docsUrl:
-      "https://separate-flea-6a7.notion.site/COFFEEN-020f99bf6c1e47b194843fc5964fe799?pvs=4",
-    backgroundImage: "./public/img/COFFEEN.webp",
-    describe: "커피 간단 소개",
-    skillOverview: ["Next.js", "React", "TypeScript"],
-    spec: {
-      startDay: "2022.10",
-      endDay: "2023.04",
-      member: "1",
-      skill: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Recoil",
-        "Styled-Components",
-        "Jest",
-      ],
-      role: "기획, 디자인, 프론트엔드",
-      characterImage: "./public/img/character.png",
-    },
-    feature: {
-      challenge:
-        "이 사이트는 크롬을 기준으로 만들었어요. 그래서 삼성 인터넷으로 켰을 때 스타일이 무너진 걸 봤죠.",
-      approach:
-        "스타일을 통일할 필요를 느꼈고, 이러한 크로스 브라우징 대책으로 normalize를 선택했어요.",
-      outcome: "그 결과 여러 브라우저에 동일한 경험을 제공할 수 있었습니다.",
-    },
-  },
-  Modak: {
-    uuid: "2d36e029-2d89-48a0-a919-7ad06030fe9b",
-    title: "Modak",
-    siteUrl: null,
-    codeUrl: null,
-    docsUrl:
-      "https://separate-flea-6a7.notion.site/fc3147e4613c4da7b3d6f8ae116331c9?pvs=4",
-    backgroundImage: "./public/img/modak.webp",
-    describe: "캠핑족에게 정보, 리뷰 제공",
-    skillOverview: ["Next.js", "React", "TypeScript"],
-    spec: {
-      startDay: "2022.01",
-      endDay: "2022.02",
-      member: "5",
-      skill: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Redux",
-        "Styled-Components",
-        "Jest",
-      ],
-      role: "마이페이지",
-      characterImage: "./public/img/character.png",
-    },
-    feature: {
-      challenge: "",
-      approach: "",
-      outcome: "",
-    },
-  },
-  반려in: {
-    uuid: "6bb4b7ce-a576-423c-96d1-95fc5f376f35",
-    title: "반려in",
-    siteUrl: null,
-    codeUrl: null,
-    docsUrl:
-      "https://separate-flea-6a7.notion.site/in-86c4c117c2fe4135b000a2e1ac365762?pvs=4",
-    backgroundImage: "./public/img/banryeoin.webp",
-    bgmUrl: "./public/sound/bgm.mp3",
-    describe: "유기 동물 입양 커뮤니티",
-    skillOverview: ["HTML", "CSS", "JavaScript"],
-    spec: {
-      startDay: "2021.12.14",
-      endDay: "2021.12.25",
-      member: "6",
-      skill: ["HTML", "CSS", "JavaScript"],
-      role: "마이페이지",
-      characterImage: "./public/img/character.png",
-    },
-    feature: {
-      challenge: "",
-      approach: "",
-      outcome: "",
-    },
-  },
-};
-
 const SELECT_SOUND = document.querySelector("#project-sound");
 const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
@@ -132,10 +14,10 @@ const inputList = () => document.querySelectorAll("input");
 const labelList = () =>
   document.querySelectorAll(".project-content__carousel__card");
 
-const createCarousel = (projectTitle) => {
+const createCarousel = (projectTitle, data) => {
   const carousel = createElement("div", { class: "project-content__carousel" });
-  const inputs = createInputs();
-  const projectBox = createCarouselCards(inputs);
+  const inputs = createInputs(data);
+  const projectBox = createCarouselCards(inputs, data);
   const projectSkillBox = createSkillBox(data[projectTitle]);
   const titleBox = createTitleBox(projectTitle);
 
@@ -149,18 +31,19 @@ const createCarousel = (projectTitle) => {
 };
 
 //? 캐러셀 1st child
-const createInputs = () => Object.keys(data).map(createInput);
-const createInput = (_, labelIndex) => {
+const createInputs = (data) =>
+  Object.keys(data).map((_, index) => createInput(index, data));
+const createInput = (labelIndex, data) => {
   const inputId = `item-${labelIndex + 1}`;
   const hasActiveClass = (label) => label.classList.contains("active");
-  const handleClick = () => {
+  const handleClick = (data) => {
     const label = findLabelByInputId(inputId);
     const projectId = label.id;
     const projectData = data[projectId];
     hasActiveClass(label) && startProject(projectData);
   };
 
-  const handleChange = () => {
+  const handleChange = (data) => {
     const label = findLabelByInputId(inputId);
     const projectTitle = label.id;
     const projectData = data[projectTitle];
@@ -182,23 +65,24 @@ const createInput = (_, labelIndex) => {
     type: "radio",
     name: "slider",
     id: inputId,
-    onClick: [handleClick],
-    onChange: [handleChange],
+    onClick: [handleClick, data],
+    onChange: [handleChange, data],
   });
 };
 
 //? 캐러셀 2nd child
-const createCarouselCards = (inputs) => {
+const createCarouselCards = (inputs, data) => {
   const box = createElement("div", {
     class: "project-content__carousel__cards",
   });
-  const labels = createLabels(inputs);
+  const labels = createLabels(inputs, data);
   labels.map((label) => box.appendChild(label));
   return box;
 };
 
-const createLabels = (inputs) => inputs.map(createLabel);
-const createLabel = (input, index) => {
+const createLabels = (inputs, data) =>
+  inputs.map((input, index) => createLabel(input, index, data));
+const createLabel = (input, index, data) => {
   const projectTitle = PROJECT_ID_LIST[index];
   const labelElement = createElement("label", {
     class: "project-content__carousel__card focusable",
@@ -362,20 +246,21 @@ const initializeInput = (title) => {
   refreshLabelClasses(inputIdNumber - 1);
 };
 
-const render = (projectTitle) => {
+const render = (projectTitle, data) => {
   const parent = document.querySelector(".project-content");
   const describeElement = document.querySelector(".project__describe");
   const projectDescribe = data[projectTitle].describe;
   describeElement.textContent = projectDescribe;
-  const carousel = createCarousel(projectTitle);
+  const carousel = createCarousel(projectTitle, data);
   parent.innerHTML = "";
   parent.appendChild(carousel);
   addTouchCarousel(carousel);
 };
 
-const MobileSelection = (title) => {
+const MobileSelection = async (title) => {
   const projectTitle = title ? title : "Hamelln";
-  render(projectTitle);
+  const data = await (await fetch("src/data/project.json")).json();
+  render(projectTitle, data);
   initializeInput(projectTitle);
 };
 

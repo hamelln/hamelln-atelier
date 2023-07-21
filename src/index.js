@@ -8,11 +8,10 @@ import setupThemeButton from "./ui/theme-button/index.js";
 import renderSelection from "./project/index.js";
 import { restoreFocus } from "./handlers/focus-saver.js";
 import setupSound from "./controllers/sound-controller.js";
-import Selection from "./project/Selection.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-  Selection();
-  MobileHeader();
+  if (isMobile()) MobileHeader();
+  renderSelection();
 });
 
 window.addEventListener("load", () => {
