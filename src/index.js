@@ -9,9 +9,12 @@ import renderSelection from "./project/index.js";
 import { restoreFocus } from "./handlers/focus-saver.js";
 import setupSound from "./controllers/sound-controller.js";
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   renderSelection();
   isMobile() && MobileHeader();
+});
+
+window.addEventListener("load", () => {
   setupMuteButton(setupSound);
   setupThemeButton();
   navigateWithScroll();
