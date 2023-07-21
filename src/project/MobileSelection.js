@@ -1,10 +1,5 @@
 import createElement from "../handlers/element-creater.js";
-import { play } from "../handlers/sound-handler.js";
-import Loading from "./Loading.js";
-import Project from "./Project.js";
 
-const SELECT_SOUND = document.querySelector("#project-sound");
-const START_SOUND = document.querySelector("#game-start");
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];
 const LIST_LENGTH = PROJECT_ID_LIST.length;
 const DEFAULT_INPUT_NUMBER = 2;
@@ -40,7 +35,7 @@ const createInput = (labelIndex, data) => {
     const label = findLabelByInputId(inputId);
     const projectId = label.id;
     const projectData = data[projectId];
-    hasActiveClass(label) && startProject(projectData);
+    hasActiveClass(label) && openDocs(projectData);
   };
 
   const handleChange = (data) => {
@@ -55,7 +50,6 @@ const createInput = (labelIndex, data) => {
     titleElement.textContent = projectTitle;
     describeElement.textContent = projectDescribe;
 
-    play(SELECT_SOUND);
     setInputIndex(labelIndex);
     refreshLabelClasses(labelIndex);
     changeSkillBox(projectData);
@@ -188,12 +182,8 @@ const refreshLabelClasses = (labelIndex) => {
   });
 };
 
-const startProject = (projectData) => {
-  play(START_SOUND);
-  Loading("Hamelln");
-  setTimeout(() => {
-    Project(projectData);
-  }, 1000);
+const openDocs = (projectData) => {
+  window.open(projectData.docsUrl, "_blank");
 };
 
 const fireChangeEvent = () => {
