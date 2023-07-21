@@ -6,7 +6,10 @@ const setupSound = () => {
   const projectSound = document.getElementById("project-sound");
   const contactSound = document.getElementById("contact-sound");
   const focusableElements = document.querySelectorAll(".focusable");
-  const event = isMobile() ? "click" : "focus";
+  const isMobileDevice = isMobile();
+  const isMuteOrThemeButton = (element) =>
+    element.classList.contains("mode__mute") ||
+    element.classList.contains("mode__theme");
 
   focusableElements.forEach((element) => {
     const playSectionSound = () => {
@@ -19,18 +22,17 @@ const setupSound = () => {
           play(contactSound);
           break;
         default:
-          if (event === "click") {
-            if (
-              element.classList.contains("mode__mute") ||
-              element.classList.contains("mode__theme")
-            )
-              return;
-          }
+          if (isMobileDevice && isMuteOrThemeButton(element)) return;
           play(defaultSound);
           break;
       }
     };
-    element.addEventListener(event, playSectionSound);
+    if (isMobileDevice) {
+      element.addEventListener("click", playSectionSound);
+    } else {
+      element.addEventListener("focus", playSectionSound);
+      element.addEventListener("mouseover", playSectionSound);
+    }
   });
 };
 
