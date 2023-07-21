@@ -12,6 +12,10 @@ const addKeyboardController = () => {
   const focusableArray = Array.from(focusableElements);
 
   focusableArray.map((element) => {
+    //? 마우스 클릭 땐 포커스 이벤트 방지
+    const preventFocusOnClick = (e) => {
+      e.preventDefault();
+    };
     const handleFocus = (e) => {
       const sectionId = e.target.closest("section")?.id;
       sectionId && scrollToSection(sectionId);
@@ -27,10 +31,12 @@ const addKeyboardController = () => {
       addFocus(newFocus);
     };
 
+    element.removeEventListener("mousedown", preventFocusOnClick);
     element.removeEventListener("focus", handleFocus);
     element.removeEventListener("blur", handleBlur);
     element.removeEventListener("keydown", handleKeyDown);
 
+    element.addEventListener("mousedown", preventFocusOnClick);
     element.addEventListener("focus", handleFocus);
     element.addEventListener("blur", handleBlur);
     element.addEventListener("keydown", handleKeyDown);
