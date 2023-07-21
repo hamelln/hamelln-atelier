@@ -19,11 +19,12 @@ const setupSound = () => {
           play(contactSound);
           break;
         default:
-          if (
-            element.classList.contains("mode__mute") ||
-            element.classList.contains("mode__theme")
-          ) {
-            return;
+          if (event === "click") {
+            if (
+              element.classList.contains("mode__mute") ||
+              element.classList.contains("mode__theme")
+            )
+              return;
           }
           play(defaultSound);
           break;

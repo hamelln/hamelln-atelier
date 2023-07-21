@@ -1,76 +1,36 @@
 "use strict";
 
 import { addFocus, removeFocus } from "../handlers/focus-handler.js";
+import moveToNextFocus from "../handlers/keyboard-handler.js";
 import isMobile from "../handlers/mobile-recognizer.js";
 import scrollToSection from "../handlers/section-scroller.js";
-
-const handleKeyDown = (event) => {
-  const focusableElements = document.querySelectorAll(".focusable");
-  const focusableArray = Array.from(focusableElements);
-  navigateToElements(event, focusableArray);
-};
-
-const navigateToElements = (event, focusableArray) => {
-  const currentIndex = focusableArray.findIndex(
-    (element) => element === document.activeElement
-  );
-  let nextIndex = 0;
-
-  event.preventDefault();
-
-  switch (event.key) {
-    case "ArrowUp":
-      nextIndex = currentIndex - 1;
-      break;
-    case "ArrowDown":
-      nextIndex = currentIndex + 1;
-      break;
-    case "ArrowLeft":
-      nextIndex = currentIndex - 1;
-      break;
-    case "ArrowRight":
-      nextIndex = currentIndex + 1;
-      break;
-    case "Tab":
-      nextIndex = currentIndex + 1;
-      break;
-    default:
-      return;
-  }
-
-  if (nextIndex < 0) nextIndex = focusableArray.length - 1;
-  else if (nextIndex >= focusableArray.length) nextIndex = 0;
-
-  const nextElement = focusableArray[nextIndex];
-  removeFocus(focusableArray[currentIndex]);
-  addFocus(nextElement);
-};
 
 const addKeyboardController = () => {
   if (isMobile()) return;
 
   const focusableElements = document.querySelectorAll(".focusable");
-  focusableElements.forEach((element) => {
-    const handleOnMouse = () => {
-      addFocus(element);
-    };
+  const focusableArray = Array.from(focusableElements);
 
-    const handleFocus = (event) => {
-      const sectionId = event.target.closest("section")?.id;
-      if (sectionId) scrollToSection(sectionId);
+  focusableArray.map((element) => {
+    const handleFocus = (e) => {
+      const sectionId = e.target.closest("section")?.id;
+      sectionId && scrollToSection(sectionId);
       addFocus(element);
     };
     const handleBlur = () => {
       removeFocus(element);
     };
-    element.removeEventListener("mousemove", handleOnMouse);
-    element.removeEventListener("mouseleave", handleBlur);
+    const handleKeyDown = (e) => {
+      const [prevFocus, newFocus] = moveToNextFocus(e, focusableArray);
+      if (!prevFocus) return;
+      removeFocus(prevFocus);
+      addFocus(newFocus);
+    };
+
     element.removeEventListener("focus", handleFocus);
     element.removeEventListener("blur", handleBlur);
     element.removeEventListener("keydown", handleKeyDown);
 
-    element.addEventListener("mousemove", handleOnMouse);
-    element.addEventListener("mouseleave", handleBlur);
     element.addEventListener("focus", handleFocus);
     element.addEventListener("blur", handleBlur);
     element.addEventListener("keydown", handleKeyDown);

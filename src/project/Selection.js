@@ -5,6 +5,7 @@ import {
   addBlurHandler,
   addFocus,
   addFocusHandler,
+  removeFocus,
 } from "../handlers/focus-handler.js";
 import { play } from "../handlers/sound-handler.js";
 import Project from "./Project.js";
@@ -110,7 +111,6 @@ const addEventProjectItem = (project) => {
       projectSkillList.appendChild(projectSkillItem);
       setProjectImage(projectTitle);
     });
-
     play(selectSound);
   };
 
@@ -119,7 +119,14 @@ const addEventProjectItem = (project) => {
     projectSkillList.innerHTML = "";
     clearProjectImage();
   };
-
+  const handleHover = () => {
+    removeFocus(document.activeElement);
+    handleFocus();
+  };
+  //? 마우스 모드: 다른 곳에 focus 아이템이 있으면 focus 제거하고 이벤트만 실행
+  project.addEventListener("mouseover", handleHover);
+  project.addEventListener("mouseout", handleBlur);
+  //? 키보드 모드: focusing도 처리해서 자동 스크롤 조절 기능 주입
   addFocusHandler(project)(handleFocus);
   addBlurHandler(project)(handleBlur);
   addClickAndEnterHandler(project)(startProject);
