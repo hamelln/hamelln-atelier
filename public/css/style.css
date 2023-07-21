@@ -697,41 +697,18 @@ img[src=""] {
   overflow: hidden;
 }
 
+.project-content__overview__image-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+}
+
 .project-content__overview__image {
-  width: 100%;
-  height: 100%;
-  transform: scale(1.04);
-  opacity: 1;
-  animation: focus-project 1s ease;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-}
-
-.project-content__overview__image.blink {
-  width: 100%;
-  height: 100%;
-  animation: clear-project-image 0.4s ease;
-}
-
-@keyframes focus-project {
-  0% {
-    opacity: 0.8;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes clear-project-image {
-  0% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
-  100% {
-    opacity: 0;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  }
+  width: 60%;
+  height: 60%;
 }
 
 .project-content__overview__skill {
@@ -1197,7 +1174,7 @@ footer {
       transform: scale(1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale(1.04);
     }
     100% {
       transform: scale(1);
@@ -1208,7 +1185,7 @@ footer {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius-l);
-    object-fit: fill;
+    background-color: var(--bg-color);
   }
 
   #item-4:checked ~ .project-content__carousel__cards #COFFEEN,
