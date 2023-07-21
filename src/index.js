@@ -12,11 +12,9 @@ import setupSound from "./controllers/sound-controller.js";
 window.addEventListener("load", () => {
   renderSelection();
   isMobile() && MobileHeader();
-  requestIdleCallback(() => {
-    setupMuteButton(setupSound);
-    setupThemeButton();
-    navigateWithScroll();
-  });
+  setupMuteButton(setupSound);
+  setupThemeButton();
+  navigateWithScroll();
 });
 
 window.addEventListener("focus", restoreFocus);
