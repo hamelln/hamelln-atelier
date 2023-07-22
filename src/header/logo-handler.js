@@ -1,3 +1,5 @@
+"use strict";
+
 import createElement from "../handlers/element-creater.js";
 
 const IMG_INFO = {

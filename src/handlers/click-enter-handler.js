@@ -1,3 +1,5 @@
+"use strict";
+
 export default function addClickAndEnterHandler(element) {
   return (callback, ...args) => {
     element.addEventListener("click", (e) => {

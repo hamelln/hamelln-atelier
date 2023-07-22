@@ -1,3 +1,5 @@
+"use strict";
+
 import addClickAndEnterHandler from "../handlers/click-enter-handler.js";
 import addKeyboardController from "../controllers/keyboard-controller.js";
 import {
@@ -46,14 +48,17 @@ const createProjectFigure = () => {
   const figure = createElement("figure", {
     class: "project-content__overview",
   });
+  const projectImgBox = createElement("div", {
+    class: "project-content__overview__image-box",
+  });
   const projectImg = createElement("img", {
     class: "project-content__overview__image",
   });
   const projectSkill = createElement("ul", {
     class: "project-content__overview__skill",
   });
-
-  figure.appendChild(projectImg);
+  projectImgBox.appendChild(projectImg);
+  figure.appendChild(projectImgBox);
   figure.appendChild(projectSkill);
   return figure;
 };
@@ -81,15 +86,16 @@ const addEventProjectItem = (project, data) => {
   };
 
   const clearProjectImage = () => {
+    const imgBox = document.querySelector(
+      ".project-content__overview__image-box"
+    );
     const oldImg = document.querySelector(".project-content__overview__image");
     const parent = oldImg.parentNode;
     const newImg = oldImg.cloneNode();
-    newImg.classList.add("blink");
+    imgBox.classList.add("blink");
     parent.replaceChild(newImg, oldImg);
-    setTimeout(() => {
-      newImg.src = "";
-      newImg.alt = "";
-    }, 300);
+    newImg.src = "";
+    newImg.alt = "";
   };
 
   const startProject = () => {

@@ -1,3 +1,5 @@
+"use strict";
+
 import { addFocus, removeFocus } from "./focus-handler.js";
 
 const createElement = (tagName, option) => {

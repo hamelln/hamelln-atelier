@@ -1,3 +1,5 @@
+"use strict";
+
 import addKeyboardController from "../controllers/keyboard-controller.js";
 import { addFocus } from "../handlers/focus-handler.js";
 import { play, stop } from "../handlers/sound-handler.js";

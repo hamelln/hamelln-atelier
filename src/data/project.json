@@ -5,7 +5,7 @@
     "siteUrl": "https://hamelln.vercel.app/",
     "codeUrl": "https://github.com/hamelln/hamelln",
     "docsUrl": "https://separate-flea-6a7.notion.site/Hamelln-f06d994d44a64992a90d3d573ef03a50?pvs=4",
-    "backgroundImage": "./public/img/about.png",
+    "backgroundImage": "./public/img/dark-logo.svg",
     "describe": "나를 소개하는 홈페이지",
     "skillOverview": ["HTML", "CSS", "JavaScript"],
     "spec": {
@@ -58,7 +58,7 @@
     "siteUrl": null,
     "codeUrl": null,
     "docsUrl": "https://separate-flea-6a7.notion.site/fc3147e4613c4da7b3d6f8ae116331c9?pvs=4",
-    "backgroundImage": "./public/img/modak.webp",
+    "backgroundImage": "./public/img/modak.svg",
     "describe": "캠핑족에게 정보, 리뷰 제공",
     "skillOverview": ["Next.js", "React", "TypeScript"],
     "spec": {
