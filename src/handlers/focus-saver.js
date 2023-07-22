@@ -1,3 +1,5 @@
+"use strict";
+
 export const saveFocusedElement = (name) => {
   sessionStorage.setItem("lastFocusedElement", name);
 };

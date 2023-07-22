@@ -1,3 +1,5 @@
+"use strict";
+
 import createElement from "../handlers/element-creater.js";
 
 export default function Loading(textContent) {

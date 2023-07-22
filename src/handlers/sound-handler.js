@@ -1,3 +1,5 @@
+"use strict";
+
 let isMuted = true;
 
 const mute = (sound) => {

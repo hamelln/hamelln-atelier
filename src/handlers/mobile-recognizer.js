@@ -1,3 +1,5 @@
+"use strict";
+
 export default function isMobile() {
   const isSmallWidth = window.matchMedia(
     "only screen and (max-width: 767px)"

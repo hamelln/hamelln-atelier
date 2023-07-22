@@ -1,3 +1,5 @@
+"use strict";
+
 import addClickAndEnterHandler from "../handlers/click-enter-handler.js";
 import addKeyboardController from "../controllers/keyboard-controller.js";
 import {

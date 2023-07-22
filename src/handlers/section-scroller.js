@@ -1,3 +1,5 @@
+"use strict";
+
 const calcCenterPositionOfSection = (section) => {
   const windowHeight = window.innerHeight;
   const headerHeight = document.querySelector("header").offsetHeight;

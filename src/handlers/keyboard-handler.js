@@ -1,3 +1,5 @@
+"use strict";
+
 const moveToNextFocus = (event, focusableArray) => {
   const currentIndex = focusableArray.findIndex(
     (element) => element === document.activeElement

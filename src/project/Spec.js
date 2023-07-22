@@ -1,3 +1,5 @@
+"use strict";
+
 import createElement from "../handlers/element-creater.js";
 import addKeyboardController from "../controllers/keyboard-controller.js";
 import isMobile from "../handlers/mobile-recognizer.js";

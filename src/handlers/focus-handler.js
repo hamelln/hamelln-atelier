@@ -1,3 +1,5 @@
+"use strict";
+
 export const addFocus = (element) => {
   element.classList.add("focus");
   element.focus();

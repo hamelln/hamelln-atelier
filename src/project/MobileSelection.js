@@ -1,3 +1,5 @@
+"use strict";
+
 import createElement from "../handlers/element-creater.js";
 
 const PROJECT_ID_LIST = ["반려in", "Hamelln", "COFFEEN", "Modak"];

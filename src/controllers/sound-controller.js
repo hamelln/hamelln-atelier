@@ -1,3 +1,5 @@
+"use strict";
+
 import isMobile from "../handlers/mobile-recognizer.js";
 import { play } from "../handlers/sound-handler.js";
 

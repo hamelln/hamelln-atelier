@@ -1,3 +1,5 @@
+"use strict";
+
 import isMobile from "../handlers/mobile-recognizer.js";
 import MobileSelection from "./MobileSelection.js";
 import Selection from "./Selection.js";
