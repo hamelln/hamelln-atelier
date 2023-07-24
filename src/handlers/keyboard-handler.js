@@ -28,7 +28,7 @@ const moveToNextFocus = (event) => {
       nextIndex = currentIndex + 1;
       break;
     default:
-      break;
+      return;
   }
 
   if (nextIndex < 0) nextIndex = focusableArray.length - 1;
