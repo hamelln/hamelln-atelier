@@ -8,6 +8,7 @@
     "backgroundImage": "./public/img/dark-logo.svg",
     "describe": "나를 소개하는 홈페이지",
     "skillOverview": ["HTML", "CSS", "JavaScript"],
+    "since": "2023",
     "spec": {
       "startDay": "2023.03",
       "endDay": "2023.07",
@@ -31,6 +32,7 @@
     "backgroundImage": "./public/img/COFFEEN.webp",
     "describe": "커피 간단 소개",
     "skillOverview": ["Next.js", "React", "TypeScript"],
+    "since": "2022",
     "spec": {
       "startDay": "2022.10",
       "endDay": "2023.04",
@@ -61,6 +63,7 @@
     "backgroundImage": "./public/img/modak.svg",
     "describe": "캠핑족에게 정보, 리뷰 제공",
     "skillOverview": ["Next.js", "React", "TypeScript"],
+    "since": "2022",
     "spec": {
       "startDay": "2022.01",
       "endDay": "2022.02",
@@ -92,6 +95,7 @@
     "bgmUrl": "./public/sound/bgm.mp3",
     "describe": "유기 동물 입양 커뮤니티",
     "skillOverview": ["HTML", "CSS", "JavaScript"],
+    "since": "2021",
     "spec": {
       "startDay": "2021.12.14",
       "endDay": "2021.12.25",
