@@ -99,34 +99,25 @@ const render = ({
   const specDescription = createElement("p", {
     class: "project-content__spec__box__describe",
   });
+  const specEnterButton = createElement("p", {
+    class: "project-content__spec__box__Enter focusable",
+    tabIndex: 0,
+    textContent: "Enter",
+    onClick: [quitSpec, SPEC_BGM],
+    onEnter: [quitSpec, SPEC_BGM],
+  });
 
   parent.innerHTML = "";
   characterFigure.appendChild(character);
   descriptionBox.appendChild(specDescription);
+  descriptionBox.appendChild(specEnterButton);
   specInnerBox.appendChild(descriptionBox);
   specBox.appendChild(characterFigure);
   specBox.appendChild(specInnerBox);
   parent.appendChild(specBox);
   animateText(specDescription, descriptionTemplate);
   addKeyboardController();
-
-  if (!isMobile()) {
-    const specEnterButton = createElement("p", {
-      class: "project-content__spec__box__Enter focusable",
-      tabIndex: 0,
-      textContent: "Enter",
-      onClick: [quitSpec, SPEC_BGM],
-      onEnter: [quitSpec, SPEC_BGM],
-    });
-    descriptionBox.appendChild(specEnterButton);
-    specEnterButton.focus();
-  } else {
-    descriptionBox.addEventListener("click", () => {
-      quitSpec(SPEC_BGM);
-    });
-    descriptionBox.tabIndex = 0;
-    descriptionBox.focus();
-  }
+  specEnterButton.focus();
 };
 
 export default function Spec(spec, backToProjectTitle) {
