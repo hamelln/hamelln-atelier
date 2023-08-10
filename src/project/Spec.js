@@ -2,7 +2,6 @@
 
 import createElement from "../handlers/element-creater.js";
 import addKeyboardController from "../controllers/keyboard-controller.js";
-import isMobile from "../handlers/mobile-recognizer.js";
 import { play, stop } from "../handlers/sound-handler.js";
 
 const SPEC_BGM = document.getElementById("spec-sound");
@@ -54,7 +53,7 @@ const getDescriptionTemplate = ({ startDay, endDay, member, skill, role }) => {
     `<span class="project-content__spec__box__skill">`,
     endDay,
     `</span>`,
-    `${endDay === "현재" ? " 유지 보수중이에요." : "까지 진행했어요."}`,
+    `${endDay === "현재" ? "까지 진행중이에요." : "까지 진행했어요."}`,
     `<br />`,
     `이 프로젝트에 사용된 기술은 `,
     `<span class="project-content__spec__box__skill">`,

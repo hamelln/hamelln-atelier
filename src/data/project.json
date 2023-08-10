@@ -13,8 +13,15 @@
       "startDay": "2023.07",
       "endDay": "현재",
       "member": "1",
-      "skill": ["Next.js", "React", "TypeScript", "Node.js", "Express.js"],
-      "role": "기획, 디자인, 프론트엔드",
+      "skill": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "Firebase"
+      ],
+      "role": "기획, 디자인, 프론트엔드, 백엔드, 배포",
       "characterImage": "./public/img/character.png"
     },
     "feature": {
@@ -38,7 +45,7 @@
       "endDay": "2023.07",
       "member": "1",
       "skill": ["HTML", "CSS", "JavaScript"],
-      "role": "기획, 디자인, 프론트엔드",
+      "role": "기획, 디자인, 프론트엔드, 배포",
       "characterImage": "./public/img/character.png"
     },
     "feature": {
@@ -69,7 +76,7 @@
         "Styled-Components",
         "Jest"
       ],
-      "role": "기획, 디자인, 프론트엔드",
+      "role": "기획, 디자인, 프론트엔드, 배포",
       "characterImage": "./public/img/character.png"
     },
     "feature": {
