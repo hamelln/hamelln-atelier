@@ -72,7 +72,8 @@ const createElement = (tagName, option) => {
 ```
 
 [문제]
-- 엘리먼트 생성 API만으론 가독성 문제를 전부 해결할 수 없습니다. 편리하게 쓰려는 유틸 함수도 기능이 추가되면 냄새를 풍기게 됩니다. 예를 들어 클릭 시 스크롤을 이동시키는 네비게이션 버튼을 구현한 navigateWithScroll 함수가 그랬습니다.
+- 엘리먼트 생성 API만으론 가독성 문제를 전부 해결할 수 없습니다. 편리하게 쓰려는 유틸 함수도 기능이 추가되면 냄새를 풍기게 됩니다.  
+예를 들어 클릭 시 스크롤을 이동시키는 네비게이션 버튼을 구현한 navigateWithScroll 함수가 그랬습니다.
 ```
 const navigateWithScroll = () => {
   const calcCenterPositionOfSection = (section) => {
@@ -126,12 +127,12 @@ const navigateWithScroll = () => {
 위 코드는 하나의 이벤트에 중복 실행을 합니다. 이벤트에 대한 등록과 그에 대한 연산을 같이 두기 때문에 코드 파악이 더 복잡해지기도 합니다.
 
 [접근]
-- 따라서 이벤트 등록을 처리하는 코드를 Controllers로, 그에 대한 연산을 처리하는 코드는 Handlers로 분리를 했습니다. 이를 통해 코드는 읽기 편해질 뿐더러, side effect도 관리하기 편해집니다.
+- 이벤트 등록을 처리하는 코드를 Controllers로, 그에 대한 연산을 처리하는 코드는 Handlers로 분리했습니다. 코드는 읽기 편해졌고 side effect 제어에도 도움이 됐습니다.
 
 # Key Learnings & Insights
 
 ### 크로스 브라우징
-> CSS, 기능 등 여러 방면에서 다양한 실행 환경에서 동일한 사용 경험을 제공하는 것이 중요하다는 사실을 체감했습니다.
+> CSS, 기능 등 여러 방면에서 다양한 실행 환경에서 동일한 사용 경험을 제공하는 것이 중요하다고 체감했습니다.
 
 ### 이벤트 루프
 > stack, task queue, microtask queue, requestAnimationFrame의 실행 순서에 대해서 다시금 되짚을 수 있었습니다.  
