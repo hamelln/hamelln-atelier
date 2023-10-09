@@ -1,5 +1,3 @@
-![hamelln's GitHub stats](https://github-readme-stats.vercel.app/api?username=hamelln&include_all_commits=true&show_icons=true&theme=tokyonight)
-
 # Why this project
 
 **제 프로젝트를 모아놓은 사이트입니다. 고전 픽셀풍 사이트를 만들어보고 싶어서 제작했습니다.**
