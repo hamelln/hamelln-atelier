@@ -8,7 +8,7 @@ const calcCenterPositionOfSection = (section) => {
   const sectionTop = section.offsetTop;
   const sectionHeight = section.offsetHeight;
   const position =
-    sectionTop - (windowHeight - sectionHeight) / 2 - headerHeight / 2;
+    sectionTop - (windowHeight - sectionHeight) / 2 + headerHeight / 2;
   return position;
 };
 
