@@ -16,7 +16,9 @@ const addKeyboardController = () => {
       e.preventDefault();
     };
     const handleFocus = (e) => {
-      const sectionId = e.target.closest("section")?.id;
+      const sectionId = e.target.closest("section")
+        ? e.target.closest("section").id
+        : e.target.closest("footer");
       sectionId && scrollToSection(sectionId);
       addFocus(element);
     };
