@@ -64,6 +64,10 @@
     <audio src="./public/sound/bgm.mp3" id="bgm" muted></audio>
     <audio src="./public/sound/spec.mp3" id="spec-sound" muted></audio>
 
+    <div class="scroll-container">
+      <div class="loading-bar"></div>
+    </div>
+
     <!-- 헤더 -->
     <header class="header">
       <div class="header__logo focusable" tabindex="0">
@@ -110,7 +114,6 @@
       <div class="project-content"></div>
       <p class="project__describe"></p>
     </section>
-
     <section id="contact"></section>
 
     <!-- 푸터 -->
@@ -159,7 +162,14 @@
 
     <!-- 테마 버튼 -->
     <div class="mode">
-      <button class="mode__mute focusable">
+      <button class="setting focusable">
+        <img
+          class="mode__setting__image"
+          src="public/img/settings.png"
+          alt="settings"
+        />
+      </button>
+      <!-- <button class="mode__mute focusable">
         <img
           class="mode__mute__image"
           src="public/img/icons/mute.svg"
@@ -172,7 +182,7 @@
           src="./public/img/sun.webp"
           alt="sun icon"
         />
-      </button>
+      </button> -->
       <div class="mode__container hide">
         <figure class="mode__frame">
           <canvas class="mode__canvas"></canvas>

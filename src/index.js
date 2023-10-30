@@ -15,6 +15,26 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener("load", () => {
+  window.addEventListener("scroll", () => {
+    const scroll = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.body.clientHeight;
+    const width = Math.min(
+      (scroll / (documentHeight - windowHeight)) * 100,
+      100
+    );
+    const loadingBar = document.querySelector(".loading-bar");
+    loadingBar.style.width = width + "%";
+  });
+
+  const title = document.querySelector(".about__title");
+
+  window.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY;
+    const opacity = 1 - scrollPosition / 100;
+    title.style.opacity = opacity;
+  });
+
   setupMuteButton(setupSound);
   setupThemeButton();
   navigateWithScroll();
