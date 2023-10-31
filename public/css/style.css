@@ -132,7 +132,7 @@ rect {
   width: 88%;
   height: 4px;
   z-index: 10;
-  background-color: var(--block-color);
+  background-color: #ffffff04;
 }
 
 .loading-bar {
