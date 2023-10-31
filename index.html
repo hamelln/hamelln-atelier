@@ -36,6 +36,11 @@
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
     <script type="module" src="./src/index.js" defer></script>
+    <script
+      type="module"
+      src="./src/ui/sub-title/pixelAnimation.js"
+      defer
+    ></script>
     <title>Hamelln's Atelier</title>
   </head>
 
@@ -99,7 +104,8 @@
     <section id="about">
       <div class="about__intro">
         <h2 class="about__title">이태현</h2>
-        <h2 class="about__subtitle">Frontend Developer</h2>
+        <canvas id="about__subtitle"></canvas>
+        <!-- <h2 class="about__subtitle">Frontend Developer</h2> -->
         <div class="about__guide">
           <p>Tab: 키보드 모드 켜기, 이동</p>
           <p>화살표: 이동</p>
@@ -175,14 +181,14 @@
 
     <!-- 테마 버튼 -->
     <div class="mode">
-      <button class="setting focusable">
+      <!-- <button class="setting focusable">
         <img
           class="mode__setting__image"
           src="public/img/settings.png"
           alt="settings"
         />
-      </button>
-      <!-- <button class="mode__mute focusable">
+      </button> -->
+      <button class="mode__mute focusable">
         <img
           class="mode__mute__image"
           src="public/img/icons/mute.svg"
@@ -195,7 +201,7 @@
           src="./public/img/sun.webp"
           alt="sun icon"
         />
-      </button> -->
+      </button>
       <div class="mode__container hide">
         <figure class="mode__frame">
           <canvas class="mode__canvas"></canvas>
