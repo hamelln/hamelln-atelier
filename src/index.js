@@ -30,8 +30,8 @@ window.addEventListener("load", () => {
   const title = document.querySelector(".about__title");
 
   window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY;
-    const opacity = 1 - scrollPosition / 100;
+    const aboutHeight = document.getElementById("about").clientHeight;
+    const opacity = 1 - (scrollY / aboutHeight) * 4.5;
     title.style.opacity = opacity;
   });
 
