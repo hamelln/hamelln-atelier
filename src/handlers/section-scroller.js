@@ -15,7 +15,6 @@ const calcCenterPositionOfSection = (section) => {
 const about = document.getElementById("about");
 const project = document.getElementById("project");
 const contact = document.getElementById("contact");
-const ABOUT_POSITION = calcCenterPositionOfSection(about);
 const PROJECT_POSITION = calcCenterPositionOfSection(project);
 const CONTACT_POSITION = calcCenterPositionOfSection(contact);
 const focusOnFirstItem = (section) => {
@@ -25,7 +24,7 @@ const focusOnFirstItem = (section) => {
 const scrollToSection = (sectionId, isEnter) => {
   switch (sectionId) {
     case "about":
-      scrollTo(0, ABOUT_POSITION);
+      scrollTo(0, 0);
       isEnter && focusOnFirstItem(about);
       break;
     case "project":
@@ -38,7 +37,7 @@ const scrollToSection = (sectionId, isEnter) => {
       break;
     case "home":
       scrollTo(0, 0);
-      isEnter && focusOnFirstItem(document);
+      isEnter && focusOnFirstItem(about);
       break;
     default:
       break;

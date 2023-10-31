@@ -17,6 +17,7 @@
   --border-radius-l: 8px;
   --border-radius-full: 50%;
   --box-shadow: #494949;
+  --logo-color: #ffffff;
   --bg-color: #fff;
   --darker-bg-color: #c2c2c2;
   --header-bg-color: #d6d6d6;
@@ -38,6 +39,7 @@
   --header-bg-color: #282c34;
   --box-shadow: #000000;
   --text-color: #efefef;
+  --logo-color: #ffffff;
   --text-color-filter: invert(100%) sepia(33%) saturate(79%) hue-rotate(214deg)
     brightness(114%) contrast(87%);
   --button-shadow: 2px 2px 4px rgba(233, 230, 59, 0.6);
@@ -102,6 +104,27 @@ img[src=""] {
   display: none;
 }
 
+.header__logo path,
+rect {
+  transition: fill 0.3s, stroke 0.3s ease;
+}
+
+.focus {
+  outline-color: #ffffffe8;
+  outline-style: solid;
+  outline-width: 1px;
+}
+
+.header__logo.focus path,
+.header__logo:hover path {
+  fill: var(--primary-color);
+}
+
+.header__logo:hover rect,
+.header__logo.focus rect {
+  stroke: var(--primary-color);
+}
+
 .scroll-container {
   position: fixed;
   top: 0;
@@ -129,7 +152,7 @@ img[src=""] {
     rgba(2, 0, 36, 0) 100%
   );
   left: 6%;
-  top: 0;
+  top: 4px;
   width: 88%;
   z-index: 9;
   height: var(--header-height);
@@ -172,17 +195,23 @@ img[src=""] {
 
 .header-nav-list__item {
   color: #ebebeb;
+  box-sizing: border-box;
   font-weight: bold;
   letter-spacing: 0.2em;
   font-size: var(--font-size-m);
   padding: 1em 2em;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .header-nav-list__item.focus,
 .header-nav-list__item:hover {
   color: var(--primary-color);
+}
+
+.header-nav-list__item:hover {
+  border-color: white;
 }
 
 /*? 어바웃 */
@@ -680,6 +709,7 @@ img[src=""] {
   cursor: pointer;
   padding: 12px 0 12px 8px;
   width: 90%;
+  border: 1px solid transparent;
 }
 
 .project-content__selection__title {
@@ -690,8 +720,12 @@ img[src=""] {
 .project-content__selection__item.focus,
 .project-content__selection__item:hover {
   transform: translateX(10px);
-  border: 1px solid #ffffff;
   border-radius: 4px;
+}
+
+.project-content__selection__item:hover {
+  border: 1px solid #ffffff;
+  border-color: white;
 }
 
 .project-content__selection__item::before,
