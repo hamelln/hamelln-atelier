@@ -368,7 +368,8 @@ rect {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  z-index: 9999;
+  z-index: 90;
+  padding-right: 10px;
 }
 
 .mode img {
@@ -376,11 +377,28 @@ rect {
   height: 24px;
 }
 
+.mode__setting {
+  position: absolute;
+  z-index: 9;
+  background-color: var(--button-background-color);
+  color: var(--text-color);
+  font-size: var(--font-size-l);
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+.mode__setting.clicked ~ .mode__theme {
+  transform: translateY(-50px);
+}
+
+.mode__setting.clicked ~ .mode__mute {
+  transform: translateY(-100px);
+}
+
 .mode__mute {
   position: absolute;
-  right: 60px;
+  z-index: 0;
   background-color: var(--button-background-color);
-  transition: background-color 0.45s ease;
+  transition: background-color 0.45s ease, transform 0.3s ease;
 }
 
 .mode__mute__image {
@@ -396,15 +414,15 @@ rect {
   height: 40px;
   padding: 4px;
   border-radius: var(--border-radius-full);
-  border-right: 1px solid var(--text-color);
 }
 
 .mode__theme {
-  margin-right: 10px;
-  margin-top: 10px;
+  position: absolute;
   background-color: var(--button-background-color);
   overflow: hidden;
-  transition: background-color 0.45s ease-in, color 0.45s ease-in;
+  z-index: 0;
+  transition: background-color 0.45s ease-in, color 0.45s ease-in,
+    transform 0.3s ease;
 }
 
 .mode__theme__image {
@@ -429,6 +447,7 @@ rect {
   width: 160px;
   height: 120px;
   transition: opacity 3s;
+  transform: translate(-34%, -6%);
 }
 
 .mode__container.hide {
@@ -1017,23 +1036,6 @@ rect {
 
 /*? contact */
 
-/* #contact {
-  background-color: var(--darker-bg-color);
-  color: var(--text-color);
-  padding: 20px;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 40px;
-} */
-
-#contact {
-  /* margin: 0 auto; */
-}
-
 #contact h2 {
   text-align: center;
   font-size: var(--title-size-l);
@@ -1052,9 +1054,6 @@ rect {
   align-items: center;
   text-decoration: none;
   padding: 5px;
-  /* background-color: #f8f8f8a2; */
-  /* border-radius: var(--border-radius-l); */
-  /* border: 2px solid var(--block-color); */
 }
 
 #contact img {

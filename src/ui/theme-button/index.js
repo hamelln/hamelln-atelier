@@ -36,11 +36,7 @@ const setupThemeButton = () => {
   button.addEventListener("blur", clearCanvas);
   button.addEventListener("mouseleave", clearCanvas);
   document.body.addEventListener("keydown", ({ code }) => {
-    if (code === "KeyC") {
-      button.focus();
-      displayCanvas();
-      button.click();
-    }
+    if (code === "KeyC") button.click();
   });
 };
 
