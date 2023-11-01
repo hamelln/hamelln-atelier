@@ -9,6 +9,7 @@ import renderSelection from "./project/index.js";
 import { restoreFocus } from "./handlers/focus-saver.js";
 import setupSound from "./controllers/sound-controller.js";
 import addKeyboardController from "./controllers/keyboard-controller.js";
+import addClickAndEnterHandler from "./handlers/click-enter-handler.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   if (isMobile()) MobileHeader();
@@ -39,8 +40,7 @@ window.addEventListener("load", () => {
   const settingButton = document.querySelector(".mode__setting");
   const themeBtn = document.querySelector(".mode__theme");
   const muteBtn = document.querySelector(".mode__mute");
-  settingButton.addEventListener("click", () => {
-    settingButton.classList.toggle("clicked");
+  addClickAndEnterHandler(settingButton)(() => {
     themeBtn.classList.toggle("focusable");
     muteBtn.classList.toggle("focusable");
     addKeyboardController();

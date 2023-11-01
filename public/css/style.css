@@ -386,11 +386,11 @@ rect {
   transition: background-color 0.45s ease, color 0.45s ease;
 }
 
-.mode__setting.clicked ~ .mode__theme {
+.mode__theme.focusable {
   transform: translateY(-50px);
 }
 
-.mode__setting.clicked ~ .mode__mute {
+.mode__mute.focusable {
   transform: translateY(-100px);
 }
 
