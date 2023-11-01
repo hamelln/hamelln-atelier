@@ -6,7 +6,7 @@ class Effect {
     this.canvasHeight = canvasHeight;
     this.textX = this.canvasWidth / 2;
     this.textY = this.canvasHeight / 2;
-    this.fontSize = 32;
+    this.fontSize = 36;
     this.lineHeight = this.fontSize * 1.1;
     this.MAX_TEXT_WIDTH = canvasWidth * 0.8;
     this.verticalOffset = 0;
@@ -75,7 +75,7 @@ class Effect {
           const red = pixels[index];
           const green = pixels[index + 1];
           const blue = pixels[index + 2];
-          const color = `rgba(${red}, ${green}, ${blue}, 0.7)`;
+          const color = `rgba(${red}, ${green}, ${blue}, 0.6)`;
           this.particles.push(new this.Particle(this, x, y, color));
         }
       }

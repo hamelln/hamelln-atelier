@@ -7,8 +7,8 @@ window.addEventListener("load", () => {
     willReadFrequently: true,
   });
   const TEXT = "Frontend Developer";
-  canvas.width = 300;
-  canvas.height = 180;
+  canvas.width = 220;
+  canvas.height = 120;
   const effect = new Effect(ctx, canvas.width, canvas.height, Particle);
   let timeoutId;
   let isAnimating = true;
@@ -49,6 +49,7 @@ window.addEventListener("load", () => {
       animate();
     }
   });
+
   effect.wrapText(TEXT);
   effect.render();
   updateCanvasPosition();

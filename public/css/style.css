@@ -125,12 +125,12 @@ rect {
 
 .header__logo.focus path,
 .header__logo:hover path {
-  fill: white;
+  fill: var(--primary-color);
 }
 
 .header__logo:hover rect,
 .header__logo.focus rect {
-  stroke: white;
+  stroke: var(--primary-color);
 }
 
 .scroll-container {
@@ -266,12 +266,12 @@ rect {
 }
 
 .about__nav {
-  width: 50%;
-  margin-top: 2em;
-  padding: 10px 1em;
+  width: 100%;
+  margin-top: 1em;
+  padding: 12px 0;
   background-color: rgba(0, 0, 0, 0.63);
   font-size: var(--font-size-l);
-  border: 1px solid var(--pale-white);
+  border: 2px solid var(--pale-white);
   border-radius: var(--border-radius-s);
   color: var(--primary-color);
 }
@@ -461,6 +461,7 @@ rect {
   border: none;
   animation: display-frame-reverse 0.6s ease-in-out;
 }
+
 .mode__theme:not(:hover):not(:focus)
   + .mode__container
   > .mode__frame
