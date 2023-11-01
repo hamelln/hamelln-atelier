@@ -115,6 +115,14 @@ rect {
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
+.header__logo path {
+  fill: var(--text-color);
+}
+
+.header__logo rect {
+  stroke: var(--text-color);
+}
+
 .header__logo.focus path,
 .header__logo:hover path {
   fill: white;
