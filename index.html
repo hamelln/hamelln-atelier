@@ -36,6 +36,11 @@
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
     <script type="module" src="./src/index.js" defer></script>
+    <script
+      type="module"
+      src="./src/ui/sub-title/pixelAnimation.js"
+      defer
+    ></script>
     <title>Hamelln's Atelier</title>
   </head>
 
@@ -64,12 +69,30 @@
     <audio src="./public/sound/bgm.mp3" id="bgm" muted></audio>
     <audio src="./public/sound/spec.mp3" id="spec-sound" muted></audio>
 
+    <div class="scroll-container">
+      <div class="loading-bar"></div>
+    </div>
+
     <!-- 헤더 -->
     <header class="header">
       <div class="header__logo focusable" tabindex="0">
-        <img src="public/img/logo.svg" alt="logo" />
+        <svg
+          width="43"
+          height="45"
+          viewBox="0 0 43 45"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="3.5" y="3.5" width="39" height="41" stroke="#ffffff88" />
+          <rect x="0.5" y="0.5" width="39" height="41" stroke="#ffffff99" />
+          <path
+            d="M13.6751 31V13.5455H14.7404V21.7699H25.2575V13.5455H26.3228V31H25.2575V22.7585H14.7404V31H13.6751Z"
+            fill="#ffffff99"
+          />
+        </svg>
       </div>
       <nav class="header-nav">
+        <div class="header-nav__background"></div>
         <ul class="header-nav-list">
           <li class="header-nav-list__item focusable" tabindex="0">About</li>
           <li class="header-nav-list__item focusable" tabindex="0">Project</li>
@@ -82,7 +105,7 @@
     <section id="about">
       <div class="about__intro">
         <h2 class="about__title">이태현</h2>
-        <h2 class="about__subtitle">Frontend Developer</h2>
+        <canvas id="about__subtitle"></canvas>
         <div class="about__guide">
           <p>Tab: 키보드 모드 켜기, 이동</p>
           <p>화살표: 이동</p>
@@ -93,7 +116,7 @@
         <button class="about__nav focusable">See Work</button>
       </div>
       <img
-        src="./public/img/about.png"
+        src="./public/img/about-2.png"
         alt="about image"
         class="about__image"
       />
@@ -110,7 +133,6 @@
       <div class="project-content"></div>
       <p class="project__describe"></p>
     </section>
-
     <section id="contact"></section>
 
     <!-- 푸터 -->
@@ -159,14 +181,14 @@
 
     <!-- 테마 버튼 -->
     <div class="mode">
-      <button class="mode__mute focusable">
+      <button class="mode__mute">
         <img
           class="mode__mute__image"
           src="public/img/icons/mute.svg"
           alt="mute button - crossed-out speaker icon"
         />
       </button>
-      <button class="mode__theme focusable">
+      <button class="mode__theme">
         <img
           class="mode__theme__image"
           src="./public/img/sun.webp"
@@ -178,6 +200,7 @@
           <canvas class="mode__canvas"></canvas>
         </figure>
       </div>
+      <button class="mode__setting focusable">?</button>
     </div>
   </body>
 </html>

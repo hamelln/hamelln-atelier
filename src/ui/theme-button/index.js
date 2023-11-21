@@ -1,7 +1,6 @@
 "use strict";
 
 import isMobile from "../../handlers/mobile-recognizer.js";
-import setLogo from "../../header/logo-handler.js";
 import addClickAndEnterHandler from "../../handlers/click-enter-handler.js";
 import { handleAnimation, stopAnimation } from "./animation-controller.js";
 import handleSoundSign from "./sound-controller.js";
@@ -24,7 +23,6 @@ const setupThemeButton = () => {
   const setTheme = () => {
     const theme = reverseTheme();
     document.body.dataset.theme = theme;
-    setLogo(theme);
   };
 
   const clearCanvas = () => {
@@ -36,6 +34,7 @@ const setupThemeButton = () => {
   button.addEventListener("mouseenter", displayCanvas);
   button.addEventListener("focus", displayCanvas);
   button.addEventListener("blur", clearCanvas);
+  button.addEventListener("mouseleave", clearCanvas);
   document.body.addEventListener("keydown", ({ code }) => {
     if (code === "KeyC") button.click();
   });
