@@ -36,7 +36,7 @@ class Particle {
       this.angle = Math.tanh(this.dy, this.dx);
       this.vx += this.force * Math.cos(this.angle);
       this.vy += this.force * Math.sin(this.angle);
-      this.opacity = 0.8;
+      this.opacity = 0.2;
     }
 
     this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;

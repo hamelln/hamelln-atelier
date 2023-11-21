@@ -10,10 +10,10 @@ class Effect {
     this.lineHeight = this.fontSize * 1.1;
     this.MAX_TEXT_WIDTH = canvasWidth * 0.8;
     this.verticalOffset = 0;
-    this.Particles = [];
+    this.particles = [];
     this.gap = 1;
     this.mouse = {
-      radius: 2200,
+      radius: 1600,
       x: 0,
       y: 0,
     };
@@ -36,7 +36,7 @@ class Effect {
     this.context.textBaseline = "middle";
     this.context.font = `${this.fontSize}px PFStardust`;
 
-    let lineArray = ["Frontend", "Developer"];
+    let lineArray = text.split(" ");
     let lineCounter = 1;
 
     const paintWords = (lineArray) => {
