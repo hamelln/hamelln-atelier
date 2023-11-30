@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
   canvas.height = 120;
   const effect = new Effect(ctx, canvas.width, canvas.height, Particle);
   let timeoutId;
-  let isAnimating = false;
+  let isAnimating = true;
 
   const animate = () => {
     if (!isAnimating) return;
@@ -53,6 +53,9 @@ window.addEventListener("load", () => {
     }
   });
 
+  setTimeout(() => {
+    isAnimating = false;
+  }, 1000);
   effect.wrapText(TEXT);
   effect.render();
   updateCanvasPosition();
