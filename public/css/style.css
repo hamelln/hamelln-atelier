@@ -119,11 +119,11 @@ rect {
 }
 
 .header__logo path {
-  fill: var(--text-color);
+  fill: var(--pale-white);
 }
 
 .header__logo rect {
-  stroke: var(--text-color);
+  stroke: var(--pale-white);
 }
 
 .header__logo.focus path,
@@ -255,7 +255,7 @@ rect {
   position: relative;
   background-color: var(--bg-color);
   color: var(--pale-white);
-  height: 180vh;
+  height: 200vh;
   display: flex;
   justify-content: center;
 }
@@ -303,26 +303,19 @@ rect {
   border-radius: var(--border-radius-s);
   color: var(--primary-color);
   outline: none;
-  position: absolute;
-  top: 44%;
-  left: 0;
   transition: background-color 0.4s, border-width 0.4s, top 0.4s, color 0.4s,
     opacity 0.4s;
+  animation-iteration-count: infinite;
 }
 
 .about__nav:not(.focus),
 .about__nav:not(:hover) {
-  animation: flash 2s ease infinite;
+  animation: flash 2s ease;
 }
 
 .about__nav.focus,
 .about__nav:hover {
   animation: pulse 0.3s ease-in-out;
-}
-
-.about__nav.fix {
-  position: fixed;
-  animation: none;
 }
 
 .about__guide {
@@ -796,7 +789,7 @@ rect {
   transition: background-color 0.45s ease-in;
   width: 100%;
   height: 70%;
-  /* background-image: url("/public/img/about-2.png"); */
+  background-image: url("/public/img/about-2.png");
   background-size: cover;
 }
 
@@ -1108,6 +1101,11 @@ rect {
 
 /*? contact */
 
+#contact {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #contact h2 {
   text-align: center;
   font-size: var(--title-size-l);
@@ -1177,7 +1175,6 @@ footer {
 }
 
 .copyright {
-  /* position: absolute; */
   display: flex;
   justify-content: center;
   align-items: center;
