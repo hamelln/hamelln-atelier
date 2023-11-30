@@ -1,58 +1,43 @@
-const scrollytellingAboutNavAndProject = async (START_Y_OF_NAV) => {
-  setTimeout(() => {
-    const aboutNav = document.querySelector(".about__nav");
-    const project = document.querySelector("#project");
-    const aboutWidth = aboutNav.getBoundingClientRect().width;
-    const aboutLeft = aboutNav.getBoundingClientRect().left;
-    let isFixed = false;
-
-    function reset() {
-      isFixed = false;
-      aboutNav.classList.remove("fix");
-      aboutNav.style.opacity = "";
-      aboutNav.style.width = "100%";
-      aboutNav.style.left = "0";
-      aboutNav.style.backgroundColor = `rgba(0, 0, 0, 0.63)`;
-      aboutNav.style.borderColor = "var(--pale-white)";
-      aboutNav.style.color = "var(--primary-color)";
-      aboutNav.textContent = "See Work";
+const scrollytellingAboutNavAndProject = () => {
+  const aboutNav = document.querySelector(".about__nav");
+  const project = document.querySelector("#project");
+  const aboutGuide = document.querySelector(".about__guide");
+  let isHide = false;
+  const inersectionCallback = ([entry]) => {
+    if (entry.isIntersecting) {
+      project.classList.add("hide");
+    } else {
+      project.classList.remove("hide");
     }
+  };
+  const intersectionObserver = new IntersectionObserver(inersectionCallback, {
+    rootMargin: "200px 0px",
+  });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          project.classList.add("hide");
-        } else {
-          project.classList.remove("hide");
+  const mutationObserver = new MutationObserver((mutationList) => {
+    mutationList.map(async (entry) => {
+      if (entry.type === "attributes" && entry.attributeName === "style") {
+        const currentWidth = entry.target.style.width;
+        if (currentWidth === "0px" && !isHide) {
+          isHide = true;
+          aboutNav.classList.remove("about__nav");
+          aboutNav.classList.add("about__nav-hide");
+          return;
         }
-      });
-    });
-
-    observer.observe(aboutNav);
-
-    window.addEventListener("scroll", () => {
-      const scrollValue = scrollY - START_Y_OF_NAV;
-      if (scrollValue >= 0 && scrollValue < 600) {
-        if (!isFixed) {
-          aboutNav.style.width = `${aboutWidth}px`;
-          aboutNav.classList.add("fix");
-          aboutNav.style.left = `${aboutLeft}px`;
-          isFixed = true;
+        if (currentWidth !== "0px" && isHide) {
+          aboutNav.classList.remove("about__nav-hide");
+          aboutNav.classList.add("about__nav");
+          isHide = false;
         }
-        if (scrollValue >= 200) {
-          aboutNav.style.borderColor = "transparent";
-        }
-        if (scrollValue >= 400) {
-          aboutNav.style.backgroundColor = "transparent";
-          aboutNav.style.color = "var(--text-color)";
-          aboutNav.textContent = "Thank you!";
-        }
-        aboutNav.style.opacity = 2 - scrollValue / 600;
-      } else {
-        reset();
       }
     });
-  }, 300);
+  });
+
+  mutationObserver.observe(aboutGuide, {
+    attributes: true,
+    attributeFilter: ["style"],
+  });
+  intersectionObserver.observe(aboutNav);
 };
 
 export default scrollytellingAboutNavAndProject;

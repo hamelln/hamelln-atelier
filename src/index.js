@@ -34,7 +34,6 @@ window.addEventListener("load", () => {
   const START_Y_OF_GUIDE =
     START_Y_OF_TITLE_AND_CANVAS + HEIGHT_OF_ABOUT * (1 / 8);
   const START_Y_OF_BACKGROUND = 168 + START_Y_OF_GUIDE;
-  const START_Y_OF_NAV = HEIGHT_OF_ABOUT / 2.4;
 
   addClickAndEnterHandler(settingButton)(() => {
     themeBtn.classList.toggle("focusable");
@@ -47,7 +46,7 @@ window.addEventListener("load", () => {
   scrollytellingTitleAndCanvas(START_Y_OF_TITLE_AND_CANVAS, HEIGHT_OF_ABOUT);
   scrollytellingAboutGuide(START_Y_OF_GUIDE);
   scrollytellingBackgroundImage(START_Y_OF_BACKGROUND);
-  scrollytellingAboutNavAndProject(START_Y_OF_NAV);
+  scrollytellingAboutNavAndProject();
   handleTabsFocusAndHover();
   setupMuteButton(setupSound);
   setupThemeButton();
