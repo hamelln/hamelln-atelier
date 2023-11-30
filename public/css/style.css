@@ -8,6 +8,7 @@
   --font-size-m: 18px;
   --font-size-l: 20px;
   --font-size-xl: 24px;
+  --title-size-xxl: 40px;
   --title-size-xl: 32px;
   --title-size-l: 30px;
   --title-size-m: 28px;
@@ -260,10 +261,19 @@ rect {
   justify-content: center;
 }
 
+.about__image {
+  position: fixed;
+  width: 88%;
+  height: 100vh;
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+}
+
 .about__intro {
   position: sticky;
   top: 20vh;
   left: 0;
+  width: 20%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -280,7 +290,7 @@ rect {
 
 .about__title {
   opacity: 1;
-  font-size: var(--title-size-xl);
+  font-size: var(--title-size-xxl);
   width: 100%;
   text-align: center;
   height: 1.5em;
@@ -293,29 +303,104 @@ rect {
   transform: translateX(0);
 }
 
-.about__nav {
+.about__nav,
+.about__nav-hide {
+  position: relative;
   width: 100%;
+  height: 2.5em;
   margin-top: 1em;
   padding: 12px 0;
-  background-color: rgba(0, 0, 0, 0.63);
   font-size: var(--font-size-l);
-  border: 2px solid var(--pale-white);
-  border-radius: var(--border-radius-s);
-  color: var(--primary-color);
   outline: none;
-  transition: background-color 0.4s, border-width 0.4s, top 0.4s, color 0.4s,
-    opacity 0.4s;
-  animation-iteration-count: infinite;
+  background-color: transparent;
 }
 
-.about__nav:not(.focus),
-.about__nav:not(:hover) {
-  animation: flash 2s ease;
+.about__nav {
+  color: transparent;
+}
+
+.about__nav-hide {
+  color: var(--primary-color);
+}
+
+.about__nav::before,
+.about__nav-hide::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.63);
+  width: calc(100% + -2px);
+  height: calc(100% + -2px);
+  border: 2px solid var(--pale-white);
+  border-radius: var(--border-radius-s);
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.about__nav::before {
+  transform: translateX(-100vw);
+  animation-name: slideBorder;
+}
+
+.about__nav-hide::before {
+  animation-name: slideBorder-hide;
+  animation-delay: 0.2s;
+}
+
+@keyframes slideBorder {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideBorder-hide {
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+.about__nav::after,
+.about__nav-hide::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  font-weight: bold;
+  color: var(--primary-color);
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.about__nav::after {
+  transform: translate(100vw, -50%);
+  animation-name: slideText;
+  animation-delay: 0.2s;
+}
+
+.about__nav-hide::after {
+  transform: translate(-50%, -50%);
+  animation-name: slideText-hide;
+  animation-delay: 0.4s;
+}
+
+@keyframes slideText {
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideText-hide {
+  to {
+    transform: translate(50vw, -50%);
+  }
 }
 
 .about__nav.focus,
 .about__nav:hover {
   animation: pulse 0.3s ease-in-out;
+  background-color: black;
 }
 
 .about__guide {
@@ -329,56 +414,16 @@ rect {
   background-color: rgba(0, 0, 0, 0.63);
   width: 100%;
   opacity: 1;
-  transition: background-color 0.5s, width 0.4s, border-width 0.4s, padding 0.4s;
+  transition: background-color 0.4s, width 0.4s, border-width 0.4s, padding 0.4s;
 }
 
 .about__guide p:first-child {
   margin-top: 1em;
+  word-break: keep-all;
 }
 
 .about__guide p:last-child {
   margin-bottom: 1em;
-}
-
-@keyframes flash {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-#project {
-  transition: opacity 1s, transform 1s;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-#project.hide {
-  opacity: 0;
-  transform: translateX(-106%);
-}
-
-.about__image {
-  position: fixed;
-  width: 88%;
-  height: 100vh;
-  opacity: 0.9;
-  transition: opacity 0.5s ease;
-}
-
-.project-header {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.project-header.show {
-  opacity: 1;
 }
 
 @keyframes extend-seperator {
@@ -747,6 +792,14 @@ rect {
 #project {
   width: 100%;
   height: calc(100vh - 60px);
+  transition: opacity 1s, transform 1s;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#project.hide {
+  opacity: 0;
+  transform: translateX(-106%);
 }
 
 .project-header {
@@ -755,6 +808,7 @@ rect {
   justify-content: center;
   padding: 20px 0;
   height: 18%;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .project-header__box {
@@ -806,7 +860,7 @@ rect {
 
 .project-content__selection__title,
 .project-content__selection__item {
-  color: var(--text-color);
+  color: var(--pale-white);
   transition: color 0.45s ease-in;
 }
 
@@ -1151,27 +1205,16 @@ rect {
 /*? 푸터  */
 
 footer {
+  position: relative;
   background-color: var(--bg-color);
   display: flex;
   justify-content: space-between;
   color: var(--text-color);
   margin-top: 20px;
   margin-bottom: 20px;
-  bottom: 0;
-  left: 0;
+  height: 80px;
   width: 100%;
   transition: background-color 0.45s ease-in, color 0.45s ease-in;
-}
-
-.scrolling-character {
-  width: 40px;
-  height: 40px;
-  background-image: url("/public/img/moon.webp");
-  background-size: contain;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  animation: scrolling 10s linear infinite;
 }
 
 .copyright {
@@ -1194,15 +1237,6 @@ footer {
 
 .copyright sup {
   transform: translateY(2px);
-}
-
-@keyframes scrolling {
-  0% {
-    left: -50px;
-  }
-  100% {
-    left: calc(100% + 50px);
-  }
 }
 
 /*? 초기 이미지 */
