@@ -6,7 +6,7 @@ class Effect {
     this.canvasHeight = canvasHeight;
     this.textX = this.canvasWidth / 2;
     this.textY = this.canvasHeight / 2;
-    this.fontSize = 36;
+    this.fontSize = 40;
     this.lineHeight = this.fontSize * 1.1;
     this.MAX_TEXT_WIDTH = canvasWidth * 0.8;
     this.verticalOffset = 0;

@@ -48,6 +48,8 @@ const createProjectFigure = () => {
   });
   const projectImg = createElement("img", {
     class: "project-content__overview__image",
+    src: "",
+    alt: "",
   });
   const projectSkill = createElement("ul", {
     class: "project-content__overview__skill",
