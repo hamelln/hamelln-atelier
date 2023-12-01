@@ -273,7 +273,7 @@ rect {
   position: sticky;
   top: 20vh;
   left: 0;
-  width: 20%;
+  width: 14em;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -493,6 +493,19 @@ rect {
   color: var(--text-color);
   font-size: var(--font-size-l);
   transition: background-color 0.45s ease, color 0.45s ease;
+  border-radius: 10px;
+}
+
+.mode__setting:focus,
+.mode__mute:focus,
+.mode__theme:focus {
+  outline: 1px solid var(--text-color);
+}
+
+.mode__setting:hover,
+.mode__mute:hover,
+.mode__theme:hover {
+  border: 1px solid var(--text-color);
 }
 
 .mode__theme.focusable {
@@ -791,7 +804,7 @@ rect {
 
 #project {
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh);
   transition: opacity 1s, transform 1s;
   opacity: 1;
   transform: translateX(0);
@@ -1173,11 +1186,16 @@ rect {
   column-gap: 20px;
 }
 
+#contact ul li {
+  box-sizing: border-box;
+}
+
 #contact a {
   display: flex;
   align-items: center;
   text-decoration: none;
   padding: 5px;
+  border: 1px solid transparent;
 }
 
 #contact img {
@@ -1188,6 +1206,13 @@ rect {
 #contact a:hover,
 #contact a:focus {
   animation: pulse 0.3s ease-in-out;
+}
+
+#contact a:focus {
+  outline: 1px solid var(--text-color);
+}
+#contact a:hover {
+  border: 1px solid var(--text-color);
 }
 
 @keyframes pulse {
