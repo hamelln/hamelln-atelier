@@ -83,11 +83,10 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect x="3.5" y="3.5" width="39" height="41" stroke="#ffffff88" />
-          <rect x="0.5" y="0.5" width="39" height="41" stroke="#ffffff99" />
+          <rect x="3.5" y="3.5" width="39" height="41" />
+          <rect x="0.5" y="0.5" width="39" height="41" />
           <path
             d="M13.6751 31V13.5455H14.7404V21.7699H25.2575V13.5455H26.3228V31H25.2575V22.7585H14.7404V31H13.6751Z"
-            fill="#ffffff99"
           />
         </svg>
       </div>
@@ -113,7 +112,7 @@
           <p>C: 모드 변경</p>
           <p>Enter: 선택</p>
         </div>
-        <button class="about__nav focusable">See Work</button>
+        <button class="about__nav focusable" data-text="See Work"></button>
       </div>
       <img
         src="./public/img/about-2.png"
@@ -133,14 +132,9 @@
       <div class="project-content"></div>
       <p class="project__describe"></p>
     </section>
-    <section id="contact"></section>
 
     <!-- 푸터 -->
     <footer>
-      <div class="copyright">
-        <ruby class="copyright__text"><rb>Hamelln</rb><rt>2023</rt></ruby
-        ><sup>ⓒ</sup>
-      </div>
       <div id="contact">
         <ul>
           <li>

@@ -6,16 +6,16 @@ class Effect {
     this.canvasHeight = canvasHeight;
     this.textX = this.canvasWidth / 2;
     this.textY = this.canvasHeight / 2;
-    this.fontSize = 36;
+    this.fontSize = 40;
     this.lineHeight = this.fontSize * 1.1;
     this.MAX_TEXT_WIDTH = canvasWidth * 0.8;
     this.verticalOffset = 0;
     this.particles = [];
-    this.gap = 1;
+    this.gap = 2;
     this.mouse = {
-      radius: 1600,
-      x: 0,
-      y: 0,
+      radius: 2000,
+      x: 10000,
+      y: 10000,
     };
   }
 

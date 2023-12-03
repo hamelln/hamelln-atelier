@@ -1,12 +1,12 @@
 class Particle {
   constructor(effect, x, y, color) {
     this.effect = effect;
-    this.x = this.effect.canvasWidth;
-    this.y = this.effect.canvasHeight;
+    this.x = effect.canvasWidth;
+    this.y = effect.canvasHeight;
     this.color = color;
     this.originX = x;
     this.originY = y;
-    this.size = 2;
+    this.size = 3;
     this.dx = 0;
     this.dy = 0;
     this.vx = 0;
