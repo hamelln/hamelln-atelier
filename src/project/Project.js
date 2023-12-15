@@ -132,7 +132,7 @@ export default function Project({
     );
     const elements = createInfoBox(title, backgroundImage, infoItems);
     parent.innerHTML = "";
-    parent.addEventListener("keydown", (e) => {
+    elements.projectBox.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         e.stopPropagation();
         infoItems.at(-1).click();
