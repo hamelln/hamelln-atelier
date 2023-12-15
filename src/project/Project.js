@@ -1,6 +1,5 @@
 "use strict";
 
-import addKeyboardController from "../controllers/keyboard-controller.js";
 import { addFocus } from "../handlers/focus-handler.js";
 import { play, stop } from "../handlers/sound-handler.js";
 import Spec from "./Spec.js";
@@ -8,6 +7,7 @@ import Loading from "./Loading.js";
 import createElement from "../handlers/element-creater.js";
 import renderSelection from "./index.js";
 import { saveFocusedElement } from "../handlers/focus-saver.js";
+import updateKeyboardController from "../controllers/keyboard-controller.js";
 
 const createInfoBox = (projectTitle, backgroundImage, infoItems) => {
   const projectBox = createElement("div", { class: "project-box" });
@@ -35,7 +35,7 @@ const createInfoItems = (siteUrl, codeUrl, docsUrl, spec, title, render) => {
   };
 
   const onClose = (title) => {
-    Loading("Thank you!");
+    new Loading("Thank you!");
     setTimeout(() => {
       renderSelection(title);
     }, 1000);
@@ -132,10 +132,16 @@ export default function Project({
     );
     const elements = createInfoBox(title, backgroundImage, infoItems);
     parent.innerHTML = "";
+    parent.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        infoItems.at(-1).click();
+      }
+    });
     renderContent(parent, elements);
     play(bgm);
     focusPrevItem(elements.infoBox, className, textContent);
-    addKeyboardController();
+    updateKeyboardController();
   };
 
   render();

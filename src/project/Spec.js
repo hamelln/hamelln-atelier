@@ -1,8 +1,8 @@
 "use strict";
 
 import createElement from "../handlers/element-creater.js";
-import addKeyboardController from "../controllers/keyboard-controller.js";
 import { play, stop } from "../handlers/sound-handler.js";
+import updateKeyboardController from "../controllers/keyboard-controller.js";
 
 const SPEC_BGM = document.getElementById("spec-sound");
 
@@ -115,8 +115,14 @@ const render = ({
   specBox.appendChild(specInnerBox);
   parent.appendChild(specBox);
   animateText(specDescription, descriptionTemplate);
-  addKeyboardController();
+  updateKeyboardController();
   specEnterButton.focus();
+  specBox.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.stopPropagation();
+      specEnterButton.click();
+    }
+  });
 };
 
 export default function Spec(spec, backToProjectTitle) {
