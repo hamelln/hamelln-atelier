@@ -2,21 +2,22 @@
 
 import createElement from "../handlers/element-creater.js";
 
-export default function Loading(textContent) {
-  const render = () => {
-    const parent = document.querySelector(".project-content");
-    const loadingBox = createElement("div", {
+export default class Loading {
+  constructor(textContent) {
+    this.parent = document.querySelector(".project-content");
+    this.loadingBox = createElement("div", {
       class: "project-content__loading",
     });
-    const loadingContent = createElement("h2", {
+    this.loadingContent = createElement("h2", {
       class: "project-content__loading__text",
       textContent,
     });
+    this.render();
+  }
 
-    parent.innerHTML = "";
-    loadingBox.appendChild(loadingContent);
-    parent.appendChild(loadingBox);
-  };
-
-  render();
+  render() {
+    this.parent.innerHTML = "";
+    this.loadingBox.appendChild(this.loadingContent);
+    this.parent.appendChild(this.loadingBox);
+  }
 }
