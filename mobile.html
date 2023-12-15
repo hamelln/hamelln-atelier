@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="description" content="이태현 포트폴리오" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hamelln.vercel.app/" />
+    <meta property="og:title" content="Hamelln" />
+    <meta property="og:image" content="/about.webp" />
+    <meta property="og:image:alt" content="Portfolio Thumbnail" />
+    <meta property="og:description" content="이태현 포트폴리오" />
+    <meta property="og:site_name" content="Hamelln" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="400" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
+    <script type="module" src="/src/index.js" defer></script>
+    <script type="module" src="/src/mobile.js" defer></script>
+    <title>Hamelln's Atelier</title>
+  </head>
+
+  <body>
+    <!-- 자원 -->
+    <div class="scroll-container">
+      <div class="loading-bar"></div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+      <div class="header__logo">
+        <svg
+          width="43"
+          height="45"
+          viewBox="0 0 43 45"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="3.5" y="3.5" width="39" height="41" />
+          <rect x="0.5" y="0.5" width="39" height="41" />
+          <path
+            d="M13.6751 31V13.5455H14.7404V21.7699H25.2575V13.5455H26.3228V31H25.2575V22.7585H14.7404V31H13.6751Z"
+          />
+        </svg>
+      </div>
+      <nav class="header-nav">
+        <div class="header-nav__background"></div>
+        <ul class="header-nav-list">
+          <li class="header-nav-list__item">About</li>
+          <li class="header-nav-list__item">Project</li>
+          <li class="header-nav-list__item">Contact</li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 소개 섹션 -->
+    <section id="about">
+      <div class="about__intro">
+        <h2 class="about__title">이태현</h2>
+        <button class="about__nav" data-text="See Work"></button>
+      </div>
+      <img
+        src="./public/img/about-2.png"
+        alt="about image"
+        class="about__image"
+      />
+    </section>
+
+    <!-- 프로젝트 섹션 -->
+    <section id="project">
+      <div class="project-header">
+        <div class="project-header__box">
+          <h2 class="project-header__title">PROJECT</h2>
+          <p class="project-header__subtitle">COLLECTION</p>
+        </div>
+      </div>
+      <div class="project-content"></div>
+      <p class="project__describe"></p>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+      <div id="contact">
+        <ul>
+          <li>
+            <a
+              class="profile"
+              href="https://github.com/hamelln"
+              target="_blank"
+            >
+              <img src="./public/img/icons/github.png" alt="GitHub" />
+            </a>
+          </li>
+          <li>
+            <a
+              class="profile"
+              href="https://www.linkedin.com/in/%ED%83%9C%ED%98%84-%EC%9D%B4-531077273/"
+              target="_blank"
+            >
+              <img src="./public/img/icons/linkedin.svg" alt="Linkedin" />
+            </a>
+          </li>
+          <li>
+            <a class="profile" href="mailto:hylee.dev@gmail.com">
+              <img src="./public/img/icons/email.png" alt="Email" />
+            </a>
+          </li>
+          <li>
+            <a
+              class="profile"
+              href="https://blog.cinntiq.synology.me/"
+              target="_blank"
+            >
+              <img src="./public/img/icons/ghost.png" alt="blog" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
