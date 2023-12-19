@@ -2,7 +2,7 @@ import Particle from "./Particle.js";
 import Effect from "./Effect.js";
 import debounce from "../../utils/debounce.js";
 
-window.addEventListener("load", () => {
+const setupSubTitleAnimation = () => {
   const canvas = document.getElementById("about__subtitle");
   const ctx = canvas.getContext("2d", {
     willReadFrequently: true,
@@ -60,4 +60,6 @@ window.addEventListener("load", () => {
   effect.render();
   updateCanvasPosition();
   animate();
-});
+};
+
+export default setupSubTitleAnimation;

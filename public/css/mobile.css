@@ -1,0 +1,213 @@
+:root {
+  --font-size-xs: 14px;
+  --font-size-s: 16px;
+  --font-size-m: 18px;
+  --font-size-l: 24px;
+  --title-size-l: 40px;
+  --title-size-m: 30px;
+  --title-size-s: 26px;
+  --text-primary-color: #ffffffde;
+  --text-secondary-color: #ffffffb7;
+  --text-tertiary-color: #ffffff62;
+  --border-radius-s: 4px;
+  --border-radius-m: 6px;
+  --primary-color: #ec7622;
+  --secondary-color: #d8dbe2;
+  --primary-pale-color: #463718c7;
+  --korean-text-spacing: 4px;
+}
+
+@font-face {
+  font-family: "PFStardust";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeoDunggeunmoPro-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: PFStardust, NeoDunggeunmoPro-Regular, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  position: relative;
+  background-color: black;
+  padding: 10% 6% 0 6%;
+}
+
+button {
+  border: none;
+}
+
+.korean-text {
+  transform: translateX(var(--korean-text-spacing));
+}
+
+/*? 어바웃 */
+#about {
+  position: relative;
+  color: var(--text-primary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.about__image {
+  position: fixed;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.about__intro {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  z-index: 1;
+}
+
+.about__title {
+  font-size: var(--title-size-l);
+}
+
+.about__subtitle {
+  font-size: var(--title-size-s);
+}
+
+.contact {
+  display: flex;
+  column-gap: 20px;
+}
+
+.contact > li > a {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.692);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-m);
+}
+
+.contact img {
+  width: 28px;
+  height: 28px;
+}
+
+/*? 프로젝트  */
+
+#project {
+  position: relative;
+  padding: 4em 0;
+  z-index: 2;
+}
+
+.project__title {
+  font-size: var(--title-size-m);
+  color: var(--text-primary-color);
+  margin-bottom: 1em;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4em;
+  width: 100%;
+}
+
+.project-item {
+  color: var(--text-secondary-color);
+}
+
+.project-item > time {
+  font-style: italic;
+}
+
+.project-item__link {
+  display: flex;
+  column-gap: 4px;
+  align-items: baseline;
+}
+
+.project-item__link > span {
+  font-size: var(--font-size-m);
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+.project-item__link > .project-item__title {
+  color: var(--primary-color);
+}
+
+.project-item__title {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: var(--font-size-l);
+}
+
+.project-item__figure {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  width: 100%;
+  height: 100%;
+}
+
+.project-item__figure > figcaption {
+  font-size: var(--font-size-s);
+  word-break: keep-all;
+}
+
+.project-item__image {
+  width: 80%;
+}
+
+.project-item__image > img {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 2.62;
+  border-radius: var(--border-radius-s);
+  border: 2px solid var(--text-secondary-color);
+}
+
+.project-item__skill-list {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.project-item__skill-item {
+  padding: 4px 12px;
+  text-align: center;
+  background-color: var(--primary-pale-color);
+  color: var(--secondary-color);
+  border: 1px solid var(--text-tertiary-color);
+  border-radius: var(--border-radius-s);
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+}
+
+.project-item__skill-list > a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}

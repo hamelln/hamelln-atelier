@@ -1,7 +1,6 @@
 "use strict";
 
 import addClickAndEnterHandler from "../handlers/click-enter-handler.js";
-import addKeyboardController from "../controllers/keyboard-controller.js";
 import {
   addBlurHandler,
   addFocus,
@@ -12,6 +11,7 @@ import { play } from "../handlers/sound-handler.js";
 import Project from "./Project.js";
 import Loading from "./Loading.js";
 import createElement from "../handlers/element-creater.js";
+import updateKeyboardController from "../controllers/keyboard-controller.js";
 
 const createSelectionBox = (selectionList) => {
   const selectionBox = createElement("div", {
@@ -97,7 +97,7 @@ const addEventProjectItem = (project, data) => {
 
   const startProject = () => {
     play(startSound);
-    Loading("Hamelln");
+    new Loading("Hamelln");
     setTimeout(() => {
       Project(projectData);
     }, 1000);
@@ -152,7 +152,7 @@ const focusPrevItem = (projectTitle) => {
     ".project-content__selection__item",
     projectTitle
   );
-  addFocus(focusedItem);
+  focusedItem && addFocus(focusedItem);
 };
 
 const render = (parent, projectTitle, data) => {
@@ -168,7 +168,7 @@ const render = (parent, projectTitle, data) => {
     addEventProjectItem(project, data);
   });
 
-  addKeyboardController();
+  updateKeyboardController();
   focusPrevItem(projectTitle);
 };
 

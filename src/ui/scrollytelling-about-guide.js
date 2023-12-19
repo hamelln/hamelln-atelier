@@ -4,7 +4,7 @@ const scrollytellingAboutGuide = (START_Y_OF_GUIDE) => {
 
   const scrollytelling = () => {
     if (scrollY <= START_Y_OF_GUIDE) {
-      guide.style.height = "12em";
+      guide.style.height = "14em";
       guide.style.opacity = "1";
       guide.style.width = "100%";
       guide.style.padding = "0 1em";
