@@ -8,7 +8,8 @@
     <meta name="googlebot" content="index,follow" />
     <meta name="description" content="이태현 포트폴리오" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hamelln.vercel.app/" />
+    <meta property="og:url" content="https://hamelln.vercel.app/ target="_blank"
+    rel="noreferrer noopener"" />
     <meta property="og:title" content="Hamelln" />
     <meta property="og:image" content="/about.webp" />
     <meta property="og:image:alt" content="Portfolio Thumbnail" />
@@ -32,80 +33,26 @@
       type="font/woff"
       crossorigin
     />
+    <link rel="icon" type="image/x-icon" href="public/img/dark-logo.svg" />
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/mobile.css" />
     <script type="module" src="/src/index.js" defer></script>
-    <script type="module" src="/src/mobile.js" defer></script>
     <title>Hamelln's Atelier</title>
   </head>
 
   <body>
-    <!-- 자원 -->
-    <div class="scroll-container">
-      <div class="loading-bar"></div>
-    </div>
-
-    <!-- 헤더 -->
-    <header class="header">
-      <div class="header__logo">
-        <svg
-          width="43"
-          height="45"
-          viewBox="0 0 43 45"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect x="3.5" y="3.5" width="39" height="41" />
-          <rect x="0.5" y="0.5" width="39" height="41" />
-          <path
-            d="M13.6751 31V13.5455H14.7404V21.7699H25.2575V13.5455H26.3228V31H25.2575V22.7585H14.7404V31H13.6751Z"
-          />
-        </svg>
-      </div>
-      <nav class="header-nav">
-        <div class="header-nav__background"></div>
-        <ul class="header-nav-list">
-          <li class="header-nav-list__item">About</li>
-          <li class="header-nav-list__item">Project</li>
-          <li class="header-nav-list__item">Contact</li>
-        </ul>
-      </nav>
-    </header>
-
     <!-- 소개 섹션 -->
     <section id="about">
       <div class="about__intro">
-        <h2 class="about__title">이태현</h2>
-        <button class="about__nav" data-text="See Work"></button>
-      </div>
-      <img
-        src="./public/img/about-2.png"
-        alt="about image"
-        class="about__image"
-      />
-    </section>
-
-    <!-- 프로젝트 섹션 -->
-    <section id="project">
-      <div class="project-header">
-        <div class="project-header__box">
-          <h2 class="project-header__title">PROJECT</h2>
-          <p class="project-header__subtitle">COLLECTION</p>
-        </div>
-      </div>
-      <div class="project-content"></div>
-      <p class="project__describe"></p>
-    </section>
-
-    <!-- 푸터 -->
-    <footer>
-      <div id="contact">
-        <ul>
+        <h2 class="about__title korean-text">이태현</h2>
+        <h3 class="about__subtitle">Frontend Developer</h3>
+        <ul class="contact">
           <li>
             <a
               class="profile"
               href="https://github.com/hamelln"
               target="_blank"
+              rel="noreferrer noopener"
             >
               <img src="./public/img/icons/github.png" alt="GitHub" />
             </a>
@@ -115,6 +62,7 @@
               class="profile"
               href="https://www.linkedin.com/in/%ED%83%9C%ED%98%84-%EC%9D%B4-531077273/"
               target="_blank"
+              rel="noreferrer noopener"
             >
               <img src="./public/img/icons/linkedin.svg" alt="Linkedin" />
             </a>
@@ -129,12 +77,179 @@
               class="profile"
               href="https://blog.cinntiq.synology.me/"
               target="_blank"
+              rel="noreferrer noopener"
             >
               <img src="./public/img/icons/ghost.png" alt="blog" />
             </a>
           </li>
         </ul>
       </div>
-    </footer>
+      <img
+        src="./public/img/about-2.png"
+        alt="about image"
+        class="about__image"
+      />
+    </section>
+
+    <!-- 프로젝트 섹션 -->
+    <section id="project">
+      <h2 class="project__title">Projects</h2>
+      <ul class="project-list">
+        <li class="project-item">
+          <time datetime="2023-07">2023/07</time> -
+          <a
+            class="project-item__link"
+            href="https://beermap.vercel.app"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <h2 class="project-item__title">BeerMap</h2>
+            <span>↗</span>
+          </a>
+          <figure class="project-item__figure">
+            <figcaption class="korean-text">
+              맥주 맛집 찾는 사이트입니다.
+            </figcaption>
+            <ul class="project-item__skill-list">
+              <li class="project-item__skill-item">Next.js</li>
+              <li class="project-item__skill-item">TypeScript</li>
+              <li class="project-item__skill-item">Node.js</li>
+            </ul>
+            <a
+              class="project-item__image"
+              href="/public/img/mobile/beermap.webp"
+            >
+              <img src="/public/img/mobile/beermap.webp" alt="BeerMap 이미지" />
+            </a>
+            <ul class="project-item__skill-list">
+              <a class="project-item__skill-item">GitHub</a>
+              <a class="project-item__skill-item">Notion</a>
+            </ul>
+          </figure>
+        </li>
+        <li class="project-item">
+          <time datetime="2023-03">2023/03</time> -
+          <a
+            class="project-item__link"
+            href="https://hamelln.vercel.app"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <h2 class="project-item__title">Hamelln</h2>
+            <span>↗</span>
+          </a>
+          <figure class="project-item__figure">
+            <figcaption class="korean-text">
+              포트폴리오 사이트입니다.
+            </figcaption>
+            <ul class="project-item__skill-list">
+              <li class="project-item__skill-item">HTML</li>
+              <li class="project-item__skill-item">CSS</li>
+              <li class="project-item__skill-item">JavaScript</li>
+            </ul>
+            <a
+              class="project-item__image"
+              href="/public/img/mobile/hamelln.webp"
+            >
+              <img src="/public/img/mobile/hamelln.webp" alt="Hamelln 이미지" />
+            </a>
+            <ul class="project-item__skill-list">
+              <a
+                class="project-item__skill-item"
+                target="_blank"
+                rel="noreferrer noopener"
+                >GitHub</a
+              >
+              <a
+                class="project-item__skill-item"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Notion</a
+              >
+            </ul>
+          </figure>
+        </li>
+        <li class="project-item">
+          <time datetime="2022-10">2022/10</time> -
+          <time datetime="2023-04">2023/04</time>
+          <a
+            class="project-item__link"
+            href="https://coffeen.vercel.app"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <h2 class="project-item__title">COFFEEN</h2>
+            <span>↗</span>
+          </a>
+          <figure class="project-item__figure">
+            <figcaption class="korean-text">커피 소개 사이트입니다.</figcaption>
+            <ul class="project-item__skill-list">
+              <li class="project-item__skill-item">Next.js</li>
+              <li class="project-item__skill-item">TypeScript</li>
+              <li class="project-item__skill-item">Recoil</li>
+            </ul>
+            <a
+              class="project-item__image"
+              href="/public/img/mobile/coffeen.webp"
+            >
+              <img src="/public/img/mobile/coffeen.webp" alt="COFFEEN 이미지" />
+            </a>
+            <ul class="project-item__skill-list">
+              <a
+                class="project-item__skill-item"
+                target="_blank"
+                rel="noreferrer noopener"
+                >GitHub</a
+              >
+              <a
+                class="project-item__skill-item"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Notion</a
+              >
+            </ul>
+          </figure>
+        </li>
+        <li class="project-item">
+          <time datetime="2022-10">2022/10</time> -
+          <time datetime="2023-04">2023/04</time>
+          <h2 class="project-item__title">Modak</h2>
+          <figure class="project-item__figure">
+            <figcaption class="korean-text">
+              캠핑장 소개와 리뷰를 보는 서비스입니다.
+            </figcaption>
+            <ul class="project-item__skill-list">
+              <li class="project-item__skill-item">Next.js</li>
+              <li class="project-item__skill-item">TypeScript</li>
+              <li class="project-item__skill-item">Redux</li>
+            </ul>
+            <a class="project-item__image" href="/public/img/mobile/modak.webp">
+              <img src="/public/img/mobile/modak.webp" alt="Modak 이미지" />
+            </a>
+          </figure>
+        </li>
+        <li class="project-item">
+          <time datetime="2021-12">2021/12</time> -
+          <time datetime="2021-12">2021/12</time>
+          <h2 class="project-item__title korean-text">반려in</h2>
+          <figure class="project-item__figure">
+            <figcaption class="korean-text">
+              유기동물 입양 정보와 입양 후기를 올리는 서비스입니다.
+            </figcaption>
+            <ul class="project-item__skill-list">
+              <li class="project-item__skill-item">HTML</li>
+              <li class="project-item__skill-item">CSS</li>
+              <li class="project-item__skill-item">JavaScript</li>
+            </ul>
+            <a
+              class="project-item__image"
+              href="/public/img/mobile/banryeoin.jpg"
+            >
+              <img src="/public/img/mobile/banryeoin.jpg" alt="반려in 이미지" />
+            </a>
+          </figure>
+        </li>
+      </ul>
+    </section>
   </body>
 </html>
