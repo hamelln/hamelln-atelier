@@ -3,8 +3,6 @@
   --pale-black: #2d2d2d;
   --pale-gray: #ccc;
   --pale-white: #f8f8f8;
-  --font-size-xs: 14px;
-  --font-size-s: 16px;
   --font-size-m: 18px;
   --font-size-l: 20px;
   --font-size-xl: 24px;
@@ -12,43 +10,32 @@
   --title-size-xl: 32px;
   --title-size-l: 30px;
   --title-size-m: 28px;
-  --title-size-s: 26px;
   --border-radius-s: 4px;
   --border-radius-m: 6px;
   --border-radius-l: 8px;
   --border-radius-full: 50%;
   --box-shadow: #494949;
-  --logo-color: #ffffff;
   --bg-color: #fff;
-  --darker-bg-color: #c2c2c2;
-  --header-bg-color: #d6d6d6;
   --text-color: #333;
   --text-color-filter: invert(16%) sepia(0%) saturate(3815%) hue-rotate(21deg)
     brightness(92%) contrast(83%);
-  --button-shadow: 2px 2px 4px rgba(20, 20, 20, 0.6);
   --button-background-color: var(--pale-white);
   --button-change-background-color: white;
   --primary-color: #e4762d;
   --secondary-color: #667082;
-  --block-color: #4a4e69;
   --header-height: 60px;
 }
 
 [data-theme="dark"] {
   --bg-color: #444352;
-  --darker-bg-color: #181818;
-  --header-bg-color: #282c34;
   --box-shadow: #000000;
   --text-color: #efefef;
-  --logo-color: #ffffff;
   --text-color-filter: invert(100%) sepia(33%) saturate(79%) hue-rotate(214deg)
     brightness(114%) contrast(87%);
-  --button-shadow: 2px 2px 4px rgba(233, 230, 59, 0.6);
   --button-background-color: var(--pale-black);
-  --button-change-background-color: rgba(27, 27, 27, 0.4);
+  --button-change-background-color: #1b1b1b66;
   --primary-color: #ec7622;
   --secondary-color: #d8dbe2;
-  --block-color: #7d95b8;
 }
 
 @font-face {
