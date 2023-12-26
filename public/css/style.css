@@ -972,13 +972,15 @@ footer {
 .mode__setting:focus,
 .mode__mute:focus,
 .mode__theme:focus {
-  outline: 1px solid var(--text-color);
+  outline: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .mode__setting:hover,
 .mode__mute:hover,
 .mode__theme:hover {
-  border: 1px solid var(--text-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .mode__theme.focusable {

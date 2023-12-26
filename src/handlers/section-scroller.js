@@ -12,14 +12,22 @@ const calcCenterPositionOfSection = (section) => {
 
 const project = document.getElementById("project");
 const PROJECT_POSITION = calcCenterPositionOfSection(project);
+
 const focusOnFirstItem = (section) => {
   addFocus(section.querySelector(".focusable"));
 };
 
 const scrollToSection = (sectionId, isEnter) => {
-  if (sectionId === "project") {
-    scrollTo(0, PROJECT_POSITION);
-    isEnter && focusOnFirstItem(project);
+  switch (sectionId) {
+    case "about":
+      scrollTo(0, 0);
+      break;
+    case "project":
+      scrollTo(0, PROJECT_POSITION);
+      isEnter && focusOnFirstItem(project);
+      break;
+    default:
+      break;
   }
 };
 
