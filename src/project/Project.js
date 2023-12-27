@@ -1,13 +1,12 @@
 "use strict";
 
-import { addFocus } from "../handlers/focus-handler.js";
+import { addFocus, saveFocusedElement } from "../handlers/focus-handler.js";
 import { play, stop } from "../handlers/sound-handler.js";
 import Spec from "./Spec.js";
 import Loading from "./Loading.js";
 import createElement from "../handlers/element-creater.js";
-import renderSelection from "./index.js";
-import { saveFocusedElement } from "../handlers/focus-saver.js";
 import updateKeyboardController from "../controllers/keyboard-controller.js";
+import Selection from "./Selection.js";
 
 const createInfoBox = (projectTitle, backgroundImage, infoItems) => {
   const projectBox = createElement("div", { class: "project-box" });
@@ -37,7 +36,7 @@ const createInfoItems = (siteUrl, codeUrl, docsUrl, spec, title, render) => {
   const onClose = (title) => {
     new Loading("Thank you!");
     setTimeout(() => {
-      renderSelection(title);
+      Selection(title);
     }, 1000);
   };
 
