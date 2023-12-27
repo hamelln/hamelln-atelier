@@ -185,7 +185,6 @@ button {
 .project-item__image > img {
   width: 100%;
   max-width: 320px;
-  aspect-ratio: 4 / 2.62;
   border-radius: var(--border-radius-s);
   border: 2px solid var(--text-secondary-color);
 }

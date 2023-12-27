@@ -76,7 +76,7 @@ const addEventProjectItem = (project, data) => {
     const parent = oldImg.parentNode;
     const newImg = createElement("img", {
       class: "project-content__overview__image",
-      src: data[projectTitle].backgroundImage,
+      src: data[projectTitle].selectImage,
       alt: `${projectTitle} image`,
     });
     parent.replaceChild(newImg, oldImg);
