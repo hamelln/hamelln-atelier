@@ -75,7 +75,7 @@ button {
 .about__image {
   position: fixed;
   height: 100%;
-  opacity: 0.4;
+  opacity: 0.1;
 }
 
 .about__intro {
