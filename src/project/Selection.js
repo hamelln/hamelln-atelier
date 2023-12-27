@@ -97,7 +97,7 @@ const addEventProjectItem = (project, data) => {
 
   const startProject = () => {
     play(startSound);
-    new Loading("Hamelln");
+    new Loading(projectData.title);
     setTimeout(() => {
       Project(projectData);
     }, 1000);
