@@ -624,6 +624,7 @@ img[src=""] {
 
 .project-content__overview__image {
   width: 60%;
+  max-height: 60%;
 }
 
 .project-content__overview__skill {
