@@ -3,8 +3,6 @@
 import navigateWithScroll from "./controllers/click-navigator.js";
 import setupMuteButton from "./ui/mute-button.js";
 import setupThemeButton from "./ui/theme-button/index.js";
-import renderSelection from "./project/index.js";
-import { restoreFocus } from "./handlers/focus-saver.js";
 import setupSound from "./controllers/sound-controller.js";
 import addClickAndEnterHandler from "./handlers/click-enter-handler.js";
 import scrollytellingTitleAndCanvas from "./ui/scrollytelling-title-and-canvas.js";
@@ -17,9 +15,10 @@ import scrollytellingAboutNavAndProject from "./ui/scrollytelling-about-nav-and-
 import setupSubTitleAnimation from "./ui/sub-title/pixelAnimation.js";
 import Dropdown from "./dropdown/index.js";
 import updateKeyboardController from "./controllers/keyboard-controller.js";
-import { removeFocus } from "./handlers/focus-handler.js";
+import { removeFocus, restoreFocus } from "./handlers/focus-handler.js";
+import Selection from "./project/Selection.js";
 
-window.addEventListener("DOMContentLoaded", renderSelection);
+window.addEventListener("DOMContentLoaded", Selection);
 window.addEventListener("load", () => {
   const settingButton = document.querySelector(".mode__setting");
   const themeBtn = document.querySelector(".mode__theme");
